@@ -47,7 +47,7 @@ public class DatasetReader {
                 String first = docTag.select("FIRST").text();
                 String second = docTag.select("SECOND").text();
                 String dateline = docTag.select("DATELINE").text();
-                for (Element head : docTag.select("HEAD")) {
+                for (Element head : docTag.getElementsByTag("HEAD")) {
                     heads.add(head.text());
                 }
                 for (Element byline : docTag.select("BYLINE")) {
@@ -63,7 +63,8 @@ public class DatasetReader {
     }
 
     public String convertModelToJSON(HW1Model model) {
-        ObjectWriter writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
+//        ObjectWriter writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        ObjectWriter writer = new ObjectMapper().writer();
         String json = "";
         try {
             json = writer.writeValueAsString(model);
@@ -82,6 +83,7 @@ public class DatasetReader {
     }
 
     private Map<String, String> getJSONDataSet(String dataSetType) {
+//        List<String> jsonData =  new ArrayList<String>();
         Map<String, String> jsonData = new HashMap<String, String>();
         DatasetReader dsReader = new DatasetReader();
         File[] dataFiles = null;
@@ -96,46 +98,10 @@ public class DatasetReader {
             for (HW1Model model : models) {
                 String json = dsReader.convertModelToJSON(model);
                 jsonData.put(model.getDocumentId(), json);
+//                jsonData.add(json);
             }
         }
         System.out.println(jsonData.size() + " json objects created.");
         return jsonData;
     }
-
-
-    public static void main(String[] args) {
-        HttpHost localHost = new HttpHost("localhost", 9200, "http");
-        RestClient restClient = RestClient.builder(localHost).build();
-
-        DatasetReader reader = new DatasetReader();
-        Map<String, String> testJsons = reader.getTestDatasetAsJSON();
-
-        String docId = "AP890102-0073";
-        String json = testJsons.get(docId);
-
-        System.out.println("POST \n" + json + "\n with documentId:" + docId);
-
-        HttpEntity entity = new NStringEntity(json, ContentType.APPLICATION_JSON);
-
-        String INDEX_NAME = "lightbringer";
-        String TYPE_NAME = "hw1";
-        String API_ENDPOINT = '/' + INDEX_NAME + '/' + TYPE_NAME + '/' + docId;
-        //  PUT /lightbringer/hw1/AP890101-0001?pretty
-
-        Response response = null;
-        try {
-            response = restClient.performRequest("POST", API_ENDPOINT, Collections.<String, String>emptyMap(), entity);
-            System.out.println(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                restClient.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
 }

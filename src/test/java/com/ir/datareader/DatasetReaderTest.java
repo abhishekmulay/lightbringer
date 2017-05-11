@@ -24,7 +24,8 @@ public class DatasetReaderTest extends TestCase {
         File testFile = new File(TEST_FILE_PATH);
         List<HW1Model> hw1Models = reader.readFileIntoModel(testFile);
         HW1Model model = hw1Models.get(0);
-        System.out.println(model);
+        System.out.println(model.toString());
+        System.out.println(model.getHeads());
     }
 
     public void tearDown() throws Exception {

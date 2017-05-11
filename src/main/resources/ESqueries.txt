@@ -1,0 +1,29 @@
+##########################################
+# housekeeping
+GET /_cat/health?v
+GET /_cat/indices?v
+##########################################
+
+
+
+##########################################
+# Search all
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+##########################################
+# Delete all documents under index = "lightbringer" which have type="hw1"
+
+DELETE /lightbringer/
+{
+    "query": {
+        "type" : {
+            "value" : "hw1"
+        }
+    }
+}
+##########################################
