@@ -24,8 +24,16 @@ public class DataWriter {
     private HttpHost localHost;
     private  RestClient restClient = null;
 
-    public DataWriter() {
+    public void initializeConnection() {
         this.localHost = new HttpHost("localhost", 9200, "http");
+        this.restClient = RestClient.builder(this.localHost).build();
+    }
+
+    private String getMetadata(String indexName, String typeName, String documentId) {
+        String actionMetaData = String.format
+                ("{ \"index\" : { \"_index\" : \"%s\", \"_type\" : \"%s\", \"_id\" : \"%s\" } }%n",
+                        indexName, typeName, documentId);
+        return actionMetaData;
     }
 
     //    { "index" : { "_index" : "main", "_type" : "hw1", "_id" : "ABC123" } }
@@ -40,16 +48,18 @@ public class DataWriter {
         for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
             documentId = entry.getKey();
             json = entry.getValue();
-            actionMetaData = String.format
-                    ("{ \"index\" : { \"_index\" : \"%s\", \"_type\" : \"%s\", \"_id\" : \"%s\" } }%n",
-                            INDEX_NAME, TYPE_NAME, documentId);
+            actionMetaData = getMetadata(INDEX_NAME, TYPE_NAME, documentId);
             bulkRequestBody.append(actionMetaData);
             bulkRequestBody.append(json);
             bulkRequestBody.append("\n");
         }
         System.out.println("Bulk inserting " + jsonMap.size() + " documents in " + INDEX_NAME);
-        HttpEntity entity = new NStringEntity(bulkRequestBody.toString(), ContentType.APPLICATION_JSON);
+        bulkPOST(bulkRequestBody.toString());
+    }
+
+    private void bulkPOST(String bulkRequestBody) {
         String BULK_API_ENDPOINT = '/' + INDEX_NAME + '/' + INDEX_NAME + "/_bulk";
+        HttpEntity entity = new NStringEntity(bulkRequestBody.toString(), ContentType.APPLICATION_JSON);
         try {
             Response response = restClient.performRequest
                     ("POST", BULK_API_ENDPOINT, Collections.<String, String>emptyMap(), entity);
@@ -80,7 +90,7 @@ public class DataWriter {
     }
 
     public void bulkInsertDocuments(Map<String, String> allJsonMap) {
-        this.restClient = RestClient.builder(this.localHost).build();
+        initializeConnection();
         // Divide the big map of JSON strings into small maps each containing 1000 json.
         if (allJsonMap.size() > CHUNK_SIZE) {
             List<Map<String, String>> jsonMaps = createSubMaps(allJsonMap);
@@ -93,6 +103,9 @@ public class DataWriter {
         }
         try {
             this.restClient.close();
+            this.restClient = null;
+            this.localHost = null;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
