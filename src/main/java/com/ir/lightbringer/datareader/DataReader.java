@@ -1,6 +1,7 @@
 package com.ir.lightbringer.datareader;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.models.HW1Model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -18,8 +19,8 @@ import java.util.*;
  * Created by Abhishek Mulay on 5/10/17.
  */
 public class DataReader {
-    String DATA_PATH = "/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/ap89_collection";
-    String TEST_DATA_PATH = "/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/testing_ap89_collection";
+    final String DATA_PATH = ConfigurationManager.getConfigurationValue("data.set.path");
+    final String TEST_DATA_PATH = ConfigurationManager.getConfigurationValue("test.data.set.path");
 
     public File[] getAllDataFiles(String PATH) {
         File folder = new File(PATH);
@@ -29,24 +30,26 @@ public class DataReader {
     public List<HW1Model> readFileIntoModel(File dataFile) throws IOException {
         List<HW1Model> models = new ArrayList<HW1Model>();
         String charset = "UTF-8";
-        List<String> heads = new ArrayList<String>();
-        List<String> bylines = new ArrayList<String>();
 
         InputStream content = new FileInputStream(dataFile);
         Document document = Jsoup.parse(content, charset, "", Parser.xmlParser());
         content.close();
         Elements docTags = document.getElementsByTag("DOC");
         for (Element docTag : docTags) {
+            // primary fields
             String docId = docTag.select("DOCNO").text();
             String text = docTag.select("TEXT").text();
 
+            // extra fields
             String fileId = docTag.select("FILEID").text();
             String first = docTag.select("FIRST").text();
             String second = docTag.select("SECOND").text();
             String dateline = docTag.select("DATELINE").text();
+            List<String>  heads = new ArrayList<String>();
             for (Element head : docTag.select("HEAD")) {
                 heads.add(head.text());
             }
+            List<String>  bylines = new ArrayList<String>();
             for (Element byline : docTag.select("BYLINE")) {
                 bylines.add(byline.text());
             }

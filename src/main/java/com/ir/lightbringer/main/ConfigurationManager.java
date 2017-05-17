@@ -11,11 +11,11 @@ import java.util.Properties;
 public class ConfigurationManager {
     private static Properties properties = new Properties();
     private static InputStream  stream = null;
-    final static String PROPERTIES_FILE_PATH = "";
+    final static String PROPERTIES_FILE_PATH = "src/main/resources/config.properties";
 
     static {
         try {
-            stream = new FileInputStream("src/main/resources/config.properties");
+            stream = new FileInputStream(PROPERTIES_FILE_PATH);
             properties.load(stream);
         } catch (java.io.IOException e) {
             e.printStackTrace();
