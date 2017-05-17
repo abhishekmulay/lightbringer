@@ -22,9 +22,19 @@ public class DataReader {
     final String DATA_PATH = ConfigurationManager.getConfigurationValue("data.set.path");
     final String TEST_DATA_PATH = ConfigurationManager.getConfigurationValue("test.data.set.path");
 
-    public File[] getAllDataFiles(String PATH) {
+    public ArrayList<File> getAllDataFiles(String PATH) {
         File folder = new File(PATH);
-        return folder.listFiles();
+        File[] allFiles = folder.listFiles();
+        // exlucde README file
+        ArrayList<File> files = new ArrayList<File>(Arrays.asList(allFiles));
+        File toReomve = null;
+        for (File f : files) {
+            if (f.getName().equalsIgnoreCase("readme")) {
+                toReomve = f;
+            }
+        }
+        files.remove(toReomve);
+        return files;
     }
 
     public List<HW1Model> readFileIntoModel(File dataFile) throws IOException {
@@ -45,11 +55,11 @@ public class DataReader {
             String first = docTag.select("FIRST").text();
             String second = docTag.select("SECOND").text();
             String dateline = docTag.select("DATELINE").text();
-            List<String>  heads = new ArrayList<String>();
+            List<String> heads = new ArrayList<String>();
             for (Element head : docTag.select("HEAD")) {
                 heads.add(head.text());
             }
-            List<String>  bylines = new ArrayList<String>();
+            List<String> bylines = new ArrayList<String>();
             for (Element byline : docTag.select("BYLINE")) {
                 bylines.add(byline.text());
             }
@@ -75,7 +85,7 @@ public class DataReader {
     public Map<String, String> convertModelsToJSON(List<HW1Model> hw1Models) {
         Map<String, String> jsons = new HashMap<String, String>();
         for (HW1Model model : hw1Models) {
-            jsons.put(model.getDocumentId(), convertModelToJSON(model));
+            jsons.put(model.getDocno(), convertModelToJSON(model));
         }
         return jsons;
     }
@@ -102,7 +112,7 @@ public class DataReader {
 //        List<String> jsonData =  new ArrayList<String>();
         Map<String, String> jsonData = new HashMap<String, String>();
         DataReader dsReader = new DataReader();
-        File[] dataFiles = null;
+        List<File> dataFiles = null;
         if (dataSetType.equals("TEST")) {
             dataFiles = dsReader.getAllDataFiles(TEST_DATA_PATH);
         } else {
@@ -113,7 +123,7 @@ public class DataReader {
             List<HW1Model> models = dsReader.readFileIntoModel(dataFile);
             for (HW1Model model : models) {
                 String json = dsReader.convertModelToJSON(model);
-                jsonData.put(model.getDocumentId(), json);
+                jsonData.put(model.getDocno(), json);
 //                jsonData.add(json);
             }
         }

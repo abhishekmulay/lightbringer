@@ -15,7 +15,7 @@ public class App {
         DataReader reader = new DataReader();
 
         String DATA_PATH = ConfigurationManager.getConfigurationValue("data.set.path");
-        File[] dataFiles = reader.getAllDataFiles(DATA_PATH);
+        List<File> dataFiles = reader.getAllDataFiles(DATA_PATH);
 
         long timeAtStart = System.nanoTime();
         for (File f : dataFiles) {
@@ -26,7 +26,7 @@ public class App {
         long timeAtEnd = System.nanoTime();
 
         long elapsedTime = timeAtEnd - timeAtStart;
-        double seconds = (double)elapsedTime / 1000000000.0;
-        System.out.println("Total time taken: " + seconds/60.0 + " minutes");
+        double seconds = (double) elapsedTime / 1000000000.0;
+        System.out.println("Total time taken: " + seconds / 60.0 + " minutes");
     }
 }

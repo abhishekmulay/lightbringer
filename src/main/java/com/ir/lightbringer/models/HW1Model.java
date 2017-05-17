@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class HW1Model {
     // required fields
-    private String documentId;
+    private String docno;
     private String text;
 
     // extra fields
@@ -19,7 +19,7 @@ public class HW1Model {
     private List<String> bylines;
 
     public HW1Model(String docId, String text, String fileId, String first, String second, String dateline, List<String> heads, List<String> bylines) {
-        this.documentId = docId;
+        this.docno = docId;
         this.text = text;
         this.fileId = fileId;
         this.first = first;
@@ -29,12 +29,12 @@ public class HW1Model {
         this.dateline = dateline;
     }
 
-    public String getDocumentId() {
-        return documentId;
+    public String getDocno() {
+        return docno;
     }
 
-    public void setDocumentId(String documentId) {
-        this.documentId = documentId;
+    public void setDocno(String docno) {
+        this.docno = docno;
     }
 
     public String getText() {
@@ -96,7 +96,7 @@ public class HW1Model {
     @Override
     public String toString() {
         return "HW1Model{" +
-                "documentId='" + documentId + '\'' +
+                "docno='" + docno + '\'' +
                 ", text='" + text + '\'' +
                 ", fileId='" + fileId + '\'' +
                 ", first='" + first + '\'' +

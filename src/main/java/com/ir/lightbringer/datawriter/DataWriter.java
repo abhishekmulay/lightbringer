@@ -2,14 +2,8 @@ package com.ir.lightbringer.datawriter;
 
 import com.ir.lightbringer.datareader.DataReader;
 import com.ir.lightbringer.main.ConfigurationManager;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.nio.entity.NStringEntity;
-import org.elasticsearch.client.Response;
-import org.elasticsearch.client.RestClient;
+import com.ir.lightbringer.restclient.RestCallHandler;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -21,14 +15,6 @@ public class DataWriter {
     private String TYPE_NAME = ConfigurationManager.getConfigurationValue("type.name");
     final static int CHUNK_SIZE = Integer.parseInt(ConfigurationManager.getConfigurationValue("chunk.size"));
 
-    private HttpHost localHost;
-    private  RestClient restClient = null;
-
-    public void initializeConnection() {
-        this.localHost = new HttpHost("localhost", 9200, "http");
-        this.restClient = RestClient.builder(this.localHost).build();
-    }
-
     private String getMetadata(String indexName, String typeName, String documentId) {
         String actionMetaData = String.format
                 ("{ \"index\" : { \"_index\" : \"%s\", \"_type\" : \"%s\", \"_id\" : \"%s\" } }%n",
@@ -38,7 +24,7 @@ public class DataWriter {
 
     //    { "index" : { "_index" : "main", "_type" : "hw1", "_id" : "ABC123" } }
     //    { "field1" : "value1" }
-    public void insertChunks(Map<String, String> jsonMap) {
+    public void insertChunks(RestCallHandler restCallHandler, Map<String, String> jsonMap) {
         DataReader reader = new DataReader();
         String actionMetaData = "";
         String json = "";
@@ -54,20 +40,7 @@ public class DataWriter {
             bulkRequestBody.append("\n");
         }
         System.out.println("Bulk inserting " + jsonMap.size() + " documents in " + INDEX_NAME);
-        bulkPOST(bulkRequestBody.toString());
-    }
-
-    private void bulkPOST(String bulkRequestBody) {
-        String BULK_API_ENDPOINT = '/' + INDEX_NAME + '/' + INDEX_NAME + "/_bulk";
-        HttpEntity entity = new NStringEntity(bulkRequestBody.toString(), ContentType.APPLICATION_JSON);
-        try {
-            Response response = restClient.performRequest
-                    ("POST", BULK_API_ENDPOINT, Collections.<String, String>emptyMap(), entity);
-            System.out.println("STATUS: " + response.getStatusLine().getStatusCode());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        restCallHandler.bulkPOST(bulkRequestBody.toString());
     }
 
     public List<Map<String, String>> createSubMaps(Map<String, String> jsonMap) {
@@ -90,26 +63,17 @@ public class DataWriter {
     }
 
     public void bulkInsertDocuments(Map<String, String> allJsonMap) {
-        initializeConnection();
         // Divide the big map of JSON strings into small maps each containing 1000 json.
+        RestCallHandler restCallHandler = new RestCallHandler();
+        restCallHandler.initializeConnection();
         if (allJsonMap.size() > CHUNK_SIZE) {
             List<Map<String, String>> jsonMaps = createSubMaps(allJsonMap);
             for (Map<String, String> jsonMap : jsonMaps) {
-                // insert 1000 json documents at once.
-                insertChunks(jsonMap);
+                insertChunks(restCallHandler, jsonMap);  // insert 1000 json documents at once.
             }
         } else {
-            insertChunks(allJsonMap);
+            insertChunks(restCallHandler, allJsonMap);
         }
-        try {
-            this.restClient.close();
-            this.restClient = null;
-            this.localHost = null;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        restCallHandler.closeConnection();
     }
-
-
 }

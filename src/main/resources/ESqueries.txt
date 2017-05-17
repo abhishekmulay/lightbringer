@@ -1,22 +1,77 @@
 ##########################################
-# housekeeping
-GET /_cat/health?v
-GET /_cat/indices?v
-##########################################
-
-
-
-##########################################
-# Search all
-GET _search
+#Search all
+GET _search/
 {
   "query": {
     "match_all": {}
   }
 }
 
+GET /ap_dataset/hw1/_search
+{
+    "query": {
+        "type" : {
+            "value" : "hw1"
+        }
+    }
+}
+
+GET /ap_dataset/hw1/AP890101-0068/_termvectors
+{
+  "fields" : ["text"],
+  "offsets" : true,
+  "payloads" : true,
+  "positions" : true,
+  "term_statistics" : true,
+  "field_statistics" : true
+}
+
+##########################################
+
+PUT /ap_dataset/
+{
+  "settings": {
+    "index": {
+      "store": {
+        "type": "fs"
+      },
+      "number_of_shards": 1,
+      "number_of_replicas": 1
+    },
+    "analysis": {
+      "analyzer": {
+        "my_english": {
+          "type": "english",
+          "stopwords_path": "stoplist.txt"
+        }
+      }
+    }
+  }
+}
+
+PUT /ap_dataset/hw1/_mapping
+{
+  "hw1": {
+    "properties": {
+      "docno": {
+        "type": "keyword",
+        "store": true
+      },
+      "text": {
+        "type": "text",
+        "store": true,
+        "term_vector": "with_positions_offsets_payloads",
+        "analyzer": "my_english"
+      }
+    }
+  }
+}
+
+
 ##########################################
 # Delete all documents under index = "lightbringer" which have type="hw1"
+
+DELETE /ap_dataset
 
 DELETE /lightbringer/
 {
@@ -26,4 +81,10 @@ DELETE /lightbringer/
         }
     }
 }
+
 ##########################################
+# housekeeping
+GET /_cat/health?v
+GET /_cat/indices?v
+##########################################
+
