@@ -3,7 +3,6 @@ package com.ir.lightbringer.restclient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ir.lightbringer.main.ConfigurationManager;
-import com.ir.lightbringer.models.HW1Model;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.entity.ContentType;
@@ -13,7 +12,9 @@ import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Abhishek Mulay on 5/17/17.
@@ -43,51 +44,42 @@ public class RestCallHandler {
         }
     }
 
+    public Response get(final String body, final String endPoint) {
+        Response response = null;
+        try {
+            response = restClient.performRequest("GET", endPoint, Collections.singletonMap("pretty", "true"));
+            System.out.println(endPoint + " | STATUS: " + response.getStatusLine().getStatusCode() + " " + response
+                    .getStatusLine().getReasonPhrase());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public Response post(final String body, final String endPoint) {
+        Response response = null;
+        HttpEntity entity = new NStringEntity(body, ContentType.APPLICATION_JSON);
+        try {
+            response = restClient.performRequest("POST", endPoint, Collections.<String, String>emptyMap(), entity);
+            System.out.println(endPoint + " | Status: " + response.getStatusLine().getStatusCode() + " " + response
+                    .getStatusLine().getReasonPhrase());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
     public Response bulkPOST(String bulkRequestBody) {
         HttpEntity entity = new NStringEntity(bulkRequestBody, ContentType.APPLICATION_JSON);
         Response response = null;
         try {
             response = restClient.performRequest("POST", BULK_API_ENDPOINT, Collections.<String, String>emptyMap(), entity);
-            System.out.println("STATUS: " + response.getStatusLine().getStatusCode());
+            System.out.println(BULK_API_ENDPOINT + " | STATUS: " + response.getStatusLine().getStatusCode() + " " +
+                    response.getStatusLine().getReasonPhrase());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return response;
-    }
-
-    public Response get(String documentId) {
-        HttpEntity entity = new NStringEntity(DOCUMENT_API + documentId, ContentType.APPLICATION_JSON);
-        Response response = null;
-        try {
-            response = restClient.performRequest("GET", DOCUMENT_API + documentId, Collections.singletonMap("pretty", "true"),
-                    entity);
-            System.out.println("STATUS: " + response.getStatusLine().getStatusCode());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return response;
-    }
-
-
-    public static void main(String[] args) {
-        RestCallHandler handler = new RestCallHandler();
-        handler.initializeConnection();
-        Response response = handler.get("AP890101-0068");
-
-        try {
-            HttpEntity entity = response.getEntity();
-            ObjectMapper objectMapper = new ObjectMapper();
-            String jsonString = EntityUtils.toString(entity);
-            System.out.println("jsonString: \n" + jsonString);
-//            HW1Model model = objectMapper.readValue(jsonString, HW1Model.class);
-            JsonNode jsonNode = objectMapper.readTree(jsonString);
-            System.out.println(jsonNode);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("response " + response.toString());
-        handler.closeConnection();
     }
 
 }

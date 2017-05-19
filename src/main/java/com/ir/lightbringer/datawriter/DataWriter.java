@@ -22,7 +22,7 @@ public class DataWriter {
         return actionMetaData;
     }
 
-    //    { "index" : { "_index" : "main", "_type" : "hw1", "_id" : "ABC123" } }
+    //    { "index" : { "_index" : "ap_dataset", "_type" : "hw1", "_id" : "ABC123" } }
     //    { "field1" : "value1" }
     public void insertChunks(RestCallHandler restCallHandler, Map<String, String> jsonMap) {
         DataReader reader = new DataReader();

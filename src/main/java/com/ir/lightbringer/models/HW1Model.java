@@ -18,6 +18,8 @@ public class HW1Model {
     private List<String> heads;
     private List<String> bylines;
 
+    private int docLength;
+
     public HW1Model(String docId, String text, String fileId, String first, String second, String dateline, List<String> heads, List<String> bylines) {
         this.docno = docId;
         this.text = text;
@@ -27,6 +29,8 @@ public class HW1Model {
         this.heads = heads;
         this.bylines = bylines;
         this.dateline = dateline;
+        this.docLength = text.split(" ").length;
+
     }
 
     public String getDocno() {
@@ -91,6 +95,14 @@ public class HW1Model {
 
     public void setBylines(List<String> bylines) {
         this.bylines = bylines;
+    }
+
+    public int getDocLength() {
+        return docLength;
+    }
+
+    public void setDocLength(int docLength) {
+        this.docLength = docLength;
     }
 
     @Override

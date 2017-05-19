@@ -1,0 +1,225 @@
+/ap_dataset/hw1/_search?scroll=1m | STATUS: 200 OK
+{
+  "_scroll_id" : "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAHFoWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ==",
+  "took" : 2,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 84678,
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0060",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0060",
+          "text" : "The archbishop of Managua condemned the human rights situation in Nicaragua Sunday during his New Year's Day mass, saying it has caused an exodus of professionals, workers and peasants. ``Will our Nicaraguan brothers continue to abandon the country in search of better horizons because here life is impossible?'' Cardinal Miguel Obando y Bravo asked in his homily to thousands gathered in front of the ruins of the metropolitan cathedral. The cathedral, like much of Managua, was destroyed in an earthquake shortly before the leftist Sandinistas took power in 1979 and has not been rebuilt. ``Will people continue to die in strange circumstances? Will kidnappings and manipulation of the pain of Nicaragua's mothers continue?'' he asked. The comment appeared to be a reference to charges published periodically in the opposition newspaper La Prensa that the leftist Sandinista government has committed human rights violations. ``No,'' Obando y Bravo exclaimed to loud applause. ``This year cannot be a copy of the one before because we are determined to make it something new.'' He did not elaborate. Obando y Bravo also attacked the government for limiting press freedom, saying there is no freedom of thought without freedom of the press. The government has shut down La Prensa several times and suspended broadcasts of several radio stations. The New Year's mass, part of a ``day of peace'' declared by Pope John Paul II and also a commemoration of the 75th anniversary of the Managua archdiocese, was broadcast on the Roman Catholic radio station Radio Catolica. Church spokesman Monsignor Bosco Vivas said other stations refused to carry the service. He did not say why, but other sources said they were acting under government orders. Obando y Bravo is a frequent and outspoken critic of the leftist government. He also heads a national commission that will oversee any peace accord reached by the government and the U.S.-backed Contra rebels. A cease-fire has been in place since March, but talks on a permanent end to the 8-year-old civil war broke down in September.",
+          "fileId" : "AP-NR-01-01-89 2142EST",
+          "first" : "r i AM-Nicaragua 01-01 0358",
+          "second" : "AM-Nicaragua,0371",
+          "dateline" : "MANAGUA, Nicaragua (AP)",
+          "heads" : [
+            "Cardinal Attacks Human Rights Conditions During New Year Celebration"
+          ],
+          "bylines" : [
+            "By RODOLFO GARCIA",
+            "Associated Press Writer"
+          ],
+          "docLength" : 335
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0062",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0062",
+          "text" : "Sudan's prime minister promised political change Sunday but charged that demonstrators who rioted against price increases were ``struck by madness'' and seeking illegal political gains. At least four people died, apparently all in one Khartoum shooting incident, during four days of street violence last week that led to a general strike. After the strike began Thursday, the government backed down, rescinding steep price increases and making salary hikes for millions of Sudanese retroactive to July 1. The demonstrators then changed their focus mainly into a protest of Prime Minister Sadek Mahdi's failure to endorse a draft peace accord signed Nov. 16. The protests finally ended Saturday. Trade unions and political parties also remain unsatisfied with the government's stand. They scheduled a meeting with Mahdi on Monday to discuss further economic reforms and peace. In a nationally broadcast speech marking Sudan's 33rd anniversary of independence from Britain and Egypt, Mahdi named no names in his bitter attack on demonstration organizers. ``Some people want to make use of legal differences, some who have been struck by madness,'' Mahdi said at a rally in el-Obeid, 200 miles southwest of Khartoum. ``For them to try and develop these differences into an uprising is harmful and wrong. Mahdi promised political changes but didn't specify whether he meant economic reforms or stepping up efforts to end the war. ``Our next steps in the government are holding wide consultations and serious, responsible studies to review our performance,'' he said in the speech broadcast over the official Omdurman Radio. The Democratic Unionist Party, which negotiated the peace treaty with southern rebels, has quit the governing coalition. Party leaders said they wanted to express sympathy with the strikers and to dramatize their outrage at Mahdis' handling of the proposed agreement to end Sudan's 5{-year-old civil war. The Democratic Unionists dominate the 2-million-member Sudanese Workers' Trade Union Federation, which brought the people into the streets and called the general strike. It acted after the government increased prices of essential commodities by up to 600 percent and imposed a 15-percent across-the-board sales tax. Government sources said the premier is expected to announce a new coalition Tuesday with the fundamentalist National Islamic Front replacing the centrist Democratic Unionists as junior partner to Mahdi's Umma Party. In a radio message from the Ethiopian capital Addis Ababa on Saturday, renegade army Col. John Garang, the rebel leader, described the outlook for peace in the New Year as bleak but said it could have been promising. Garang blamed Mahdi's ignoring the tentative peace plan for the impasse in the peace process. Rebel leader Garang took up arms in 1983 to fight the Moslem-dominated government in Khartoum for economic, social and political changes in the mainly Christian and animist south.",
+          "fileId" : "AP-NR-01-01-89 2155EST",
+          "first" : "r i AM-Sudan 01-01 0472",
+          "second" : "AM-Sudan,0488",
+          "dateline" : "KHARTOUM, Sudan (AP)",
+          "heads" : [
+            "Beleaguered Prime Minister Blasts Demonstrators"
+          ],
+          "bylines" : [
+            "By DALIA BALIGH",
+            "Associated Press Writer"
+          ],
+          "docLength" : 454
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0061",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0061",
+          "text" : "An earthen dike gave way early Sunday, sending a 12-foot wall of water down the Virgin River that forced the overnight evacuation of 1,500 people, flooded homes and forced authorities to close Interstate 15. No injuries were reported. ``If you had had a surfboard, you could have just rode the wave. It was that forceful,'' said Mike Brunn, a member of the Washington County Search and Rescue Team. St. George City Manager Gary Esplin said that by noon, electrical, water and other utilities had been restored to areas that were flooded. Evacuees were being allowed to return to their homes as the floodwaters receded. Washington County officials said 50 to 60 homes and 100 apartments were flooded. Numerous abandoned cars, trucks and trailers in low-lying areas also were covered. Interstate 15 _ the main route between Salt Lake City and Los Angeles _ was closed south of St. George where the freeway enters the narrow Virgin River Gorge. Officials reopened the freeway about 14 hours later. Gov. Norm Bangerter, who flew to the area 300 miles south of Salt Lake City, declared the region a disaster area, which will help facilitate federal aid for the southwestern Utah communities. ``Will we rebuild? The answer is `yes' to that, an unequivocal yes,'' the governor said. The failed dike, which helped contain the Quail Creek Reservoir, was built in 1983 at a cost of $3 million. Bangerter said state engineers would try to determine the cause of the 300-foot-wide breach in the dike, located 14 miles east of this town of about 12,000. The 2,500-foot-long earthen dike that broke is a section of the Quail Creek Dam. When the 50-foot-high dike gave way, it left low-lying areas awash. In all, 25,000 acre feet of water rushed through the dike breach, but the flow had been reduced to a trickle by midday, said Ronald Thompson, chairman of the Washington County Water Conservancy District. Thompson estimated it would take at least six months to design and rebuild the dike. State engineers were inspecting bridges and other highway structures in the flood path. Thompson said the dike had a history of seepage dating to when the reservoir was filled in 1985, but previous leakage had been repaired with little difficulty. He said new seepage was discovered about 10 a.m. Saturday, and that by 8 p.m. what had been a small water loss had expanded to a major leak. Heavy equipment was dispatched to reinforce the dike, but by 10:30 p.m. it became apparent nothing could be done to stop the dike from failing and the machinery was pulled out. Authorities said 100 units of an apartment complex sustained water and mud damage. At the flooding's height, water was reported window high. Overnight, local Mormon Church authorities opened their chapels to evacuated families and Red Cross officials appealed to community residents to open their homes to the displaced. There were no reports of injuries, even though there was confusion when civil defense sirens blew shortly after midnight. Some residents thought it was a new year's celebration, not an evacuation warning, officials said. Others, attending New Year's parties, were away from their homes when the evacuation was ordered, said St. George Mayor Carl Brooks.",
+          "fileId" : "AP-NR-01-01-89 2143EST",
+          "first" : "u a AM-DikeBreak 2ndLd-Writethru a0762 01-01 0569",
+          "second" : "AM-Dike Break, 2nd Ld-Writethru, a0762,0585",
+          "dateline" : "ST. GEORGE, Utah (AP)",
+          "heads" : [
+            "Governor Declares Flood-Ravaged Southern Utah Communities Disaster Area",
+            "Eds: REWRITES throughout to trim; no pick up",
+            "LaserGraphic NY12; LaserPhotos VG1, VG2"
+          ],
+          "bylines" : [ ],
+          "docLength" : 536
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0020",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0020",
+          "text" : "Gunmen killed a 27-year-old man and wounded a policeman after officers confronted a group painting anti-government slogans on a wall, the dead man's father said Sunday. Police in the northern city of Arica said by telephone that the incident occurred Saturday night but refused to provide details. A police spokesman said an official report will be issued, probably Monday. A Santiago radio station, Radio Chilena, called the gunmen ``unidentified civilians,'' an expression often used to refer to members of the National Information Agency, the military regime's secret police. Omar Cautivo said his son, Salvador, a worker at a local chemical plant, was shot dead and that a police officer was wounded. Cautivo said his son with with a group of friends painting anti-government slogans on a wall in a suburb of Arica, 1,250 miles north of Santiago. A police patrol appeared and ordered the group to stop, Cautivo said. A group of civilians watching the scene a few yards away opened fire with automatic weapons, killing Salvador and wounding one officer, Cautivo said. The man said police later arrested two daughters of his, one of them at the local hospital where she went to find out about her brother. The independent Human Rights Commission in Arica, which normally reports on this type of incidents, was closed on Sunday because of New Year's.",
+          "fileId" : "AP-NR-01-01-89 1310EST",
+          "first" : "r i AM-Chile-Killing 01-01 0235",
+          "second" : "AM-Chile-Killing,0242",
+          "dateline" : "SANTIAGO, Chile (AP)",
+          "heads" : [
+            "Man Killed While Painting Anti-government Slogans"
+          ],
+          "bylines" : [ ],
+          "docLength" : 222
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0064",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0064",
+          "text" : "Authorities were searching Sunday for two men who opened fire on a sheriff's deputy during a routine traffic stop on Interstate 40. Navajo County Sheriff's Deputy Bob Varner, 51, was listed in critical condition at Barrow Neurological Center in Phoenix following Saturday night's attack. Varner was shot three times, once in the head and once in each forearm, with one of the latter bullets also hitting his chest, said sheriff's Lt. Terry Deboer. Varner apparently stopped the men about 7:30 p.m. Saturday, but ``we don't know the circumstances of why he stopped that car,'' said Arizona Department of Public Safety spokesman Sgt. Allan Schmidt. Investigators believed the two men got out of their car and started shooting before Varner was able to get out of his vehicle, Schmidt said. The men fled after the shooting and were believed to have shot at a second police car later Saturday night. No one was injured in the second shooting. The men were wearing camouflage jackets and possibly military boots, and were armed with rapid-fire automatic weapons, Schmidt said. Their car, containing several automatic weapons, was found abandoned on the interstate. More than 100 law officers and three helicopters were involved in the search.",
+          "fileId" : "AP-NR-01-01-89 2242EST",
+          "first" : "r a AM-OfficerShot 1stLd-Writethru a0765 01-01 0266",
+          "second" : "AM-Officer Shot, 1st Ld-Writethru, a0765,0270",
+          "dateline" : "WINSLOW, Ariz. (AP)",
+          "heads" : [
+            "Search Continues for Suspect in Navajo County Deputy Shooting",
+            "Eds: CORRECTS hospital name in 2nd graf to Barrow; SUBS 3rd graf, `Varner apparently...' with 3 grafs to UPDATE number of bullet wounds; no reason yet for why car stopped; picks up 4th graf pvs, `The men...'; DELETES `BRF' designator; RETRANSMITTING to add writethru status"
+          ],
+          "bylines" : [ ],
+          "docLength" : 201
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0063",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0063",
+          "text" : "Author Daniel Curley, an award-winning novelist whose works include ``Mummy'' and ``How Many Angels,'' was killed in a traffic accident while on vacation in Florida, authorities said. Curley, 70, and his wife, Audrey, 56, were hit by a car Friday night as they crossed a street, said Tallahassee Police Lt. Duane West. Mrs. Curley suffered two broken legs and remained hospitalized. Curley, a University of Illinois professor, won both the Guggenheim and Flannery O'Connor prizes. ``He was very important both for what he wrote himself and what he helped others to write,'' said his friend, Roger Ebert, film critic for the Chicago Sun-Times. ``How Many Angels?'' was Curley's first novel, and was published in 1958. His most recent, ``Mummy,'' won critical acclaim last year for its use of ``magic realism'' techniques, a departure from his usual realistic style. Another novel was ``A Stone Man, Yes,'' which won two national awards. And he published several story collections, including ``That Marriage Bed of Procrustes,'' ``In the Hands of Our Enemies,'' ``Love in the Winter'' and ``Living with Snakes.'' ``Hilarion'' was a children's book he wrote. Curley also encouraged young writers as editor of the literary magazine ``Ascent.'' Originally named ``Accent,'' the magazine was the first to publish several major writers, Flannery O'Connor among them, and continued to be a major literary voice of the 1980s. Curley was planning to retire at the end of this school year. A retirement celebration had been planned in April in Urbana, in which former students would come together to perform readings from his works. The function could still go on as a memorial, said Marcia Kirkpatrick, one of his friends. Curley is survived by his wife, four daughters and a stepdaughter. He was to be cremated and his ashes interred, but no date was set.",
+          "fileId" : "AP-NR-01-01-89 2208EST",
+          "first" : "r a AM-Obit-Curley 01-01 0312",
+          "second" : "AM-Obit-Curley,0322",
+          "dateline" : "CHAMPAIGN, Ill. (AP)",
+          "heads" : [
+            "Illinois Professor Dies in Florida Accident"
+          ],
+          "bylines" : [ ],
+          "docLength" : 299
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0022",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0022",
+          "text" : "It may not be everyone's idea of a good time, especially coming on the heels of New Year's Eve, but the 49 men and women who plunged into the icy waters of Boston Harbor on Sunday seemed to enjoy themselves. To keep up the 85-year tradition of the L Street Brownies swimming club, men and women ranging in age from teen-agers to octogenarians took the yearly New Year's morning dip in the harbor. Before they ran down the strip of beach into the water, club president Paul Levenson apologized to onlookers for ``the mild weather over which we have no control.'' It was 25 degrees outside. ``Not bad,'' said Al Binari, 55, of Somerville, as he exited the 29-degree water wearing nothing more than a brief pair of swimming trunks. ``It was great!'' said Frances Tobin, who appeared to be in her 50s and said it was her first winter swim. ``I said I was going to do it and I did it.'' Many of the swimmers are longtime members of the L Street Brownies, a swimming club which has its headquarters at the L Street Bathhouse in South Boston. Many, like George Graney, 75, Jerry Collins, 82, and Joe Alecks, 77, have been swimming year-round for decades. ``We do it for health reasons,'' said Graney. ``It's a discipline. We do it every day, like joggers. Some days we have to chop the ice away before we go in.'' ``They do it for their sex lives,'' retorted Paul Wolan, 78, who stopped swimming year-round recently but still takes daily dips from March until November. One of the younger club members, Peter Jurzynski, 37, scoffed at questions about the cleanliness of Boston Harbor, which was an issue in last year's presidential campaign. ``The yuppies go to the Caribbean; we have the crystal clear waters of Boston Harbor,'' Jurzynski said. The group clustered together for a photograph before the swim, several wearing New Year's Eve hats and others reluctant to discard their shirts and sweatpants until the last minute. Collins, who said he's been swimming on New Year's Day since 1925, walked out of the water smiling. ``Really refreshing,'' he said.",
+          "fileId" : "AP-NR-01-01-89 1322EST",
+          "first" : "r a AM-BrowniesSwim 01-01 0385",
+          "second" : "AM-Brownies Swim,0396",
+          "dateline" : "BOSTON (AP)",
+          "heads" : [
+            "Boston Swimmers Plunge for Icy New Year's Swim for 85th Year",
+            "LaserPhoto BX2"
+          ],
+          "bylines" : [
+            "By DANA KENNEDY",
+            "Associated Press Writer"
+          ],
+          "docLength" : 359
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0066",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0066",
+          "text" : "James Dux III, weighing 6 pounds, 15.5 ounces and measuring 20 inches long, greeted the world about three seconds into 1989, becoming one of the nation's first born of the new year. ``Everybody's fine. He's a good eater already,'' said Lorraina Zuba, a nursing supervisor at New Milford Hospital. The parents are MaryAnne and James Dux II, who had been watching New Year's Eve festivities on television prior to the birth.",
+          "fileId" : "AP-NR-01-01-89 2258EST",
+          "first" : "r a AM-BRF--NewYearsBaby 01-01 0090",
+          "second" : "AM-BRF--New Years Baby,0090",
+          "dateline" : "NEW MILFORD, Conn. (AP)",
+          "heads" : [
+            "Connecticut Child One of the First Born in 1989"
+          ],
+          "bylines" : [ ],
+          "docLength" : 71
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0021",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0021",
+          "text" : "The judge in the PTL bankruptcy case called for stricter scrutiny of religious groups in newspaper interviews in which he described former PTL leader Jim Bakker as a ``little, sawed-off runt.'' Rufus Reynolds, who retired Saturday as a U.S. bankruptcy judge, told the Greensboro News & Record that television ministries are ``wide open'' for mismanagement or corruption. He also said he received death threats while he was handling the case. ``I think Congress should pass a very strong act forcing the IRS (Internal Revenue Service) ... to make them comply with an accounting,'' Reynolds said. ``We have all kinds of laws protecting consumers. Religion is just another consumer item, just the same as selling soap or washing powders or aspirin.'' In a separate interview with The Charlotte Observer, the 81-year-old Reynolds said he was amazed at the response to the travails that brought down Bakker's evangelistic empire. ``What puzzled me was why people were interested in that little, sawed-off runt,'' Reynolds said. The PTL founder Sunday criticized the judge's comments. ``I am shocked to find Judge Reynolds so prejudiced toward us, and to hear of him making fun of us and the PTL partners,'' Bakker said in a statement released by one of his attorneys. ``He should not have tried the PTL case with these feelings against us.'' The interviews were published Sunday, the day after Reynolds' tenure in the bankruptcy case ended with his retirement. The ministry filed for protection under federal bankruptcy laws in June 1987, three months after Bakker resigned from PTL amid a sex-and-money scandal. Two months ago, Reynolds ordered Bakker, his wife, Tammy, and former aide David Taggart to repay PTL nearly $7.7 million in benefits he found to be excessive. Last month, he approved the sale of PTL assets to a Canadian businessman. It was also last month that a federal grand jury indicted Bakker and former top aide Richard Dortch on criminal fraud and conspiracy charges, accusing them of diverting more than $4 million in PTL money for their own benefit. Bakker is scheduled to appear in U.S. District Court in Charlotte on Jan. 17. Upon his retirement, Reynolds told the Observer that he left the PTL case discouraged and somewhat cynical. For the first time as a bankruptcy judge, Reynolds was guarded by U.S. marshals. He said the FBI investigated death threats. ``I didn't know Christians could be so critical. They would just chew me out,'' Reynolds said. When a woman called the bankruptcy court in Columbia to find out if he was a Christian, ``I said, `You tell her I was when I started this case, but now I plead the Fifth Amendment.''' In talking with the News & Record, Reynolds said he would like to see closer government regulation of all not-for-profit corporations, including churches. ``They're handling (money) the way they damn please. They mold a religion to fit their pocketbook,'' Reynolds said. He dismissed arguments that stricter regulation of broadcast ministries might violate First Amendment guarantees of freedom of speech and worship. ``The First Amendment has no relation to accounting for money,'' Reynolds said. ``When you go stealing other people's money, you can't say, `The Bible excuses me. I've been forgiven by the Lord.' That doesn't apply.''",
+          "fileId" : "AP-NR-01-01-89 1321EST",
+          "first" : "r a AM-Reynolds-PTL 01-01 0552",
+          "second" : "AM-Reynolds-PTL,0571",
+          "dateline" : "GREENSBORO, N.C. (AP)",
+          "heads" : [
+            "PTL Bankruptcy Judge Calls Bakker `Sawed-Off Runt'"
+          ],
+          "bylines" : [ ],
+          "docLength" : 538
+        }
+      },
+      {
+        "_index" : "ap_dataset",
+        "_type" : "hw1",
+        "_id" : "AP890101-0065",
+        "_score" : 1.0,
+        "_source" : {
+          "docno" : "AP890101-0065",
+          "text" : "With AM-Israel-Border Israel on Sunday deported to Lebanon 13 Palestinians suspected of leading the year-old uprising, culminating a bloody weekend in which six Palestinians died in clashes with Israeli troops. In the occupied West Bank, Palestinians set off firecrackers and held parades, dancing and waving pictures of PLO Chairman Yasser Arafat to mark the 24th anniversary of Arafat's Fatah guerrilla group and its first attack on Israel. At least nine Arabs were shot and wounded in the occupied lands, including a 17-year-old critically wounded by a bullet in the head, Arab and military reports said. The army confirmed five casualties and said it was checking further. A military helicopter flew the deportees over Israel's northern border and dropped them in Lebanon, military sources said. They were each given about $50 in cash, the sources said. However, a police spokesman in Rashaya, Lebanon, said the deportees reported they refused the money. The spokesman said on condition of anonymity that the 13 were dropped off at the border village of Metulla and traveled by car to the Bekaa Valley in the east, where they joined a base run by the Marxist Popular Front for the Liberation of Palestine. Two other Palestinians agreed to leave voluntarily in a deal with authorities. The army said the two would be allowed to return to their homes in occupied territory if they refrain from anti-Israeli activity during a five-year period of exile. Seven of the Palestinians deported Sunday were from the occupied West Bank, and six were from the occupied Gaza Strip, a military spokesman said. The expulsions brought the number of Palestinians deported since the uprising began a year ago to 49. Twelve more suspected resistance leaders have received deportation orders, a military spokesman said. At least 345 Arabs and 14 Israelis have been killed since the anti-Israel revolt began Dec. 8, 1987. December had the highest casualty toll of any month of the revolt, said the Jerusalem Post daily. Thirty-one Arabs were killed and hundreds were wounded. Three Palestinians died of gunshots in the West Bank on Saturday. On Friday, troops raiding a Gaza Strip hideout killed two Palestinians as they tried to flee; a third Gaza resident was killed when soldiers fired at stone-throwing worshipers after noon prayers. The army on Sunday confined all 650,000 Palestinian residents of the Gaza Strip to their homes and strengthened patrols in an attempt to quell the violence, an army spokesman said. The most senior Palestinian leader among the deportees was Abdallah Abu Samhadaneh, 38, a lecturer at the Islamic University in Gaza whom the army accused of organizing a network of underground popular committees. Also deported was Abdel Hamid Al-Baba, a 25-year-old university student from the Amari refugee camp in the West Bank accused of being a member of the Unified National Leadership of the Uprising, the underground group directing the Palestinian resistance. The army said all the 13 deportees received deportation orders on Aug. 17, 1988. The orders were upheld by the military appeals committees, and the 13 have dropped their appeals to Israel's Supreme Court, it said. The United States and other Western nations have criticized Israel for deporting suspected Palestinian activists. In the occupied territories Sunday, underground Palestinian resistance leaders had called for a ``Day Of Escalation'' to mark Fatah Day, which celebrates formation of Fatah and the group's first anti-Israeli attack on Jan. 1, 1965. The PLO is an umbrella organization for several guerrilla groups, the largest being Arafat's Fatah. Arafat himself participated in a Dec. 28, 1965, guerrilla attack on an Israeli water installation in northern Israel. There were no casualties in that attack. Hundreds of Palestinian youths gathered in at least six West Bank villages to hold parades, an Arab reporter said. The teen-agers were dressed in green and khaki-colored vests and wore masks, the Arab reporter said. In Bethlehem, south of Jerusalem, Palestinians spray-painted pictures of Arafat on the wall and flew illegal Palestinian flags on utility poles, an Arab reporter said. Eight Palestinians were wounded in violent incidents in the West Bank, and a curfew violator was wounded in Gaza, Israel radio said. A 17-year-old from Tulkarem in the West Bank was critically injured by a bullet to the head, an Arab doctor said on condition of anonymity. The army spokeswoman said she was unaware of the injury. Israel captured the territories from Egypt and Jordan in 1967. About 1.5 million Palestinians live there.",
+          "fileId" : "AP-NR-01-01-89 2255EST",
+          "first" : "u i AM-Israel 4thLd-Writethru a0777 01-01 0779",
+          "second" : "AM-Israel, 4th Ld-Writethru, a0777,0800",
+          "dateline" : "JERUSALEM (AP)",
+          "heads" : [
+            "Israel Deports 13 Palestinians To Lebanon",
+            "Eds: SUBS one graf for 6th pvs `The spokesman...' to FIX typo and give village locator, PICKS UP 7th `Two other...'"
+          ],
+          "bylines" : [
+            "By RONI RABIN",
+            "Associated Press Writer"
+          ],
+          "docLength" : 736
+        }
+      }
+    ]
+  }
+}
+
