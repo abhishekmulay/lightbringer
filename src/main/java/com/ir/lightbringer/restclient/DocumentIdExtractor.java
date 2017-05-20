@@ -9,8 +9,8 @@ import org.elasticsearch.client.Response;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Abhishek Mulay on 5/19/17.
@@ -18,32 +18,59 @@ import java.util.List;
 public class DocumentIdExtractor {
 
     private RestCallHandler handler = new RestCallHandler();
+    private String endPoint = "/ap_dataset/hw1/_search?scroll=2m";
+    private String scrollEndPoint = "_search/scroll";
 
-    private List<String> getDocumentIdsFromResponse(final Response response) {
-        HttpEntity entity = response.getEntity();
-        String jsonResponse = null;
-        JsonNode jsonNode = null;
+    @SuppressWarnings("Since15")
+    public Set<String> getAllDocumentIds() throws IOException {
+        handler.initializeConnection();
+        final String body = "";
+        Set<String> docids = new HashSet<String>();
+        String scrollId = "";
 
-        try {
-            jsonResponse = EntityUtils.toString(entity);
-            System.out.println("Getting docIds from: \n" + jsonResponse);
+            Response response = this.handler.get(body, endPoint);
+            HttpEntity entity = response.getEntity();
+            String jsonString = EntityUtils.toString(entity);
+
             ObjectMapper mapper = new ObjectMapper();
-            jsonNode = mapper.readTree(jsonResponse);
-        } catch (IOException e) {
-            e.printStackTrace();
+            JsonNode jsonNode = mapper.readTree(jsonString);
+
+            if (jsonNode.has("_scroll_id")) {
+                scrollId = jsonNode.get("_scroll_id").asText();
+                docids.addAll(extraceDocumentIds(jsonNode));
+            }
+
+        boolean hitsPresent = true;
+        while (hitsPresent) {
+            final String scrollBody = "{\n" +
+                    "    \"scroll\" : \"1m\", \n" +
+                    "    \"scroll_id\": \""+scrollId+"\"\n" +
+                    "}\n";
+
+            Response nextPageResponse = handler.post(scrollBody, scrollEndPoint);
+            String nextJson = EntityUtils.toString(nextPageResponse.getEntity());
+            JsonNode jsonTree = mapper.readTree(nextJson);
+            hitsPresent = jsonTree.get("hits").get("hits").size() > 0;
+            if (jsonNode.has("_scroll_id")) {
+                scrollId = jsonTree.get("_scroll_id").asText();
+            }
+            docids.addAll(extraceDocumentIds(jsonTree));
         }
-        return extractDoumentIds(jsonNode);
+
+        System.out.println(docids);
+        System.out.println(" Number of ids = " + docids.size());
+        handler.closeConnection();
+        return docids;
     }
 
-    private List<String> extractDoumentIds(JsonNode jsonNode) {
+    private Set<String> extraceDocumentIds(JsonNode jsonNode) {
+        Set<String> docids = new HashSet<String>();
         JsonNode hitsArray = jsonNode.get("hits").get("hits");
-        List<String> docids = new ArrayList<String>();
         if (hitsArray.isArray()) {
-//            hit =>
-//            {"_index":"ap_dataset","_type":"hw1","_id":"AP890101-0060","_score":1.0,"fields":{"docno":["AP890101-0060"]}}
+            // hit => {"_index":"ap_dataset","_type":"hw1","_id":"AP890101-0060","_score":1.0,"fields":{"docno":["AP890101-0060"]}}
             for (JsonNode hit : hitsArray) {
-                if (hit.has("fields") && hit.get("fields").has("docno")) {
-                    String docno = hit.get("fields").get("docno").get(0).asText();
+                if (hit.has("_source") && hit.get("_source").has("docno")) {
+                    String docno = hit.get("_source").get("docno").asText();
                     docids.add(docno);
                 }
             }
@@ -51,122 +78,17 @@ public class DocumentIdExtractor {
         return docids;
     }
 
-    public Response fetchFirstPage() {
-        final int batchSize = 10000;
-        final String body = "{\n" +
-                "    \"size\": "+batchSize+",\n" +
-                "    \"stored_fields\": [ \"docno\"]\n" +
-                "}";
-        final String endPoint = "/ap_dataset/hw1/_search?scroll=1m";
-
-        this.handler.initializeConnection();
-        Response response = handler.post(body, endPoint);
-        this.handler.closeConnection();
-        return response;
-    }
-
-    public String getScrollId (Response response) {
-        String scrollId = "";
+    public static void main(String[] args) {
         try {
-            HttpEntity entity = response.getEntity();
-            String jsonString = EntityUtils.toString(entity);
-            System.out.println("Finding scrollId in json: \n" + jsonString);
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode jsonNode = mapper.readTree(jsonString);
-            scrollId = jsonNode.has("_scroll_id") ? jsonNode.get("_scroll_id").asText() : "";
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scrollId;
-    }
-
-    private Response fetchNextPage(final String scrollId) {
-        final String SCROLL_API = "/_search/scroll";
-        return fetchNextScrollPage(scrollId, SCROLL_API);
-    }
-
-    //    POST  /_search/scroll
-    //    {
-    //        "scroll" : "1m",
-    //        "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAYYWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
-    //    }
-    //
-    private Response fetchNextScrollPage(final String scrollId, final String endPoint) {
-        String aliveTime = "1m";
-        String requestBody = "{\n" +
-                "    \"scroll\" : \" "+ aliveTime +"\", \n" +
-                "    \"scroll_id\": " + scrollId +
-                "}\n";
-
-        this.handler.closeConnection();
-        Response response = handler.post(requestBody, endPoint);
-        this.handler.closeConnection();
-        return response;
-    }
-
-    public List<String> fetchAllDocIds() {
-        this.handler.initializeConnection();
-        List<String> documentIds = new ArrayList<String>();
-        final Response response = fetchFirstPage();
-
-        String scrollId = getScrollId(response);
-
-        List<String> documentIdsFromResponse = getDocumentIdsFromResponse(response);
-        documentIds.addAll(documentIdsFromResponse);
-
-        //noinspection Since15
-        while(!scrollId.isEmpty()) {
-            System.out.println("ScrollId = " + scrollId);
-            Response nextPageResponse = fetchNextPage(scrollId);
-            List<String> docIds = getDocumentIdsFromResponse(nextPageResponse);
-            documentIds.addAll(docIds);
-            scrollId = getScrollId(nextPageResponse);
-        }
-
-        this.handler.closeConnection();
-        return documentIds;
-    }
-
-//    GET /ap_dataset/hw1/_search?scroll=1m
-//    {
-//        "stored_fields" : ["docno"],
-//        "query" : {
-//              "match_all" : {}
-//         }
-//    }
-    public void sushantQuery () throws IOException {
-        final String endPoint = "/ap_dataset/hw1/_search?scroll=1m";
-        final String body = "    {\n" +
-                            "        \"stored_fields\" : [\"docno\"],\n" +
-                            "        \"query\" : {\n" +
-                            "              \"match_all\" : {}\n" +
-                            "         }\n" +
-                            "    }\n";
-        this.handler.initializeConnection();
-        Response response = this.handler.get(body, endPoint);
-        String jsonString = EntityUtils.toString(response.getEntity());
-        System.out.println(jsonString);
-    }
-
-    public static void main(String[] args) throws IOException {
-        try {
-            System.setOut(new PrintStream(new File("output-file.txt")));
+            System.setOut(new PrintStream(new File("output.txt")));
         } catch (Exception e) {
             e.printStackTrace();
         }
         DocumentIdExtractor extractor = new DocumentIdExtractor();
-        extractor.sushantQuery();
-
-//        Response response = extractor.fetchFirstPage();
-//        String scrollId = extractor.getScrollId(response);
-//
-//        String jsonString = EntityUtils.toString(response.getEntity());
-//        System.out.println(jsonString);
-//
-//        System.out.println("scrollId = "+ scrollId);
-
-//        List<String> docIds = extractor.fetchAllDocIds();
-//        System.out.println("fetched docIds = " + docIds.size());
+        try {
+            Set<String> documentIds = extractor.getAllDocumentIds();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
 }
