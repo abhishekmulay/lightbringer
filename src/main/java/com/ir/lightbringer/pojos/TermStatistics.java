@@ -12,7 +12,6 @@ public class TermStatistics {
     private int termFrequency;
     private int documentFrequency;
     private int documentLength;
-
     private int ttf;
 
     public TermStatistics(String term, String documentId, int documentLength, int termFrequency, int documentFrequency, int ttf) {
