@@ -1,5 +1,6 @@
 package com.ir.lightbringer.queryprocessor;
 
+import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.retrievalmodels.OkapiTFCalculator;
 import com.ir.lightbringer.statistics.StatisticsProvider;
 import com.ir.lightbringer.statistics.TermStatistics;
@@ -7,71 +8,47 @@ import com.ir.lightbringer.statistics.TermStatistics;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Abhishek Mulay on 5/20/17.
  */
 public class QueryProcessor {
 
-    public Map<String, Double> getOkapiTFforQuery(Query query) {
+    private Map<String, List<TermStatistics>> getTermStatistics(Query query) throws IOException {
         String cleanedQuery = query.getCleanedQuery();
         String[] terms = cleanedQuery.split(" ");
-        Map<String, Map<String, Double>> docOkapiMap = calculateOkapi_tfForAllTermsInQuery(terms);
 
-        Map<String, Double> docIdFinalOkapiMap = new HashMap<String, Double>();
+        Map<String, List<TermStatistics>> docIdTermStatisticsMap = new HashMap<>();
 
-        for (Map.Entry<String, Map<String, Double>> entry : docOkapiMap.entrySet()) {
+        for (String term : terms) {
+            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics(term);
+            for (Map.Entry<String, List<TermStatistics>> entry : statistics.entrySet()) {
+                String documentId = entry.getKey();
+                List<TermStatistics> statisticsForDocumentId = entry.getValue();
 
-            String documentId = entry.getKey();
-            Map<String, Double> termOkapiMap = entry.getValue();
-
-            double finalOkapi = 0;
-            for (Map.Entry<String, Double> termEntity : termOkapiMap.entrySet()) {
-                String term = termEntity.getKey();
-                Double okapiValue = termEntity.getValue();
-                finalOkapi += okapiValue;
-            }
-            docIdFinalOkapiMap.put(documentId, finalOkapi);
-        }
-
-        System.out.println( "\n\nFinal OKAPI scores: \n" + prettyPrintMap(docIdFinalOkapiMap));
-        return docIdFinalOkapiMap;
-    }
-
-    // Map <docId, <term, okapi_tf>>
-    public Map<String, Map<String, Double>> calculateOkapi_tfForAllTermsInQuery(String[] terms) {
-        Map<String, Map<String, Double>> docOkapiMap = new HashMap<String, Map<String, Double>>();
-        try {
-            for (String term : terms) {
-
-                // <docId, TermStat>
-                Map<String, TermStatistics> docIdStatsMap = StatisticsProvider.getStatistics(term);
-
-                for (Map.Entry<String, TermStatistics> entry : docIdStatsMap.entrySet()) {
-                    String documentId = entry.getKey();
-                    TermStatistics termStatistics = entry.getValue();
-                    double okapiValue = OkapiTFCalculator.okapi_tf(termStatistics);
-
-                    if (docOkapiMap.containsKey(documentId)) {
-                        Map<String, Double> termOkapiValueMap = docOkapiMap.get(documentId);
-                        Double previousValue = termOkapiValueMap.get(documentId);
-                        termOkapiValueMap.put(documentId, previousValue + okapiValue);
-                        docOkapiMap.put(documentId, termOkapiValueMap);
-                    } else {
-                        Map<String, Double> hash = new HashMap<String, Double>();
-                        hash.put(documentId, okapiValue);
-                        docOkapiMap.put(documentId, hash);
-                    }
+                if (docIdTermStatisticsMap.containsKey(documentId)) {
+                    List<TermStatistics> previousTermStatistics = docIdTermStatisticsMap.get(documentId);
+                    previousTermStatistics.addAll(statisticsForDocumentId);
+                    docIdTermStatisticsMap.put(documentId, previousTermStatistics);
+                } else {
+                    docIdTermStatisticsMap.put(documentId, statisticsForDocumentId);
                 }
             }
+        }
+
+        return docIdTermStatisticsMap;
+    }
+
+    public Map<String, Double> calculateOkapi_tf(Query query) {
+        try {
+            Map<String, List<TermStatistics>> termStatistics = getTermStatistics(query);
+            Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf(termStatistics);
+            return docIdOkapiValuesMap;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return docOkapiMap;
+        throw new UnsupportedOperationException("Could not calculate Okapi values for query.");
     }
 
     public String prettyPrintMap(Map<String, Double> map) {
@@ -85,19 +62,46 @@ public class QueryProcessor {
     }
 
 
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o2.getValue()).compareTo(o1.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<K, V>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         try {
             System.setOut(new PrintStream(new File("output.txt")));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        long timeAtStart = System.nanoTime();
+        String okapiOutputFile = ConfigurationManager.getConfigurationValue("okapi.output.file");
         FileQueryReader reader = new FileQueryReader();
         List<Query> allQueries = reader.getAllQueries();
-        Query query = allQueries.get(0);
-        System.out.println("Finding metrices for query " + query.getCleanedQuery());
 
         QueryProcessor processor = new QueryProcessor();
-        processor.getOkapiTFforQuery(query);
 
+        for (Query query : allQueries) {
+            System.out.println("\n\nCalculating Okapi for: " + query.getCleanedQuery());
+            Map<String, Double> docIdOkapiValuesMap = processor.calculateOkapi_tf(query);
+            Map<String, Double> sortedDocIdOkapiValuesMap = sortByValue(docIdOkapiValuesMap);
+            QueryResultWriter.writeQueryResultToFile(query, sortedDocIdOkapiValuesMap, okapiOutputFile);
+        }
+
+        long timeAtEnd = System.nanoTime();
+
+        long elapsedTime = timeAtEnd - timeAtStart;
+        double seconds = (double) elapsedTime / 1000000000.0;
+        System.out.println("Total time taken: " + seconds / 60.0 + " minutes");
     }
 }

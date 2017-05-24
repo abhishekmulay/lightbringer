@@ -1,9 +1,9 @@
 85.   alleg measur corrupt public offici government jurisdict
-59.   type weather event directli caus fatal
-56.   prime lend rate move
-71.   land air water border countri militari forc guerrilla group
+59.   weather event directli caus fatal
+56.   predict prime lend rate move
+71.   incurse land air water border countri militari second countri forc guerrilla group
 64.   event result polit motiv hostag take
-62.   militari coup d'etat attempt success countri
+62.   militari coup detat attempt success countri
 93.   support nation rifl associ nra asset
 99.   develop iran contra affair
 58.   predict anticip rail strike report
