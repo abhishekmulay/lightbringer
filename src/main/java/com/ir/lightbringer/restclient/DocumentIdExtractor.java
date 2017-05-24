@@ -2,6 +2,7 @@ package com.ir.lightbringer.restclient;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ir.lightbringer.main.ConfigurationManager;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
@@ -18,12 +19,15 @@ import java.util.Set;
 public class DocumentIdExtractor {
 
     private RestCallHandler handler = new RestCallHandler();
-    private String endPoint = "/ap_dataset/hw1/_search?scroll=2m";
+    private String INDEX_NAME = ConfigurationManager.getConfigurationValue("index.name");
+    private String TYPE_NAME = ConfigurationManager.getConfigurationValue("type.name");
+    private final String keepAliveTime = "2m";
+    private String endPoint = "/"+INDEX_NAME+"/" + TYPE_NAME + "/_search?scroll=" + keepAliveTime;
     private String scrollEndPoint = "_search/scroll";
 
     @SuppressWarnings("Since15")
     public Set<String> getAllDocumentIds() throws IOException {
-        handler.initializeConnection();
+        handler.openConnection();
         final String body = "";
         Set<String> docids = new HashSet<String>();
         String scrollId = "";
@@ -56,9 +60,6 @@ public class DocumentIdExtractor {
             }
             docids.addAll(extraceDocumentIds(jsonTree));
         }
-
-        System.out.println(docids);
-        System.out.println(" Number of ids = " + docids.size());
         handler.closeConnection();
         return docids;
     }
@@ -76,19 +77,5 @@ public class DocumentIdExtractor {
             }
         }
         return docids;
-    }
-
-    public static void main(String[] args) {
-        try {
-            System.setOut(new PrintStream(new File("output.txt")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        DocumentIdExtractor extractor = new DocumentIdExtractor();
-        try {
-            Set<String> documentIds = extractor.getAllDocumentIds();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
