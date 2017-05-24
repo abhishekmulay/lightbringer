@@ -1,7 +1,12 @@
 package com.ir.lightbringer.statistics;
 
 import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
+
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,11 +32,29 @@ public class StatisticsProviderTest extends TestCase {
 //            }
 //    },
 
-    public void testGetStatistics() throws Exception {
-        final String testTerm = "corrupt";
-//        final TermStatistics expectedStatistic = new TermStatistics();
-        Map<String, TermStatistics> statistics = StatisticsProvider.getStatistics(testTerm);
-        System.out.println("statistics" + statistics);
+    @Test
+    public void statisticProviderTest() {
+        try {
+            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics("d'etat");
+            System.out.println(statistics);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Assert.assertFalse(false);
     }
+
+
+//    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+
+//    public static <K, V extends Comparable<? super V>> String prettyPrintMap(Map<K, V> map) {
+//        StringBuffer buffer = new StringBuffer();
+//        for (Map.Entry<K, V> entry : map.entrySet()) {
+//            Object key = entry.getKey();
+//            Object value = entry.getValue();
+//            buffer.append(key).append("\t").append(value).append('\n');
+//        }
+//        return buffer.toString();
+//    }
+
 
 }

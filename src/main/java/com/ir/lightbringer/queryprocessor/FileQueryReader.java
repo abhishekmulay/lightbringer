@@ -38,17 +38,19 @@ public class FileQueryReader {
         return queries;
     }
 
-
+    //  not doing cleaning now as we have manually cleaned queries.
     private String cleanQuery(String query, List<String> stopWords) {
-        String cleanedQuery = "";
-        String[] queryTerms = query.split(" ");
-        for (String term : queryTerms) {
-            // word should not be in stoplist
-            if(stopWords.contains(term) == false) {
-                cleanedQuery += " " + term.replaceAll("\\s+","");
-            }
-        }
-        return cleanedQuery;
+//        String cleanedQuery = "";
+//        String[] queryTerms = query.split(" ");
+//        for (String term : queryTerms) {
+//            // word should not be in stoplist
+//            if(stopWords.contains(term) == false) {
+//                cleanedQuery += " " + term.replaceAll("\\s+","");
+//            }
+//        }
+//        return cleanedQuery;
+        //  not doing cleaning now as we have manually cleaned queries.
+        return query;
     }
 
 

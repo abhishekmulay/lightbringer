@@ -8,7 +8,9 @@ import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +23,10 @@ public class StatisticsProvider {
     private final static String STATISTICS_API = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?scroll=1m";
     private final static String scrollEndPoint = "_search/scroll";
 
-    public static Map<String, TermStatistics> getStatistics(String term) throws IOException {
+    private StatisticsProvider(){}
+
+    // return map of <documentId, List<TermStatistics>>
+    public static Map<String, List<TermStatistics>> getStatistics(String term) throws IOException {
         handler.openConnection();
         final String body = "{\n" +
                 "    \"size\" : 1000,\n" +
@@ -56,7 +61,7 @@ public class StatisticsProvider {
         return extractStatistics(term, jsonString);
     }
 
-    private static Map<String, TermStatistics> extractStatistics(String term, String jsonString) {
+    private static Map<String, List<TermStatistics>> extractStatistics(String term, String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = null;
         String scrollId = "";
@@ -70,7 +75,7 @@ public class StatisticsProvider {
         }
 
         // parsing tf, df and ttf.
-        Map<String, TermStatistics> termStatisticsMap = parseTermStatistics(jsonNode, term);
+        Map<String, List<TermStatistics>> docIdTermStatisticsMap = parseTermStatistics(jsonNode, term);
 
         handler.openConnection();
         if (!scrollId.isEmpty()) {
@@ -95,17 +100,20 @@ public class StatisticsProvider {
                     scrollId = nextPageJsonNode.get("_scroll_id").asText();
                 }
                 // parsing here again
-                Map<String, TermStatistics> stringTermStatisticsMapFromNextPage = parseTermStatistics(nextPageJsonNode, term);
-                termStatisticsMap.putAll(stringTermStatisticsMapFromNextPage);
+//                Map<String, TermStatistics> stringTermStatisticsMapFromNextPage =
+                Map<String, List<TermStatistics>> docIdTermStatsMapFromNextPage = parseTermStatistics(nextPageJsonNode, term);
+                docIdTermStatisticsMap.putAll(docIdTermStatsMapFromNextPage );
             }
         }
-        System.out.println("Total term statistics " + termStatisticsMap.size());
+        System.out.println("Total term statistics for '" + term + "' = " + docIdTermStatisticsMap.size());
         handler.closeConnection();
-        return termStatisticsMap;
+        return docIdTermStatisticsMap;
     }
 
-    private static Map<String, TermStatistics> parseTermStatistics(JsonNode jsonNode, String term) {
-        Map<String, TermStatistics> termStatisticsMap = new HashMap<String, TermStatistics>();
+    private static Map<String, List<TermStatistics>> parseTermStatistics(JsonNode jsonNode, String term) {
+        // return map of <documentId, List<TermStatistics>>
+        Map<String, List<TermStatistics>> termStatisticsMap = new HashMap<>();
+
         if (jsonNode.has("hits")) {
             boolean hitsPresent = jsonNode.get("hits").get("hits").size() > 0;
             if (hitsPresent) {
@@ -119,7 +127,15 @@ public class StatisticsProvider {
                         int ttf = hit.get("fields").has("ttf") ? hit.get("fields").get("ttf").get(0).asInt() : -1;
 
                         TermStatistics termStatistics = new TermStatistics(term, documentId, docLength, tf, df, ttf);
-                        termStatisticsMap.put(documentId, termStatistics);
+                        if (termStatisticsMap.containsKey(documentId)) {
+                            List<TermStatistics> stats = termStatisticsMap.get(documentId);
+                            stats.add(termStatistics);
+                            termStatisticsMap.put(documentId, stats);
+                        } else {
+                            List<TermStatistics> newList = new ArrayList<>();
+                            newList.add(termStatistics);
+                            termStatisticsMap.put(documentId, newList);
+                        }
                     }
                 }
             }
