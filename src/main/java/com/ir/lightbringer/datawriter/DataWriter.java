@@ -65,7 +65,7 @@ public class DataWriter {
     public void bulkInsertDocuments(Map<String, String> allJsonMap) {
         // Divide the big map of JSON strings into small maps each containing 1000 json.
         RestCallHandler restCallHandler = new RestCallHandler();
-        restCallHandler.initializeConnection();
+        restCallHandler.openConnection();
         if (allJsonMap.size() > CHUNK_SIZE) {
             List<Map<String, String>> jsonMaps = createSubMaps(allJsonMap);
             for (Map<String, String> jsonMap : jsonMaps) {

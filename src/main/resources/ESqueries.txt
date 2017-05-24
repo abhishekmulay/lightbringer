@@ -1,22 +1,13 @@
 ##########################################
 #Search all
-GET _search/
+GET /ap_dataset/hw1/_search/
 {
   "query": {
     "match_all": {}
   }
 }
-
-GET /ap_dataset/hw1/_search
-{
-    "query": {
-        "type" : {
-            "value" : "hw1"
-        }
-    }
-}
-
-GET /ap_dataset/hw1/AP890101-0068/_termvectors
+##########################################
+GET /twitter/tweet/1/_termvectors
 {
   "fields" : ["text"],
   "offsets" : true,
@@ -26,8 +17,90 @@ GET /ap_dataset/hw1/AP890101-0068/_termvectors
   "field_statistics" : true
 }
 
+
 ##########################################
 
+GET /ap_dataset/hw1/_search?scroll=1m
+{
+    "stored_fields" : ["docno"],
+    "query" : {
+        "match_all" : {}
+    }
+}
+
+POST  _search/scroll
+{
+    "scroll" : "1m",
+    "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAYqMWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
+}
+
+##########################################
+
+POST /ap_dataset/hw1/_search?scroll=1m
+{
+    "size": 10000,
+    "stored_fields": [ "docno"]
+}
+
+POST  /_search/scroll
+{
+    "scroll" : "1m",
+    "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAYYWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
+}
+
+
+GET ap_dataset/hw1/_search?size=10000
+{
+  "stored_fields": [ "docno"]
+}
+
+
+#Get all under type
+GET /ap_dataset/hw1/_search
+{
+    "query": {
+        "type" : {
+            "value" : "hw1"
+        }
+    }
+}
+
+# average length of entire corpus
+POST ap_dataset/hw1/_search?size=0
+{
+  "aggs" : {
+      "avg_docLength" : { "avg" : { "field" : "docLength"}}
+  }
+}
+
+
+# Get term vectors for a docno
+GET /ap_dataset/hw1/AP890101-0060/_termvectors
+
+POST /ap_dataset/hw1/_mtermvectors
+{
+    "ids" : ["AP890101-0060", "AP890101-0062"],
+    "parameters": {
+        "fields": [
+                "text"
+        ],
+        "term_statistics": true
+    }
+}
+
+
+GET /ap_dataset/hw1/AP890101-0060/_termvectors
+{
+  "fields" : ["text"],
+  "offsets" : true,
+  "payloads" : true,
+  "positions" : true,
+  "term_statistics" : true,
+  "field_statistics" : true
+}
+##########################################
+#           Configuration                #
+##########################################
 PUT /ap_dataset/
 {
   "settings": {
@@ -67,13 +140,12 @@ PUT /ap_dataset/hw1/_mapping
   }
 }
 
-
 ##########################################
 # Delete all documents under index = "lightbringer" which have type="hw1"
 
 DELETE /ap_dataset
 
-DELETE /lightbringer/
+DELETE /ap_dataset/
 {
     "query": {
         "type" : {
@@ -88,3 +160,93 @@ GET /_cat/health?v
 GET /_cat/indices?v
 ##########################################
 
+
+
+# script.engine.groovy.inline.search: on
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-advanced-scripting.html
+
+# get tf, df and ttf for a term
+GET /ap_dataset/hw1/_search
+{
+    "query" : {
+        "term": {"text": "bravo"}
+    },
+    "script_fields" : {
+        "doc_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['bravo'].df()"
+            }
+        },
+        "term_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['bravo'].tf()"
+            }
+        },
+        "ttf" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['bravo'].ttf()"
+            }
+        }
+    }
+}
+
+
+# Get average document length
+POST /ap_dataset/hw1/_search?size=0
+{
+    "aggs" : {
+        "avg_grade" : { "avg" : { "field" : "docLength" } }
+    }
+}
+
+# Increase per minute max query limit. default max 15/min
+PUT /_cluster/settings
+{
+    "transient" : {
+        "script.max_compilations_per_minute" : 100
+    }
+}
+
+##########################################################################
+#      Get tf, df, ttf for a term, API is paginated because we can have  #
+#      lot of documents that contain given term, hence API response is   #
+#      paginated. ScrollId is the page marker.                           #
+##########################################################################
+
+GET /ap_dataset/_search?scroll=1m
+{
+    "size" : 1000,
+    "query" : {
+        "term": {"text": "corrupt"}
+    },
+    "script_fields" : {
+        "doc_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['corrupt'].df()"
+            }
+        },
+        "term_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['corrupt'].tf()"
+            }
+        },
+        "ttf" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['corrupt'].ttf()"
+            }
+        }
+    }
+}
+
+POST  /_search/scroll
+{
+    "scroll" : "1m",
+    "scroll_id":  "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAANEcWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
+}
+#####################################################################################

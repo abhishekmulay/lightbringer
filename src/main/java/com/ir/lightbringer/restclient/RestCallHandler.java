@@ -29,7 +29,7 @@ public class RestCallHandler {
     private HttpHost localHost = null;
     private RestClient restClient = null;
 
-    public void initializeConnection() {
+    public void openConnection() {
         this.localHost = new HttpHost("localhost", 9200, "http");
         this.restClient = RestClient.builder(this.localHost).build();
     }
@@ -45,9 +45,10 @@ public class RestCallHandler {
     }
 
     public Response get(final String body, final String endPoint) {
+        HttpEntity entity = new NStringEntity(body, ContentType.APPLICATION_JSON);
         Response response = null;
         try {
-            response = restClient.performRequest("GET", endPoint, Collections.singletonMap("pretty", "true"));
+            response = restClient.performRequest("GET", endPoint, Collections.singletonMap("pretty", "true"), entity);
             System.out.println(endPoint + " | STATUS: " + response.getStatusLine().getStatusCode() + " " + response
                     .getStatusLine().getReasonPhrase());
         } catch (Exception e) {

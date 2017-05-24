@@ -28,8 +28,7 @@ public class FileQueryReader {
                     int queryId = Integer.parseInt(line.substring(0, line.indexOf('.')));
                     String originalQuery = line.substring(6, line.length());
                     String cleanedQuery = cleanQuery(originalQuery, this.stopWords);
-                    System.out.println("id:" + queryId + "\t query:" + originalQuery);
-
+//                    System.out.println("id:" + queryId + "\t query:" + originalQuery);
                     queries.add(new Query(queryId, originalQuery, cleanedQuery));
                 }
             }
