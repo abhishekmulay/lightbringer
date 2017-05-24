@@ -1,4 +1,4 @@
-package com.ir.lightbringer.retrievalmodels;
+package com.ir.lightbringer.vectorspacemodels;
 
 import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.statistics.TermStatistics;
