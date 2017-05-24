@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class QueryResultWriter {
 
-    public void writeQueryResultToFile(List<Query> queryList, Map<String, Double> docIdScoreMap, String outputFile) {
+    public static void writeQueryResultToFile(List<Query> queryList, Map<String, Double> docIdScoreMap, String outputFile) {
         try {
             PrintWriter writer = new PrintWriter(outputFile, "UTF-8");
 
