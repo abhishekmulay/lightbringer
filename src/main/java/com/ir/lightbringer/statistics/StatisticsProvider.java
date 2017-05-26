@@ -3,6 +3,7 @@ package com.ir.lightbringer.statistics;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ir.lightbringer.main.ConfigurationManager;
+import com.ir.lightbringer.pojos.Query;
 import com.ir.lightbringer.pojos.TermStatistics;
 import com.ir.lightbringer.restclient.RestCallHandler;
 import org.apache.http.util.EntityUtils;
@@ -179,6 +180,43 @@ public class StatisticsProvider {
             }
         }
         return termStatisticsMap;
+    }
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////
+
+    public static Map<String, List<TermStatistics>> getTermStatisticsForQuery(Query query) throws IOException {
+        String cleanedQuery = query.getCleanedQuery();
+        String[] terms = cleanedQuery.split(" ");
+
+        Map<String, List<TermStatistics>> docIdTermStatisticsMap = new HashMap<>();
+
+        for (String term : terms) {
+            // get map of <docId, List[stats for terms in that docId]>
+            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics(term);
+
+            // update main map with values
+            for (Map.Entry<String, List<TermStatistics>> entry : statistics.entrySet()) {
+                String documentId = entry.getKey();
+                List<TermStatistics> statisticsForDocumentId = entry.getValue();
+
+                if (docIdTermStatisticsMap.containsKey(documentId)) {
+                    List<TermStatistics> previousTermStatistics = docIdTermStatisticsMap.get(documentId);
+                    previousTermStatistics.addAll(statisticsForDocumentId);
+                    docIdTermStatisticsMap.put(documentId, previousTermStatistics);
+                } else {
+                    docIdTermStatisticsMap.put(documentId, statisticsForDocumentId);
+                }
+            }
+        }
+
+        return docIdTermStatisticsMap;
     }
 }
 

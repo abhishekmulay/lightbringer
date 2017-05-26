@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class App {
 
+    ////////////////  INDEXING  /////////////////////////////
     public static void startIndexing() {
         DataWriter writer = new DataWriter();
         DataReader reader = new DataReader();
@@ -40,16 +41,49 @@ public class App {
         System.out.println("Total time taken: " + seconds / 60.0 + " minutes");
     }
 
-    public static void runVectorSpaceModels() {
-
+    ///////////  VECTOR SPACE MODELS ////////////////////////
+    public static void runOkapi() {
         String okapiOutputFile = ConfigurationManager.getConfigurationValue("okapi.output.file");
         FileQueryReader reader = new FileQueryReader();
         List<Query> allQueries = reader.getAllQueries();
-
         QueryProcessor processor = new QueryProcessor();
-
+        processor.calculateOkapi_tf(allQueries, okapiOutputFile);
     }
 
+    public static void runTfIdf() {
+        String tfIdfOutputFile = ConfigurationManager.getConfigurationValue("tfidf.output.file");
+        FileQueryReader reader = new FileQueryReader();
+        List<Query> allQueries = reader.getAllQueries();
+        QueryProcessor processor = new QueryProcessor();
+        processor.calculateTfIdf(allQueries, tfIdfOutputFile);
+    }
+
+    public static void runBM25() {
+        String bm25OutputFile = ConfigurationManager.getConfigurationValue("bm-25.output.file");
+        FileQueryReader reader = new FileQueryReader();
+        List<Query> allQueries = reader.getAllQueries();
+        QueryProcessor processor = new QueryProcessor();
+        processor.calculateOkapiMb25(allQueries, bm25OutputFile);
+    }
+
+    ///////////  LANGUAGE MODELS ///////////////////////////
+    public static void runUnigramWithLaplaceSmoothing() {
+        String unigramWithLaplaceSmoothingOutputFile = ConfigurationManager.getConfigurationValue("unigram.laplace.output.file");
+        FileQueryReader reader = new FileQueryReader();
+        List<Query> allQueries = reader.getAllQueries();
+        QueryProcessor processor = new QueryProcessor();
+        processor.calculateUnigramWithLaplaceSmoothing(allQueries, unigramWithLaplaceSmoothingOutputFile);
+    }
+
+    public static void runUnigramWithJelinekMercerSmoothing() {
+        FileQueryReader reader = new FileQueryReader();
+        List<Query> allQueries = reader.getAllQueries();
+        QueryProcessor processor = new QueryProcessor();
+    }
+
+
+
+    //////////////////// MAIN /////////////////////////////
     public static void main(String[] args) {
         // Writes output to output.txt file instead of stdout
         try {
@@ -60,8 +94,10 @@ public class App {
 
         long timeAtStart = System.nanoTime();
 
-//        runVectorSpaceModels();
-        startIndexing();
+//       For indexing documents
+//        startIndexing();
+
+        runUnigramWithLaplaceSmoothing();
 
         long timeAtEnd = System.nanoTime();
         long elapsedTime = timeAtEnd - timeAtStart;
