@@ -6,20 +6,8 @@ GET /ap_dataset/hw1/_search/
     "match_all": {}
   }
 }
-##########################################
-GET /twitter/tweet/1/_termvectors
-{
-  "fields" : ["text"],
-  "offsets" : true,
-  "payloads" : true,
-  "positions" : true,
-  "term_statistics" : true,
-  "field_statistics" : true
-}
-
 
 ##########################################
-
 GET /ap_dataset/hw1/_search?scroll=1m
 {
     "stored_fields" : ["docno"],
@@ -33,7 +21,6 @@ POST  _search/scroll
     "scroll" : "1m",
     "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAYqMWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
 }
-
 ##########################################
 
 POST /ap_dataset/hw1/_search?scroll=1m
