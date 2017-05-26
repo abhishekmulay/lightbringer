@@ -1,5 +1,6 @@
 package com.ir.lightbringer.statistics;
 
+import com.ir.lightbringer.pojos.TermStatistics;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -44,9 +45,8 @@ public class StatisticsProviderTest extends TestCase {
     }
 
 
-//    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-
-//    public static <K, V extends Comparable<? super V>> String prettyPrintMap(Map<K, V> map) {
+//
+//    public static <K, V extends Comparable<? super V>> String prettyString(Map<K, V> map) {
 //        StringBuffer buffer = new StringBuffer();
 //        for (Map.Entry<K, V> entry : map.entrySet()) {
 //            Object key = entry.getKey();
@@ -55,6 +55,6 @@ public class StatisticsProviderTest extends TestCase {
 //        }
 //        return buffer.toString();
 //    }
-
+//
 
 }

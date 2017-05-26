@@ -1,8 +1,12 @@
-package com.ir.lightbringer.languagemodels;
+package com.ir.lightbringer.ranking.languagemodels;
 
 import com.ir.lightbringer.main.ConfigurationManager;
-import com.ir.lightbringer.queryprocessor.Query;
-import com.ir.lightbringer.statistics.TermStatistics;
+import com.ir.lightbringer.pojos.Query;
+import com.ir.lightbringer.pojos.TermStatistics;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Abhishek Mulay on 5/24/17.
@@ -12,20 +16,48 @@ public class BM25Calculator {
     private final static int corpusSize = 84678;
     private final static int averageDocumentLength = Integer.parseInt(ConfigurationManager.getConfigurationValue("average.document.length"));
 
-    public static double bm25(TermStatistics termStatistics, Query query) {
 
-        int k1 = 0;
-        int k2 = 0;
-        int b = 0;
+    public static double bm25(TermStatistics termStats, Query query) {
+        double k1 = 1.2;
+        double k2 = 100;
+        double b = 0.75;
 
-        int docFrequency = termStatistics.getDocumentFrequency();
-        int termFrequency = termStatistics.getTermFrequency();
-        double result = 0.0;
-        for (String term : query.getCleanedQuery().split(" ")) {
-            double firstLogFactor = Math.log((corpusSize + 0.5) / (docFrequency + 0.5));
+        int docFrequency = termStats.getDocumentFrequency();
+        int termFrequency = termStats.getTermFrequency();
+        int documentLength = termStats.getDocumentLength();
 
+        // finding term frequency in query
+        String term = termStats.getTerm();
+        String[] queryTerms = query.getCleanedQuery().split(" ");
+        int termFrequencyInQuery = 0;
+        for (String t : queryTerms) {
+            if (t.equals(term))
+                termFrequencyInQuery +=1;
         }
-        return result;
+
+        // apply BM25 formula
+        final double firstLogTerm = Math.log((corpusSize + 0.5) / (docFrequency + 0.5));
+        final double middleTerm = (termFrequency + ( k1 * termFrequency)) / (termFrequency + (k1 * ( (1-b) + b * (documentLength/averageDocumentLength))) );
+        final double lastTerm =  (termFrequencyInQuery + (k2 * termFrequencyInQuery)) / (termFrequencyInQuery + k2);
+
+        return firstLogTerm * middleTerm * lastTerm;
+    }
+
+    public static Map<String, Double> bm25(Map<String, List<TermStatistics>> docIdTermStatisticsMap, Query query) {
+        Map<String, Double> docIdBm25ValuesMap = new HashMap<>();
+
+        for (Map.Entry<String, List<TermStatistics>> entry : docIdTermStatisticsMap.entrySet()) {
+            String documentId = entry.getKey();
+            List<TermStatistics> termStatisticsList = entry.getValue();
+
+            double finalBm25Value = 0.0;
+            for (TermStatistics termStats : termStatisticsList) {
+                finalBm25Value += bm25(termStats, query);
+            }
+            docIdBm25ValuesMap.put(documentId, finalBm25Value);
+        }
+
+        return docIdBm25ValuesMap;
     }
 
 }

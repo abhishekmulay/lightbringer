@@ -1,6 +1,6 @@
-package com.ir.lightbringer.datawriter;
+package com.ir.lightbringer.indexing.datawriter;
 
-import com.ir.lightbringer.datareader.DataReader;
+import com.ir.lightbringer.indexing.datareader.DataReader;
 import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.restclient.RestCallHandler;
 

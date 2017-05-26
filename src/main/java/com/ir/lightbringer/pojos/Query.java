@@ -1,6 +1,4 @@
-package com.ir.lightbringer.queryprocessor;
-
-import com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl;
+package com.ir.lightbringer.pojos;
 
 /**
  * Created by Abhishek Mulay on 5/17/17.

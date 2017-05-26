@@ -1,6 +1,6 @@
-package com.ir.lightbringer.vectorspacemodels;
+package com.ir.lightbringer.ranking.vectorspacemodels;
 
-import com.ir.lightbringer.statistics.TermStatistics;
+import com.ir.lightbringer.pojos.TermStatistics;
 
 import java.util.HashMap;
 import java.util.List;

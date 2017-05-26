@@ -1,6 +1,6 @@
-package com.ir.lightbringer.datareader;
+package com.ir.lightbringer.indexing.datareader;
 
-import com.ir.lightbringer.models.HW1Model;
+import com.ir.lightbringer.pojos.HW1Model;
 import junit.framework.TestCase;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.ir.lightbringer.models;
+package com.ir.lightbringer.pojos;
 
 import java.util.List;
 
