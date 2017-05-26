@@ -25,38 +25,68 @@ public class StatisticsProvider {
     private final static String STATISTICS_API = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?scroll=1m";
     private final static String scrollEndPoint = "_search/scroll";
 
-    private StatisticsProvider(){}
+    // avoid instantiation
+    private StatisticsProvider() {}
+
+    ///////////////////// Get statistics for all words in query ////////////////
+    public static Map<String, List<TermStatistics>> getTermStatisticsForQuery(Query query) throws IOException {
+        String cleanedQuery = query.getCleanedQuery();
+        String[] terms = cleanedQuery.split(" ");
+
+        Map<String, List<TermStatistics>> docIdTermStatisticsMap = new HashMap<>();
+
+        for (String term : terms) {
+            // get map of <docId, List[stats for terms in that docId]>
+            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics(term);
+
+            // update main map with values
+            for (Map.Entry<String, List<TermStatistics>> entry : statistics.entrySet()) {
+                String documentId = entry.getKey();
+                List<TermStatistics> statisticsForDocumentId = entry.getValue();
+
+                if (docIdTermStatisticsMap.containsKey(documentId)) {
+                    List<TermStatistics> previousTermStatistics = docIdTermStatisticsMap.get(documentId);
+                    previousTermStatistics.addAll(statisticsForDocumentId);
+                    docIdTermStatisticsMap.put(documentId, previousTermStatistics);
+                } else {
+                    docIdTermStatisticsMap.put(documentId, statisticsForDocumentId);
+                }
+            }
+        }
+
+        return docIdTermStatisticsMap;
+    }
 
     // return map of <documentId, List<TermStatistics>>
-    public static Map<String, List<TermStatistics>> getStatistics(String term) throws IOException {
+    private static Map<String, List<TermStatistics>> getStatistics(String term) throws IOException {
         handler.openConnection();
         final String body = "{\n" +
-                            "    \"size\" : 4000,\n" +
-                            "    \"query\" : {\n" +
-                            "        \"term\": {\"text\": \"" + term + "\"}\n" +
-                            "    },\n" +
-                            "    \"_source\": \"docLength\", \n" +
-                            "    \"script_fields\" : {\n" +
-                            "        \"doc_frequency\" : {\n" +
-                            "            \"script\" : {\n" +
-                            "              \"lang\": \"groovy\",   \n" +
-                            "              \"inline\": \"_index['text']['" + term + "'].df()\"\n" +
-                            "            }\n" +
-                            "        },\n" +
-                            "        \"term_frequency\" : {\n" +
-                            "            \"script\" : {\n" +
-                            "              \"lang\": \"groovy\",   \n" +
-                            "              \"inline\": \"_index['text']['" + term + "'].tf()\"\n" +
-                            "            }\n" +
-                            "        },\n" +
-                            "        \"ttf\" : {\n" +
-                            "            \"script\" : {\n" +
-                            "              \"lang\": \"groovy\",   \n" +
-                            "              \"inline\": \"_index['text']['" + term + "'].ttf()\"\n" +
-                            "            }\n" +
-                            "        }\n" +
-                            "    }\n" +
-                            "}";
+                "    \"size\" : 4000,\n" +
+                "    \"query\" : {\n" +
+                "        \"term\": {\"text\": \"" + term + "\"}\n" +
+                "    },\n" +
+                "    \"_source\": \"docLength\", \n" +
+                "    \"script_fields\" : {\n" +
+                "        \"doc_frequency\" : {\n" +
+                "            \"script\" : {\n" +
+                "              \"lang\": \"groovy\",   \n" +
+                "              \"inline\": \"_index['text']['" + term + "'].df()\"\n" +
+                "            }\n" +
+                "        },\n" +
+                "        \"term_frequency\" : {\n" +
+                "            \"script\" : {\n" +
+                "              \"lang\": \"groovy\",   \n" +
+                "              \"inline\": \"_index['text']['" + term + "'].tf()\"\n" +
+                "            }\n" +
+                "        },\n" +
+                "        \"ttf\" : {\n" +
+                "            \"script\" : {\n" +
+                "              \"lang\": \"groovy\",   \n" +
+                "              \"inline\": \"_index['text']['" + term + "'].ttf()\"\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
 
         Response response = handler.get(body, STATISTICS_API);
         String jsonString = EntityUtils.toString(response.getEntity());
@@ -67,38 +97,37 @@ public class StatisticsProvider {
     public static Map<String, List<TermStatistics>> getStatisticsForAllDocuments(String term) throws IOException {
         handler.openConnection();
         final String body = "{\n" +
-                            "    \"size\" : 10000,\n" +
-                            "    \"query\" : {\n" +
-                            "        \"match_all\": {}\n" +
-                            "    },\n" +
-                            "    \"_source\": \"docLength\", \n" +
-                            "    \"script_fields\" : {\n" +
-                            "        \"doc_frequency\" : {\n" +
-                            "            \"script\" : {\n" +
-                            "              \"lang\": \"groovy\",   \n" +
-                            "              \"inline\": \"_index['text']['" + term + "'].df()\"\n" +
-                            "            }\n" +
-                            "        },\n" +
-                            "        \"term_frequency\" : {\n" +
-                            "            \"script\" : {\n" +
-                            "              \"lang\": \"groovy\",   \n" +
-                            "              \"inline\": \"_index['text']['" + term + "'].tf()\"\n" +
-                            "            }\n" +
-                            "        },\n" +
-                            "        \"ttf\" : {\n" +
-                            "            \"script\" : {\n" +
-                            "              \"lang\": \"groovy\",   \n" +
-                            "              \"inline\": \"_index['text']['" + term + "'].ttf()\"\n" +
-                            "            }\n" +
-                            "        }\n" +
-                            "    }\n" +
-                            "}";
+                "    \"size\" : 10000,\n" +
+                "    \"query\" : {\n" +
+                "        \"match_all\": {}\n" +
+                "    },\n" +
+                "    \"_source\": \"docLength\", \n" +
+                "    \"script_fields\" : {\n" +
+                "        \"doc_frequency\" : {\n" +
+                "            \"script\" : {\n" +
+                "              \"lang\": \"groovy\",   \n" +
+                "              \"inline\": \"_index['text']['" + term + "'].df()\"\n" +
+                "            }\n" +
+                "        },\n" +
+                "        \"term_frequency\" : {\n" +
+                "            \"script\" : {\n" +
+                "              \"lang\": \"groovy\",   \n" +
+                "              \"inline\": \"_index['text']['" + term + "'].tf()\"\n" +
+                "            }\n" +
+                "        },\n" +
+                "        \"ttf\" : {\n" +
+                "            \"script\" : {\n" +
+                "              \"lang\": \"groovy\",   \n" +
+                "              \"inline\": \"_index['text']['" + term + "'].ttf()\"\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
         Response response = handler.get(body, STATISTICS_API);
         String jsonString = EntityUtils.toString(response.getEntity());
         handler.closeConnection();
         return extractStatistics(term, jsonString);
     }
-
 
     private static Map<String, List<TermStatistics>> extractStatistics(String term, String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
@@ -139,9 +168,8 @@ public class StatisticsProvider {
                     scrollId = nextPageJsonNode.get("_scroll_id").asText();
                 }
                 // parsing here again
-//                Map<String, TermStatistics> stringTermStatisticsMapFromNextPage =
                 Map<String, List<TermStatistics>> docIdTermStatsMapFromNextPage = parseTermStatistics(nextPageJsonNode, term);
-                docIdTermStatisticsMap.putAll(docIdTermStatsMapFromNextPage );
+                docIdTermStatisticsMap.putAll(docIdTermStatsMapFromNextPage);
             }
         }
         System.out.println("Total term statistics for '" + term + "' = " + docIdTermStatisticsMap.size());
@@ -180,43 +208,6 @@ public class StatisticsProvider {
             }
         }
         return termStatisticsMap;
-    }
-
-
-
-
-
-
-
-
-    //////////////////////////////////////////////////////////
-
-    public static Map<String, List<TermStatistics>> getTermStatisticsForQuery(Query query) throws IOException {
-        String cleanedQuery = query.getCleanedQuery();
-        String[] terms = cleanedQuery.split(" ");
-
-        Map<String, List<TermStatistics>> docIdTermStatisticsMap = new HashMap<>();
-
-        for (String term : terms) {
-            // get map of <docId, List[stats for terms in that docId]>
-            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics(term);
-
-            // update main map with values
-            for (Map.Entry<String, List<TermStatistics>> entry : statistics.entrySet()) {
-                String documentId = entry.getKey();
-                List<TermStatistics> statisticsForDocumentId = entry.getValue();
-
-                if (docIdTermStatisticsMap.containsKey(documentId)) {
-                    List<TermStatistics> previousTermStatistics = docIdTermStatisticsMap.get(documentId);
-                    previousTermStatistics.addAll(statisticsForDocumentId);
-                    docIdTermStatisticsMap.put(documentId, previousTermStatistics);
-                } else {
-                    docIdTermStatisticsMap.put(documentId, statisticsForDocumentId);
-                }
-            }
-        }
-
-        return docIdTermStatisticsMap;
     }
 }
 

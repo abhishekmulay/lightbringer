@@ -18,7 +18,6 @@ import java.util.Set;
  */
 public class DocumentIdExtractor {
 
-
     private RestCallHandler handler = new RestCallHandler();
     private String INDEX_NAME = ConfigurationManager.getConfigurationValue("index.name");
     private String TYPE_NAME = ConfigurationManager.getConfigurationValue("type.name");
@@ -26,7 +25,6 @@ public class DocumentIdExtractor {
     private String endPoint = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?scroll=" + keepAliveTime;
     private String scrollEndPoint = "_search/scroll";
 
-    @SuppressWarnings("Since15")
     public Set<String> getAllDocumentIds() throws IOException {
         handler.openConnection();
         final String body = "{\n" +
