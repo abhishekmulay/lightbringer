@@ -244,9 +244,427 @@ GET /ap_dataset/_search?scroll=1m
     }
 }
 
+
+#///////////////////////////////////////////
+
+##########################################
+#Search all
+GET /ap_dataset/_search?pretty
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+DELETE query_set
+
+GET _search
+
+##########################################
+GET /twitter/tweet/1/_termvectors
+{
+  "fields" : ["text"],
+  "offsets" : true,
+  "payloads" : true,
+  "positions" : true,
+  "term_statistics" : true,
+  "field_statistics" : true
+}
+
+
+##########################################
+
+GET /ap_dataset/hw1/_search?scroll=1m
+{
+    "stored_fields" : ["docno"],
+    "query" : {
+        "match_all" : {}
+    }
+}
+
+POST  _search/scroll
+{
+    "scroll" : "1m",
+    "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAYqMWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
+}
+
+##########################################
+
+POST /ap_dataset/hw1/_search?scroll=1m
+{
+    "size": 10000,
+    "stored_fields": [ "docno"]
+}
+
+POST  /_search/scroll
+{
+    "scroll" : "1m",
+    "scroll_id": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAYYWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
+}
+
+
+GET ap_dataset/hw1/_search?size=10000
+{
+  "stored_fields": [ "docno"]
+}
+
+
+#Get all under type
+GET /ap_dataset/hw1/_search
+{
+    "query": {
+        "type" : {
+            "value" : "hw1"
+        }
+    }
+}
+
+# average length of entire corpus
+POST ap_dataset/hw1/_search?size=0
+{
+  "aggs" : {
+      "avg_docLength" : { "avg" : { "field" : "docLength"}}
+  }
+}
+
+
+# Get term vectors for a docno
+GET /ap_dataset/hw1/AP890101-0060/_termvectors
+
+POST /ap_dataset/hw1/_mtermvectors
+{
+    "ids" : ["AP890101-0060", "AP890101-0062"],
+    "parameters": {
+        "fields": [
+                "text"
+        ],
+        "term_statistics": true
+    }
+}
+
+
+GET /ap_dataset/hw1/_termvectors
+{
+  "doc": {
+    "text" : "allegations measures against corrupt public officials governmental jurisdiction worldwide"
+  },
+  "fields" : ["text"],
+  "offsets" : true,
+  "payloads" : true,
+  "positions" : true,
+  "term_statistics" : true,
+  "field_statistics" : true
+}
+##########################################
+#           Configuration                #
+##########################################
+PUT /ap_dataset/
+{
+  "settings": {
+    "index": {
+      "store": {
+        "type": "fs"
+      },
+      "number_of_shards": 1,
+      "number_of_replicas": 1
+    },
+    "analysis": {
+      "analyzer": {
+        "my_english": {
+          "type": "english",
+          "stopwords_path": "stoplist.txt"
+        }
+      }
+    }
+  }
+}
+
+PUT /ap_dataset/document/_mapping
+{
+  "document": {
+    "properties": {
+      "docno": {
+        "type": "keyword",
+        "store": true
+      },
+      "text": {
+        "type": "text",
+        "store": true,
+        "term_vector": "with_positions_offsets_payloads",
+        "analyzer": "my_english",
+        "fielddata" : true
+      }
+    }
+  }
+}
+
+##########################################
+# Delete all documents under index = "lightbringer" which have type="hw1"
+
+DELETE /ap_dataset
+
+DELETE /ap_dataset/
+{
+    "query": {
+        "type" : {
+            "value" : "hw1"
+        }
+    }
+}
+
+##########################################
+# housekeeping
+GET /_cat/health?v
+GET /_cat/indices?v
+##########################################
+
+# Get average document length
+POST /ap_dataset/hw1/_search?size=0
+{
+    "aggs" : {
+        "avg_grade" : { "avg" : { "field" : "docLength" } }
+    }
+}
+
+# get all documents that contain a term and their ids
+POST /ap_dataset/hw1/_search?
+{
+  "_source": "_id",
+  "query": {
+    "term" : { "text" : "algorithm" }
+  }
+}
+
+
+POST /ap_dataset/hw1/_mtermvectors
+{
+    "ids" : ["AP890101-0060", "AP890101-0062"],
+    "parameters": {
+        "fields": [
+                "text"
+        ],
+        "term_statistics": true
+    }
+}
+
+# get all documents that contain a term
+POST /ap_dataset/hw1/_search?
+{
+  "query": {
+    "match" : { "text" : "algorithms" }
+  }
+}
+
+
+POST /ap_dataset/hw1/_search?
+{
+  "query": {
+    "term" : { "text" : "algorithm" }
+  },
+  "script_fields" : {
+    "test1" : {
+        "script" : {
+            "lang": "painless",
+            "inline": "_source['text']['algorithm'].tf()"
+        }
+    }
+  }
+}
+
+
+GET ap_dataset/hw1/_search
+{
+  "query": {
+    "term" : {"text" : "corrupt"}
+  }
+}
+
+
+
+
+GET /ap_dataset/_search?scroll=1m
+{
+    "size" : 2000,
+    "query" : {
+        "match_all": {}
+    },
+    "_source": "docLength",
+    "script_fields" : {
+        "doc_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['government'].df()"
+            }
+        },
+        "term_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['government'].tf()"
+            }
+        },
+        "ttf" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['government'].ttf()"
+            }
+        }
+    }
+}
+
+
+
+
+GET /ap_dataset/_search?scroll=1m
+{
+    "size" : 2000,
+    "query" : {
+        "term": {"text": "crucial"}
+    },
+    "_source": "docLength",
+    "script_fields" : {
+        "doc_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['crucial'].df()"
+            }
+        },
+        "term_frequency" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['crucial'].tf()"
+            }
+        },
+        "ttf" : {
+            "script" : {
+              "lang": "groovy",
+              "inline": "_index['text']['crucial'].ttf()"
+            }
+        }
+    }
+}
+
+
+GET ap_dataset/hw1/_search?explain
+{
+  "query" : {
+    "match" :  {"text" : "alleg" }
+  }
+}
+
+
+POST  /_search/scroll
+{
+    "scroll" : "1m",
+    "scroll_id":  "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAANyIWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
+}
+#############################################
+
+PUT /_cluster/settings
+{
+    "transient" : {
+        "script.max_compilations_per_minute" : 500
+    }
+}
+#############################################
+
+
+
+GET /ap_dataset/hw1/_search
+{
+  "query": {
+    "match": {"text": "algorithm"}
+  }
+}
+
+POST /ap_dataset/_analyze
+{
+  "analyzer": "my_english",
+  "text": "algorithm"
+}
+
+######################################
+
+
+GET /ap_dataset/hw1/_search
+    {
+        "query" : {
+            "match" : { "text" : "allegations" }
+        },
+        "_source": "docLength",
+        "script_fields" : {
+            "tf" : {
+                "script" : {
+                "lang": "groovy",
+                "inline": "_index['text']['alleg'].tf()"
+
+                }
+            },
+            "df" : {
+                "script" : {
+                "lang": "groovy",
+                "inline": "_index['text']['alleg'].df()"
+
+                }
+            },
+        "score" : {
+                "script" : {
+                "lang": "groovy",
+                "inline": "int d = doc['docLength'].value; double tf = _index['text']['alleg'].tf(); double df = _index['text']['alleg'].df();double okapi = tf/(tf+0.5+1.5*(d/441.6)); return okapi;"
+
+                }
+    }
+}}
+
+
+
+
+GET /ap_dataset/document/_search
+{
+  "size": 0,
+  "aggs": {
+    "vocabSize": {
+      "cardinality": {
+        "field": "text"
+      }
+    }
+  }
+}
+
+
 POST  /_search/scroll
 {
     "scroll" : "1m",
     "scroll_id":  "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAANEcWT1B1dnFXVjVTM09sc0hHLXo5QTltQQ=="
 }
 #####################################################################################
+
+GET /ap_dataset/document/_search
+    {
+        "query" : {
+            "match" : { "text" : "allegations" }
+        },
+        "_source": "docLength",
+        "script_fields" : {
+            "tf" : {
+                "script" : {
+                "lang": "groovy",
+                "inline": "_index['text']['alleg'].tf()"
+
+                }
+            },
+            "df" : {
+                "script" : {
+                "lang": "groovy",
+                "inline": "_index['text']['alleg'].df()"
+
+                }
+            },
+        "score" : {
+                "script" : {
+                "lang": "groovy",
+                "inline": "int dl = doc['docLength'].value; double tf = _index['text']['alleg'].tf(); double df =
+                _index['text']['alleg'].df();double okapi = tf/(tf+0.5+1.5*(dl/441.6)); return okapi;"
+
+                }
+    }
+}}

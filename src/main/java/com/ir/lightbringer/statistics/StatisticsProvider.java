@@ -3,6 +3,7 @@ package com.ir.lightbringer.statistics;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ir.lightbringer.main.ConfigurationManager;
+import com.ir.lightbringer.pojos.TermStatistics;
 import com.ir.lightbringer.restclient.RestCallHandler;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
@@ -29,37 +30,74 @@ public class StatisticsProvider {
     public static Map<String, List<TermStatistics>> getStatistics(String term) throws IOException {
         handler.openConnection();
         final String body = "{\n" +
-                "    \"size\" : 1000,\n" +
-                "    \"query\" : {\n" +
-                "        \"term\": {\"text\": \"" + term + "\"}\n" +
-                "    },\n" +
-                "    \"script_fields\" : {\n" +
-                "        \"doc_frequency\" : {\n" +
-                "            \"script\" : {\n" +
-                "              \"lang\": \"groovy\",   \n" +
-                "              \"inline\": \"_index['text']['" + term + "'].df()\"\n" +
-                "            }\n" +
-                "        },\n" +
-                "        \"term_frequency\" : {\n" +
-                "            \"script\" : {\n" +
-                "              \"lang\": \"groovy\",   \n" +
-                "              \"inline\": \"_index['text']['" + term + "'].tf()\"\n" +
-                "            }\n" +
-                "        },\n" +
-                "        \"ttf\" : {\n" +
-                "            \"script\" : {\n" +
-                "              \"lang\": \"groovy\",   \n" +
-                "              \"inline\": \"_index['text']['" + term + "'].ttf()\"\n" +
-                "            }\n" +
-                "        }\n" +
-                "    }\n" +
-                "}";
+                            "    \"size\" : 4000,\n" +
+                            "    \"query\" : {\n" +
+                            "        \"term\": {\"text\": \"" + term + "\"}\n" +
+                            "    },\n" +
+                            "    \"_source\": \"docLength\", \n" +
+                            "    \"script_fields\" : {\n" +
+                            "        \"doc_frequency\" : {\n" +
+                            "            \"script\" : {\n" +
+                            "              \"lang\": \"groovy\",   \n" +
+                            "              \"inline\": \"_index['text']['" + term + "'].df()\"\n" +
+                            "            }\n" +
+                            "        },\n" +
+                            "        \"term_frequency\" : {\n" +
+                            "            \"script\" : {\n" +
+                            "              \"lang\": \"groovy\",   \n" +
+                            "              \"inline\": \"_index['text']['" + term + "'].tf()\"\n" +
+                            "            }\n" +
+                            "        },\n" +
+                            "        \"ttf\" : {\n" +
+                            "            \"script\" : {\n" +
+                            "              \"lang\": \"groovy\",   \n" +
+                            "              \"inline\": \"_index['text']['" + term + "'].ttf()\"\n" +
+                            "            }\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}";
 
         Response response = handler.get(body, STATISTICS_API);
         String jsonString = EntityUtils.toString(response.getEntity());
         handler.closeConnection();
         return extractStatistics(term, jsonString);
     }
+
+    public static Map<String, List<TermStatistics>> getStatisticsForAllDocuments(String term) throws IOException {
+        handler.openConnection();
+        final String body = "{\n" +
+                            "    \"size\" : 10000,\n" +
+                            "    \"query\" : {\n" +
+                            "        \"match_all\": {}\n" +
+                            "    },\n" +
+                            "    \"_source\": \"docLength\", \n" +
+                            "    \"script_fields\" : {\n" +
+                            "        \"doc_frequency\" : {\n" +
+                            "            \"script\" : {\n" +
+                            "              \"lang\": \"groovy\",   \n" +
+                            "              \"inline\": \"_index['text']['" + term + "'].df()\"\n" +
+                            "            }\n" +
+                            "        },\n" +
+                            "        \"term_frequency\" : {\n" +
+                            "            \"script\" : {\n" +
+                            "              \"lang\": \"groovy\",   \n" +
+                            "              \"inline\": \"_index['text']['" + term + "'].tf()\"\n" +
+                            "            }\n" +
+                            "        },\n" +
+                            "        \"ttf\" : {\n" +
+                            "            \"script\" : {\n" +
+                            "              \"lang\": \"groovy\",   \n" +
+                            "              \"inline\": \"_index['text']['" + term + "'].ttf()\"\n" +
+                            "            }\n" +
+                            "        }\n" +
+                            "    }\n" +
+                            "}";
+        Response response = handler.get(body, STATISTICS_API);
+        String jsonString = EntityUtils.toString(response.getEntity());
+        handler.closeConnection();
+        return extractStatistics(term, jsonString);
+    }
+
 
     private static Map<String, List<TermStatistics>> extractStatistics(String term, String jsonString) {
         ObjectMapper mapper = new ObjectMapper();

@@ -1,6 +1,4 @@
-package com.ir.lightbringer.statistics;
-
-import java.util.List;
+package com.ir.lightbringer.pojos;
 
 /**
  * Created by Abhishek Mulay on 5/22/17.

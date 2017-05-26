@@ -1,8 +1,8 @@
-package com.ir.lightbringer.datareader;
+package com.ir.lightbringer.indexing.datareader;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ir.lightbringer.main.ConfigurationManager;
-import com.ir.lightbringer.models.HW1Model;
+import com.ir.lightbringer.pojos.HW1Model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 

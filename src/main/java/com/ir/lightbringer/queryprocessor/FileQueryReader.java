@@ -1,11 +1,11 @@
 package com.ir.lightbringer.queryprocessor;
 
 import com.ir.lightbringer.main.ConfigurationManager;
+import com.ir.lightbringer.pojos.Query;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Created by Abhishek Mulay on 5/17/17.

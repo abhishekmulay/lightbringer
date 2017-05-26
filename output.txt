@@ -1,0 +1,761 @@
+/ap_dataset/document/_search?scroll=2m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+
+
+Calculating Unigram LM with Laplace smoothing for: alleg measur corrupt public offici government jurisdict
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'alleg' = 6256
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'measur' = 6817
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'corrupt' = 1785
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'public' = 16126
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'offici' = 31303
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'government' = 423
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'jurisdict' = 601
+
+
+Calculating Unigram LM with Laplace smoothing for: weather event directli caus fatal
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'weather' = 3194
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'event' = 4389
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'directli' = 2145
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'caus' = 11404
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'fatal' = 1676
+
+
+Calculating Unigram LM with Laplace smoothing for: predict prime lend rate move
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'predict' = 4181
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'prime' = 5730
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'lend' = 1050
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'rate' = 9582
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'move' = 14517
+
+
+Calculating Unigram LM with Laplace smoothing for: incurse land air water border countri militari second countri forc guerrilla group
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'incurse' = 0
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'land' = 6695
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'air' = 9629
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'water' = 5414
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'border' = 4386
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'countri' = 20579
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'militari' = 10996
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'second' = 11693
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'countri' = 20579
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'forc' = 18293
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'guerrilla' = 3244
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'group' = 20094
+
+
+Calculating Unigram LM with Laplace smoothing for: event result polit motiv hostag take
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'event' = 4389
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'result' = 9959
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'polit' = 13465
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'motiv' = 1583
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'hostag' = 1553
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'take' = 22327
+
+
+Calculating Unigram LM with Laplace smoothing for: militari coup detat attempt success countri
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'militari' = 10996
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'coup' = 1446
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'detat' = 0
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'attempt' = 7629
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'success' = 4812
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'countri' = 20579
+
+
+Calculating Unigram LM with Laplace smoothing for: support nation rifl associ nra asset
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'support' = 16071
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'nation' = 34034
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'rifl' = 1386
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'associ' = 13196
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'nra' = 65
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'asset' = 2613
+
+
+Calculating Unigram LM with Laplace smoothing for: develop iran contra affair
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'develop' = 11652
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'iran' = 2702
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'contra' = 1489
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'affair' = 4983
+
+
+Calculating Unigram LM with Laplace smoothing for: predict anticip rail strike report
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'predict' = 4181
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'anticip' = 1685
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'rail' = 853
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'strike' = 5060
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'report' = 33571
+
+
+Calculating Unigram LM with Laplace smoothing for: poach method wildlif
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'poach' = 89
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'method' = 1385
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'wildlif' = 909
+
+
+Calculating Unigram LM with Laplace smoothing for: sign contract preliminari agreement tent reserv launch commerci satellit
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'sign' = 9637
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'contract' = 5159
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'preliminari' = 1611
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'agreement' = 7769
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'tent' = 1434
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'reserv' = 4789
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'launch' = 3756
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'commerci' = 3887
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'satellit' = 1144
+
+
+Calculating Unigram LM with Laplace smoothing for: current crimin action offic fail US financi institut
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'current' = 8130
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'crimin' = 4217
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'action' = 9791
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'offic' = 21535
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'fail' = 7626
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'US' = 0
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'financi' = 7052
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'institut' = 6731
+
+
+Calculating Unigram LM with Laplace smoothing for: crime perpetr aid comput
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'crime' = 3789
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'perpetr' = 198
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'aid' = 8802
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'comput' = 3193
+
+
+Calculating Unigram LM with Laplace smoothing for:  non communist industri state regul transfer high tech good technolog undesir nation
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for '' = 0
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'non' = 6698
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'communist' = 6846
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'industri' = 12266
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'state' = 36621
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'regul' = 4108
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'transfer' = 2308
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'high' = 15408
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'tech' = 532
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'good' = 13268
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'technolog' = 3142
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'undesir' = 90
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'nation' = 34034
+
+
+Calculating Unigram LM with Laplace smoothing for: exist pend invest opec member downstream oper nation
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'exist' = 4348
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'pend' = 2136
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'invest' = 5396
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'opec' = 316
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'member' = 20199
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'downstream' = 89
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'oper' = 13202
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'nation' = 34034
+
+
+Calculating Unigram LM with Laplace smoothing for: israel iran contra affair
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'israel' = 2914
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'iran' = 2702
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'contra' = 1489
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'affair' = 4983
+
+
+Calculating Unigram LM with Laplace smoothing for: comput applic crime solv
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'comput' = 3193
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'applic' = 1770
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'crime' = 3789
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'solv' = 1708
+
+
+Calculating Unigram LM with Laplace smoothing for: studi unsubstanti concern safeti manufactur employe instal worker fine diamet fiber insul
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'studi' = 6978
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'unsubstanti' = 58
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'concern' = 9884
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'safeti' = 4080
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'manufactur' = 4043
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'employe' = 6369
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'instal' = 2364
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'worker' = 8653
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'fine' = 4181
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'diamet' = 260
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'fiber' = 286
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'insul' = 237
+
+
+Calculating Unigram LM with Laplace smoothing for: mci bell system breakup
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'mci' = 88
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'bell' = 1088
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'system' = 10734
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'breakup' = 224
+
+
+Calculating Unigram LM with Laplace smoothing for: fiber optic technolog
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'fiber' = 286
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'optic' = 164
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'technolog' = 3142
+
+
+Calculating Unigram LM with Laplace smoothing for: individu organ produc fiber optic equip
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'individu' = 3906
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'organ' = 12690
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'produc' = 9024
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'fiber' = 286
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'optic' = 164
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'equip' = 4208
+
+
+Calculating Unigram LM with Laplace smoothing for: controversi standard perform salari level incent pai senior longev job
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'controversi' = 2456
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'standard' = 4305
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'perform' = 5726
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'salari' = 1645
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'level' = 8329
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'incent' = 1115
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'pai' = 9969
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'senior' = 5412
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'longev' = 58
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'job' = 8781
+
+
+Calculating Unigram LM with Laplace smoothing for: platform 1988 presidenti candid
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'platform' = 746
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for '1988' = 11482
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'presidenti' = 4402
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'candid' = 4229
+
+
+Calculating Unigram LM with Laplace smoothing for: machin translat system
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'machin' = 2842
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'translat' = 910
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'system' = 10734
+
+
+Calculating Unigram LM with Laplace smoothing for: acquisit US armi advanc weapon system
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'acquisit' = 1330
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'US' = 0
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'armi' = 7068
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'advanc' = 5558
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'weapon' = 5189
+/ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+_search/scroll | Status: 200 OK
+Total term statistics for 'system' = 10734
+Total time taken: 5.160851255866667 minutes
