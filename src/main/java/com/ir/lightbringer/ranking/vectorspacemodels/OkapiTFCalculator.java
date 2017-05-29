@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class OkapiTFCalculator {
 
-    private static int averageDocumentLength = Integer.parseInt(ConfigurationManager.getConfigurationValue("average.document.length"));
+    private static double averageDocumentLength = Double.parseDouble(ConfigurationManager.getConfigurationValue("average.document.length"));
 
     public static double okapi_tf(TermStatistics termStats) {
         int termFrequency = termStats.getTermFrequency();

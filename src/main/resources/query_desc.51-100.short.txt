@@ -1,25 +1,25 @@
-85.   alleg measur corrupt public offici government jurisdict
-59.   weather event directli caus fatal
-56.   predict prime lend rate move
-71.   incurs land air water border countri militari second countri forc guerrilla group
-64.   event result polit motiv hostag take
-62.   militari coup detat attempt success countri
-93.   support nation rifl associ nra asset
-99.   develop iran contra affair
-58.   predict anticip rail strike report
-77.   poach method wildlif
-54.   sign contract preliminari agreement tent reserv launch commerci satellit
-87.   current crimin action offic fail US financi institut
-94.   crime perpetr aid comput
-100.  non communist industri state regul transfer high tech good technolog undesir nation
-89.   exist pend invest opec member downstream oper nation
-61.   israel iran contra affair
-95.   comput applic crime solv
-68.   studi unsubstanti concern safeti manufactur employe instal worker fine diamet fiber insul
-57.   mci bell system breakup
-97.   fiber optic technolog
-98.   individu organ produc fiber optic equip
-60.   controversi standard perform salari level incent pai senior longev job
-80.   platform 1988 presidenti candid
-63.   machin translat system
-91.   acquisit US armi advanc weapon system
+85.   allegations, or measures being taken against, corrupt public officials of any governmental jurisdiction worldwide.
+59.   a type of weather event which has directly caused at least one fatality in some location.
+56.   a prediction about the prime lending rate, or will report an actual prime rate move.
+71.   incursions by land, air, or water into the border area of one country by military forces of a second country or a guerrilla group based in a second country.
+64.   an event or result of politically motivated hostage-taking.
+62.   a military coup detat, either attempted or successful, in any country.
+93.   or identify supporters of the National Rifle Association (NRA), or its assets.
+99.   a development in the Iran-Contra Affair.
+58.   predict or anticipate a rail strike or report an ongoing rail  strike.
+77.   a poaching method used against a certain type of wildlife.
+54.   the signing of a contract or preliminary agreement, or the making of a tentative reservation, to launch a commercial satellite.
+87.   on current criminal actions against officers of a failed U.S. financial institution.
+94.   a crime perpetrated with the aid of a computer.
+100.   efforts by the non-communist, industrialized states to regulate the transfer of high-tech goods or \"dual-use\" technologies to undesirable nations.
+89.    an existing or pending investment by an OPEC member state in any \"downstream\" operation.
+61.   the role of Israel in the Iran-Contra Affair.
+95.   a computer application to crime solving.
+68.   actual studies, or even unsubstantiated concerns about the safety to manufacturing employees and installation workers of fine-diameter fibers used in insulation and other products.
+57.   how MCI has been doing since the Bell System breakup.
+97.   instances of fiber optics technology actually in use.
+98.   individuals or organizations which produce fiber optics equipment.
+60.   either one or both sides of the controversy over the use of standards of performance to determine salary levels and incentive pay as contrasted with determining pay solely on the basis of seniority or longevity on the job.
+80.   something about the platform of a 1988 presidential  candidate.
+63.   a machine translation system.
+91.   acquisition by the US Army of specified advanced weapons systems.

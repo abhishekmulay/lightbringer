@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Abhishek Mulay on 5/17/17.
  */
 public class FileQueryReader {
-    private final List<String> stopWords = StopWordsProvider.getStopWords();
+    //    private final List<String> stopWords = QueryCleaner.getStopWords();
     private final String QUERY_FILE_PATH = ConfigurationManager.getConfigurationValue("query.file.path");
 
     public List<Query> getAllQueries() {
@@ -24,12 +24,10 @@ public class FileQueryReader {
             String line = "";
             while ((line = br.readLine()) != null) {
 
-                //noinspection Since15
                 if (!line.isEmpty()) {
                     int queryId = Integer.parseInt(line.substring(0, line.indexOf('.')));
                     String originalQuery = line.substring(6, line.length());
-                    String cleanedQuery = cleanQuery(originalQuery, this.stopWords);
-//                    System.out.println("id:" + queryId + "\t query:" + originalQuery);
+                    String cleanedQuery = cleanQuery(originalQuery);
                     queries.add(new Query(queryId, originalQuery, cleanedQuery));
                 }
             }
@@ -39,27 +37,7 @@ public class FileQueryReader {
         return queries;
     }
 
-    //  not doing cleaning now as we have manually cleaned queries.
-    private String cleanQuery(String query, List<String> stopWords) {
-//        String cleanedQuery = "";
-//        String[] queryTerms = query.split(" ");
-//        for (String term : queryTerms) {
-//            // word should not be in stoplist
-//            if(stopWords.contains(term) == false) {
-//                cleanedQuery += " " + term.replaceAll("\\s+","");
-//            }
-//        }
-//        return cleanedQuery;
-        //  not doing cleaning now as we have manually cleaned queries.
-        return query;
-    }
-
-
-    public static void main(String[] args) {
-        FileQueryReader reader = new FileQueryReader();
-        for (Query q : reader.getAllQueries()) {
-            System.out.println(Arrays.toString(q.getCleanedQuery().split(" ")));
-            System.out.println(q.getCleanedQuery().split(" ").length);
-        }
+    private String cleanQuery(String query) {
+        return QueryCleaner.analyzeString(query);
     }
 }

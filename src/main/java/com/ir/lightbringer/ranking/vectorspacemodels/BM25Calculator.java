@@ -15,7 +15,7 @@ import java.util.Map;
 public class BM25Calculator {
 
     private final static int corpusSize = 84678;
-    private final static int averageDocumentLength = Integer.parseInt(ConfigurationManager.getConfigurationValue("average.document.length"));
+    private final static double averageDocumentLength = Double.parseDouble(ConfigurationManager.getConfigurationValue("average.document.length"));
 
 
     public static double bm25(TermStatistics termStats, Query query) {

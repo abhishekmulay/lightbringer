@@ -73,7 +73,7 @@ public class QueryProcessor {
     }
 
     public void calculateUnigramWithLaplaceSmoothing(List<Query> queryList, String unigramWithLaplaceSmoothingOutputFile) {
-        int vocabularySize = Integer.parseInt(ConfigurationManager.getConfigurationValue("corpus.vocabulary.size"));
+        double vocabularySize = Double.parseDouble(ConfigurationManager.getConfigurationValue("corpus.vocabulary.size"));
         DocumentIdExtractor extractor = new DocumentIdExtractor();
         Set<String> allDocumentIds = null;
         try {
@@ -113,7 +113,7 @@ public class QueryProcessor {
         for (Query query : queryList) {
             System.out.println("\n\nCalculating Unigram LM with Jelinek Mercer smoothing for: " + query.getCleanedQuery());
             try {
-                Map<String, Double> finalDocIdJmValuesForQuery = StatisticsProvider.getTermStatisticsForQueryJelinek(query, allDocumentIds);
+                Map<String, Double> finalDocIdJmValuesForQuery = UnigramWithJelinekSmoothingCalculator.applyJMModelAndGetValuesMap(query, allDocumentIds);
                 Map<String, Double> sortedFinalDocIdJmValuesForQuery = MapUtils.sortByValue(finalDocIdJmValuesForQuery);
                 QueryResultWriter.writeQueryResultToFile(query, sortedFinalDocIdJmValuesForQuery, unigramWithJelinekSmoothingOutputFile);
             } catch (IOException e) {
