@@ -111,8 +111,8 @@ public class App {
 //        runOkapi();
 //        runTfIdf();
 //        runBM25();
-//        runUnigramWithLaplaceSmoothing();
-        runUnigramWithJelinekMercerSmoothing();
+        runUnigramWithLaplaceSmoothing();
+//        runUnigramWithJelinekMercerSmoothing();
 
         long timeAtEnd = System.nanoTime();
         long elapsedTime = timeAtEnd - timeAtStart;

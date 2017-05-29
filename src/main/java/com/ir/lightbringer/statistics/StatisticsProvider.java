@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.pojos.Query;
 import com.ir.lightbringer.pojos.TermStatistics;
+import com.ir.lightbringer.ranking.languagemodels.UnigramWithJelinekSmoothingCalculator;
 import com.ir.lightbringer.ranking.vectorspacemodels.VectorSpaceModelsCalculator;
 import com.ir.lightbringer.pojos.VectorStatistics;
 import com.ir.lightbringer.restclient.RestCallHandler;
@@ -24,7 +25,6 @@ public class StatisticsProvider {
     private final static String STATISTICS_API = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?scroll=1m";
     private final static String scrollEndPoint = "_search/scroll";
 
-
     private final static String GET_TTF_ENDPOINT = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?filter_path=hits.hits.fields.ttf";
     private final static double vocabularySize = Double.parseDouble(ConfigurationManager.getConfigurationValue("corpus.vocabulary.size"));
     private final static double lambda = 0.5;
@@ -33,7 +33,7 @@ public class StatisticsProvider {
     private StatisticsProvider(){}
 
     // return map of <documentId, List<TermStatistics>>
-    private static Map<String, List<TermStatistics>> getStatistics(String term) throws IOException {
+    public static Map<String, List<TermStatistics>> getStatistics(String term) throws IOException {
         handler.openConnection();
         final String body = "{\n" +
                             "    \"size\" : 4000,\n" +
@@ -182,107 +182,6 @@ public class StatisticsProvider {
         return docIdTermStatisticsMap;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                           For Jelinek Mercer LM
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static Map<String, Double> getTermStatisticsForQueryJelinek(Query query, Set<String> allDocIds) throws IOException {
-        String cleanedQuery = query.getCleanedQuery();
-        String[] terms = cleanedQuery.split(" ");
-
-        Map<String, Double> finalJMValuesForQuery = new HashMap<>();
-
-        for (String term : terms) {
-            double ttf = getTTFforTerm(term);
-            double defaultValue = Math.log((1 - lambda) * (ttf / vocabularySize));
-            Map<String, Double> jmValuesForTerm = new HashMap<>();
-            for (String id : allDocIds) {
-                // initialize with docId and defaultValue for this term.
-                jmValuesForTerm.put(id, defaultValue);
-            }
-
-            // get map of <docId, List[stats for terms in that docId]>
-            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics(term);
-
-            // there will be only one match, calculate jmScore for this term.
-            // add this result into term score map
-            for (Map.Entry<String, List<TermStatistics>> entry : statistics.entrySet()) {
-                String documentId = entry.getKey();
-                List<TermStatistics> statisticsForDocumentId = entry.getValue();
-                TermStatistics termStatisticsForMatchingTerm = statisticsForDocumentId.get(0);
-                double jmScore = p_jm(termStatisticsForMatchingTerm);
-                jmValuesForTerm.put(documentId, jmScore);
-            }
-
-            // now update the query level map with jm values for single term
-            for (Map.Entry<String, Double> entry : jmValuesForTerm.entrySet()) {
-                String documentId = entry.getKey();
-                Double jmValue = entry.getValue();
-
-                if (finalJMValuesForQuery.containsKey(documentId)) {
-                    double previousValue = finalJMValuesForQuery.get(documentId);
-                    double newValue = (previousValue + jmValue);
-                    finalJMValuesForQuery.put(documentId, newValue);
-                } else {
-                    finalJMValuesForQuery.put(documentId, jmValue);
-                }
-            }
-
-        }// term loop ends
-
-        return finalJMValuesForQuery;
-    }
-
-    private static double p_jm (TermStatistics termStatistics) {
-        double termFrequency = termStatistics.getTermFrequency() * 1.0;
-        double documentLength = termStatistics.getDocumentLength() * 1.0;
-        double ttf = termStatistics.getTtf() * 1.0;
-        double score = Math.log(lambda * (termFrequency/documentLength) + (1-lambda) * (ttf/vocabularySize));
-        return score;
-    }
-
-    private static double getTTFforTerm(String term) {
-        handler.openConnection();
-        final String body = "{\n" +
-                            "    \"size\": 1, \n" +
-                            "    \"_source\": false, \n" +
-                            "    \"query\" : {\n" +
-                            "        \"term\": {\n" +
-                            "          \"text\": \""+ term +"\"  \n" +
-                            "        }\n" +
-                            "    },\n" +
-                            "    \"script_fields\" : {\n" +
-                            "        \"ttf\" : {\n" +
-                            "            \"script\" : {\n" +
-                            "              \"lang\": \"groovy\",   \n" +
-                            "              \"inline\": \"_index['text']['"+ term +"'].ttf()\"\n" +
-                            "            }\n" +
-                            "        }\n" +
-                            "    }\n" +
-                            "}\n";
-
-        Response response = handler.get(body, GET_TTF_ENDPOINT);
-        handler.closeConnection();
-        String jsonString = "";
-        double ttf = 1.0;
-        try {
-            jsonString = EntityUtils.toString(response.getEntity());
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode jsonNode = mapper.readTree(jsonString);
-            boolean hitsPresent = jsonNode.has("hits") && jsonNode.get("hits").get("hits").size() > 0;
-            if(hitsPresent) {
-                JsonNode hit  = jsonNode.get("hits").get("hits").get(0);
-                if (hit.has("fields") && hit.get("fields").has("ttf")) {
-                    ttf = hit.get("fields").get("ttf").get(0).asDouble();
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return ttf;
-    }
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static Map<String, List<VectorStatistics>> getVectorTermStatisticsForQuery(Query query) throws IOException {
         String cleanedQuery = query.getCleanedQuery();
