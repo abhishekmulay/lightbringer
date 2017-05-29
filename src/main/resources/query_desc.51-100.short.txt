@@ -1,7 +1,7 @@
 85.   alleg measur corrupt public offici government jurisdict
 59.   weather event directli caus fatal
 56.   predict prime lend rate move
-71.   incurse land air water border countri militari second countri forc guerrilla group
+71.   incurs land air water border countri militari second countri forc guerrilla group
 64.   event result polit motiv hostag take
 62.   militari coup detat attempt success countri
 93.   support nation rifl associ nra asset
@@ -11,7 +11,7 @@
 54.   sign contract preliminari agreement tent reserv launch commerci satellit
 87.   current crimin action offic fail US financi institut
 94.   crime perpetr aid comput
-100.   non communist industri state regul transfer high tech good technolog undesir nation
+100.  non communist industri state regul transfer high tech good technolog undesir nation
 89.   exist pend invest opec member downstream oper nation
 61.   israel iran contra affair
 95.   comput applic crime solv

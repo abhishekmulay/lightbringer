@@ -35,13 +35,13 @@ public class StatisticsProviderTest extends TestCase {
 
     @Test
     public void statisticProviderTest() {
-        try {
-            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics("d'etat");
-            System.out.println(statistics);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Assert.assertFalse(false);
+//        try {
+//            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatistics("d'etat");
+//            System.out.println(statistics);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Assert.assertFalse(false);
     }
 
 

@@ -1,8 +1,9 @@
-package com.ir.lightbringer.ranking.languagemodels;
+package com.ir.lightbringer.ranking.vectorspacemodels;
 
 import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.pojos.Query;
 import com.ir.lightbringer.pojos.TermStatistics;
+import com.ir.lightbringer.pojos.VectorStatistics;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,5 +60,21 @@ public class BM25Calculator {
 
         return docIdBm25ValuesMap;
     }
+
+    public static Map<String, Double> bm25_from_es(Map<String, List<VectorStatistics>> docIdVectorStatisticsMap) {
+        Map<String, Double> docIdBM25ValuesMap = new HashMap<>();
+        for (Map.Entry<String, List<VectorStatistics>> entry : docIdVectorStatisticsMap.entrySet()) {
+            String documentId = entry.getKey();
+            List<VectorStatistics> vectorStatisticsList = entry.getValue();
+
+            double finalBm25Score = 0.0;
+            for (VectorStatistics vectorStats : vectorStatisticsList) {
+                finalBm25Score += vectorStats.getMb25();
+            }
+            docIdBM25ValuesMap.put(documentId, finalBm25Score);
+        }
+        return docIdBM25ValuesMap;
+    }
+
 
 }

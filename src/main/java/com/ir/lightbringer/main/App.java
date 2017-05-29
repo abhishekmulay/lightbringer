@@ -10,6 +10,7 @@ import com.ir.lightbringer.queryprocessor.QueryProcessor;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,8 @@ public class App {
     ///////////  VECTOR SPACE MODELS ////////////////////////
     public static void runOkapi() {
         String okapiOutputFile = ConfigurationManager.getConfigurationValue("okapi.output.file");
+        File file = new File(okapiOutputFile);
+        file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
         List<Query> allQueries = reader.getAllQueries();
         QueryProcessor processor = new QueryProcessor();
@@ -52,6 +55,8 @@ public class App {
 
     public static void runTfIdf() {
         String tfIdfOutputFile = ConfigurationManager.getConfigurationValue("tfidf.output.file");
+        File file = new File(tfIdfOutputFile);
+        file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
         List<Query> allQueries = reader.getAllQueries();
         QueryProcessor processor = new QueryProcessor();
@@ -60,15 +65,19 @@ public class App {
 
     public static void runBM25() {
         String bm25OutputFile = ConfigurationManager.getConfigurationValue("bm-25.output.file");
+        File file = new File(bm25OutputFile);
+        file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
         List<Query> allQueries = reader.getAllQueries();
         QueryProcessor processor = new QueryProcessor();
-        processor.calculateOkapiMb25(allQueries, bm25OutputFile);
+        processor.calculateOkapiBM25(allQueries, bm25OutputFile);
     }
 
     ///////////  LANGUAGE MODELS ///////////////////////////
     public static void runUnigramWithLaplaceSmoothing() {
-        String unigramWithLaplaceSmoothingOutputFile = ConfigurationManager.getConfigurationValue("unigram.laplace.output.file");
+        String unigramWithLaplaceSmoothingOutputFile = ConfigurationManager.getConfigurationValue("laplace.output.file");
+        File file = new File(unigramWithLaplaceSmoothingOutputFile);
+        file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
         List<Query> allQueries = reader.getAllQueries();
         QueryProcessor processor = new QueryProcessor();
@@ -76,12 +85,14 @@ public class App {
     }
 
     public static void runUnigramWithJelinekMercerSmoothing() {
+        String unigramWithJelinekSmoothingOutputFile = ConfigurationManager.getConfigurationValue("jelinek.output.file");
+        File file = new File(unigramWithJelinekSmoothingOutputFile);
+        file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
         List<Query> allQueries = reader.getAllQueries();
         QueryProcessor processor = new QueryProcessor();
+        processor.calculateUnigramWithJeliekSmoothing(allQueries, unigramWithJelinekSmoothingOutputFile);
     }
-
-
 
     //////////////////// MAIN /////////////////////////////
     public static void main(String[] args) {
@@ -97,7 +108,11 @@ public class App {
 //       For indexing documents
 //        startIndexing();
 
-        runUnigramWithLaplaceSmoothing();
+//        runOkapi();
+//        runTfIdf();
+//        runBM25();
+//        runUnigramWithLaplaceSmoothing();
+        runUnigramWithJelinekMercerSmoothing();
 
         long timeAtEnd = System.nanoTime();
         long elapsedTime = timeAtEnd - timeAtStart;
