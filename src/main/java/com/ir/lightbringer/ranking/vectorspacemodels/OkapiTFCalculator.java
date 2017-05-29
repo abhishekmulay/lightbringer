@@ -2,6 +2,7 @@ package com.ir.lightbringer.ranking.vectorspacemodels;
 
 import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.pojos.TermStatistics;
+import com.ir.lightbringer.pojos.VectorStatistics;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,5 +39,21 @@ public class OkapiTFCalculator {
         }
         return docIdOkapiValuesMap;
     }
+
+    public static Map<String, Double> okapi_tf_from_es(Map<String, List<VectorStatistics>> docIdVectorStatisticsMap) {
+        Map<String, Double> docIdOkapiValuesMap = new HashMap<>();
+        for (Map.Entry<String, List<VectorStatistics>> entry : docIdVectorStatisticsMap.entrySet()) {
+            String documentId = entry.getKey();
+            List<VectorStatistics> vectorStatisticsList = entry.getValue();
+
+            double finalOkapiScore = 0.0;
+            for (VectorStatistics vectorStats : vectorStatisticsList) {
+                finalOkapiScore += vectorStats.getOkapi();
+            }
+            docIdOkapiValuesMap.put(documentId, finalOkapiScore);
+        }
+        return docIdOkapiValuesMap;
+    }
+
 
 }

@@ -109,7 +109,7 @@ PUT /ap_dataset/
   }
 }
 
-PUT /ap_dataset/hw1/_mapping
+PUT /ap_dataset/document/_mapping
 {
   "hw1": {
     "properties": {
@@ -120,6 +120,7 @@ PUT /ap_dataset/hw1/_mapping
       "text": {
         "type": "text",
         "store": true,
+        "fielddata" : true,
         "term_vector": "with_positions_offsets_payloads",
         "analyzer": "my_english"
       }
@@ -650,8 +651,64 @@ GET /ap_dataset/document/_search
                 "script" : {
                 "lang": "groovy",
                 "inline": "int dl = doc['docLength'].value; double tf = _index['text']['alleg'].tf(); double df =
-                _index['text']['alleg'].df();double okapi = tf/(tf+0.5+1.5*(dl/441.6)); return okapi;"
+                _index['text']['alleg'].df();double okapi = tf  /(tf+0.5+1.5*(dl/441.6)); return okapi;"
 
                 }
     }
 }}
+
+
+
+
+####################################################
+#    Get all Okapi, TF-IDF and MB25                #
+####################################################
+
+GET /ap_dataset/document/_search?scroll=1m
+{
+  "query": {
+    "match": {
+      "text": "corrupt"
+    }
+  },
+  "_source": "docLength",
+  "script_fields": {
+    "okapi": {
+      "script": {
+        "lang": "groovy",
+        "inline": "double tf = _index['text'][word].tf(); int dl =doc['docLength'].value; double df = _index['text'][word].df();  double okapiScore = tf / (tf + 0.5 + (1.5 * (dl/avgDocLength))); return okapiScore;",
+        "params": {
+          "word": "corrupt",
+          "avgDocLength": 441
+        }
+      }
+    },
+    "tfidf": {
+      "script": {
+        "lang": "groovy",
+        "inline": "double tf = _index['text'][word].tf(); int dl =doc['docLength'].value; double df = _index['text'][word].df();  double okapiScore = tf / (tf + 0.5 + (1.5 * (dl/avgDocLength))); double tfidf= okapiScore * Math.log10(corpusSize/df); return tfidf;",
+        "params": {
+          "word": "corrupt",
+          "corpusSize": 84678,
+          "avgDocLength": 441
+        }
+      }
+    },
+    "bm25": {
+      "script": {
+        "lang": "groovy",
+        "inline": "double tf = _index['text'][word].tf(); int dl = doc['docLength'].value; double df = _index['text'][word].df(); double first = Math.log10((corpusSize + 0.5)/(tf + 0.5)); double second = ((tf+ k1 * tf) / (tf + k1 * ((1-b) + (b* (dl/avgDocLength))))); double last = (tfwq + k2 * tfwq)/ (tfwq+ k2);  double bm = first * second * last; return bm;",
+        "params": {
+          "word": "corrupt",
+          "corpusSize": 84678.0,
+          "avgDocLength": 441.0,
+          "k1": 1.2,
+          "k2": 10.0,
+          "b": 0.75,
+          "tfwq": 1.0
+        }
+      }
+    }
+  }
+}
+

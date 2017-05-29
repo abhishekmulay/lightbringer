@@ -5,6 +5,7 @@ import com.ir.lightbringer.pojos.Query;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -57,7 +58,8 @@ public class FileQueryReader {
     public static void main(String[] args) {
         FileQueryReader reader = new FileQueryReader();
         for (Query q : reader.getAllQueries()) {
-            System.out.println(q);
+            System.out.println(Arrays.toString(q.getCleanedQuery().split(" ")));
+            System.out.println(q.getCleanedQuery().split(" ").length);
         }
     }
 }

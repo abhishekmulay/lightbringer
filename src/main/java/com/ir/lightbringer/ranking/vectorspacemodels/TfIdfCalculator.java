@@ -1,6 +1,7 @@
 package com.ir.lightbringer.ranking.vectorspacemodels;
 
 import com.ir.lightbringer.pojos.TermStatistics;
+import com.ir.lightbringer.pojos.VectorStatistics;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,4 +40,23 @@ public class TfIdfCalculator {
         }
         return docIdOkapiValuesMap;
     }
+
+
+
+    public static Map<String, Double> tfidf_from_es(Map<String, List<VectorStatistics>> docIdVectorStatisticsMap) {
+        Map<String, Double> docIdOkapiValuesMap = new HashMap<>();
+        for (Map.Entry<String, List<VectorStatistics>> entry : docIdVectorStatisticsMap.entrySet()) {
+            String documentId = entry.getKey();
+            List<VectorStatistics> vectorStatisticsList = entry.getValue();
+
+            double finalTfidfScore = 0.0;
+            for (VectorStatistics vectorStats : vectorStatisticsList) {
+                finalTfidfScore += vectorStats.getTfidf();
+            }
+            docIdOkapiValuesMap.put(documentId, finalTfidfScore);
+        }
+        return docIdOkapiValuesMap;
+    }
+
+
 }
