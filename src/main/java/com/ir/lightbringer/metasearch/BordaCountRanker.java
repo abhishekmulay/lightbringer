@@ -149,11 +149,11 @@ public class BordaCountRanker {
             List<QueryStats> filteredQueryStatsListForBM25 = getFilteredQueryStatsListForQuery(query, getBM25QueryStatsList());
             finalScores =  calculateFinalBordaScoreMap(filteredQueryStatsListForBM25, finalScores);
 
-//            List<QueryStats> filteredQueryStatsListForLaplace = getFilteredQueryStatsListForQuery(query, getUnigramWithLaplace());
-//            finalScores =  calculateFinalBordaScoreMap(filteredQueryStatsListForLaplace, finalScores);
-//
-//            List<QueryStats> filteredQueryStatsListForJelinek = getFilteredQueryStatsListForQuery(query, getUnigramWithJelinek());
-//            finalScores =  calculateFinalBordaScoreMap(filteredQueryStatsListForJelinek, finalScores);
+            List<QueryStats> filteredQueryStatsListForLaplace = getFilteredQueryStatsListForQuery(query, getUnigramWithLaplace());
+            finalScores =  calculateFinalBordaScoreMap(filteredQueryStatsListForLaplace, finalScores);
+
+            List<QueryStats> filteredQueryStatsListForJelinek = getFilteredQueryStatsListForQuery(query, getUnigramWithJelinek());
+            finalScores =  calculateFinalBordaScoreMap(filteredQueryStatsListForJelinek, finalScores);
 
             // sort
             Map<String, Double> sortedDocIdFinalBordaValuesMap = MapUtils.sortByValue(finalScores);
@@ -161,7 +161,7 @@ public class BordaCountRanker {
             // print
 //            String prettyString = MapUtils.getPrettyString(sortedDocIdFinalBordaValuesMap);
 //            System.out.println(prettyString);
-            QueryResultWriter.writeQueryResultToFile(query, finalScores, bordaOutputFile);
+            QueryResultWriter.writeQueryResultToFile(query, sortedDocIdFinalBordaValuesMap, bordaOutputFile);
         }
 
     }
