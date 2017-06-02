@@ -24,7 +24,7 @@ public class UnigramWithJelinekSmoothingCalculator {
     private static RestCallHandler handler = new RestCallHandler();
     private static String INDEX_NAME = ConfigurationManager.getConfigurationValue("index.name");
     private static String TYPE_NAME = ConfigurationManager.getConfigurationValue("type.name");
-    private final static double lambda = 0.5;
+    private final static double lambda = 0.6;
     private final static String GET_TTF_ENDPOINT = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?filter_path=hits.hits.fields.ttf";
 
     public static Map<String, Double> applyJMModelAndGetValuesMap(Query query, Set<String> allDocIds) throws IOException {
@@ -121,7 +121,8 @@ public class UnigramWithJelinekSmoothingCalculator {
         double termFrequency = termStatistics.getTermFrequency() * 1.0;
         double documentLength = termStatistics.getDocumentLength() * 1.0;
         double ttf = termStatistics.getTtf() * 1.0;
-        double score = Math.log(lambda * (termFrequency / documentLength) + (1 - lambda) * (ttf / vocabularySize));
+//        double score = Math.log(lambda * (termFrequency / documentLength) + (1 - lambda) * (ttf / vocabularySize));
+        double score = 0.001;
         return score;
     }
 

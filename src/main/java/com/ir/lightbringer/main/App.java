@@ -48,7 +48,7 @@ public class App {
         File file = new File(okapiOutputFile);
         file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
-        List<Query> allQueries = reader.getAllQueries();
+        List<Query> allQueries = reader.getAllQueries(FileQueryReader.QUERY_FILE_PATH);
         QueryProcessor processor = new QueryProcessor();
         processor.calculateOkapi_tf(allQueries, okapiOutputFile);
     }
@@ -58,7 +58,7 @@ public class App {
         File file = new File(tfIdfOutputFile);
         file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
-        List<Query> allQueries = reader.getAllQueries();
+        List<Query> allQueries = reader.getAllQueries(FileQueryReader.QUERY_FILE_PATH);
         QueryProcessor processor = new QueryProcessor();
         processor.calculateTfIdf(allQueries, tfIdfOutputFile);
     }
@@ -68,7 +68,7 @@ public class App {
         File file = new File(bm25OutputFile);
         file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
-        List<Query> allQueries = reader.getAllQueries();
+        List<Query> allQueries = reader.getAllQueries(FileQueryReader.QUERY_FILE_PATH);
         QueryProcessor processor = new QueryProcessor();
         processor.calculateOkapiBM25(allQueries, bm25OutputFile);
     }
@@ -79,7 +79,7 @@ public class App {
         File file = new File(unigramWithLaplaceSmoothingOutputFile);
         file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
-        List<Query> allQueries = reader.getAllQueries();
+        List<Query> allQueries = reader.getAllQueries(FileQueryReader.QUERY_FILE_PATH);
         QueryProcessor processor = new QueryProcessor();
         processor.calculateUnigramWithLaplaceSmoothing(allQueries, unigramWithLaplaceSmoothingOutputFile);
     }
@@ -89,7 +89,7 @@ public class App {
         File file = new File(unigramWithJelinekSmoothingOutputFile);
         file.delete(); // delete previous file
         FileQueryReader reader = new FileQueryReader();
-        List<Query> allQueries = reader.getAllQueries();
+        List<Query> allQueries = reader.getAllQueries(FileQueryReader.QUERY_FILE_PATH);
         QueryProcessor processor = new QueryProcessor();
         processor.calculateUnigramWithJeliekSmoothing(allQueries, unigramWithJelinekSmoothingOutputFile);
     }
@@ -111,8 +111,8 @@ public class App {
 //        runOkapi();
 //        runTfIdf();
 //        runBM25();
-        runUnigramWithLaplaceSmoothing();
-//        runUnigramWithJelinekMercerSmoothing();
+//        runUnigramWithLaplaceSmoothing();
+        runUnigramWithJelinekMercerSmoothing();
 
         long timeAtEnd = System.nanoTime();
         long elapsedTime = timeAtEnd - timeAtStart;
