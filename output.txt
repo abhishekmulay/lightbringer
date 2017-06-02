@@ -35,23 +35,28 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 
 
-Calculating Unigram LM with Laplace smoothing for: alleg measur taken corrupt public offici government jurisdict worldwid 
+Calculating Unigram LM with Jelinek Mercer smoothing for: alleg measur taken corrupt public offici government jurisdict worldwid 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'alleg' = 6256
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'measur' = 6817
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'taken' = 8803
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'corrupt' = 1785
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -59,6 +64,7 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'public' = 16126
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -69,66 +75,82 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'offici' = 31303
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'government' = 423
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'jurisdict' = 601
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'worldwid' = 1785
 
 
-Calculating Unigram LM with Laplace smoothing for: type weather event directli caus least fatal locat 
+Calculating Unigram LM with Jelinek Mercer smoothing for: type weather event directli caus least fatal locat 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'type' = 2917
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'weather' = 3194
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'event' = 4389
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'directli' = 2145
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'caus' = 11404
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'least' = 11881
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'fatal' = 1676
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'locat' = 3172
 
 
-Calculating Unigram LM with Laplace smoothing for: predict prime lend rate report actual prime rate move 
+Calculating Unigram LM with Jelinek Mercer smoothing for: predict prime lend rate report actual prime rate move 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'predict' = 4181
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'prime' = 5730
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'lend' = 1050
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'rate' = 9582
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -140,18 +162,22 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'report' = 33571
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'actual' = 3455
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'prime' = 5730
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'rate' = 9582
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -160,33 +186,40 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'move' = 14517
 
 
-Calculating Unigram LM with Laplace smoothing for: incurs land air water border area countri militari forc second countri guerrilla group base second countri 
+Calculating Unigram LM with Jelinek Mercer smoothing for: incurs land air water border area countri militari forc second countri guerrilla group base second countri 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'incurs' = 105
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'land' = 6695
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'air' = 9629
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'water' = 5414
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'border' = 4386
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'area' = 13114
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -195,11 +228,13 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'countri' = 20579
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'militari' = 10996
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -207,11 +242,13 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'forc' = 18293
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'second' = 11693
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -220,9 +257,11 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'countri' = 20579
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'guerrilla' = 3244
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -231,6 +270,7 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'group' = 20094
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -238,11 +278,13 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'base' = 17346
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'second' = 11693
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -253,28 +295,34 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'countri' = 20579
 
 
-Calculating Unigram LM with Laplace smoothing for: event result polit motiv hostag take 
+Calculating Unigram LM with Jelinek Mercer smoothing for: event result polit motiv hostag take 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'event' = 4389
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'result' = 9959
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'polit' = 13465
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'motiv' = 1583
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'hostag' = 1553
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -285,26 +333,32 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'take' = 22327
 
 
-Calculating Unigram LM with Laplace smoothing for: militari coup detat attempt success countri 
+Calculating Unigram LM with Jelinek Mercer smoothing for: militari coup detat attempt success countri 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'militari' = 10996
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'coup' = 1446
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'detat' = 0
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'attempt' = 7629
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'success' = 4812
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -315,11 +369,13 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'countri' = 20579
 
 
-Calculating Unigram LM with Laplace smoothing for: identifi support nation rifl associ nra asset 
+Calculating Unigram LM with Jelinek Mercer smoothing for: identifi support nation rifl associ nra asset 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'identifi' = 6466
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -327,6 +383,7 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'support' = 16071
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -338,56 +395,69 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'nation' = 34034
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'rifl' = 1386
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'associ' = 13196
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'nra' = 65
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'asset' = 2613
 
 
-Calculating Unigram LM with Laplace smoothing for: develop iran contra affair 
+Calculating Unigram LM with Jelinek Mercer smoothing for: develop iran contra affair 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'develop' = 11652
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'iran' = 2702
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'contra' = 1489
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'affair' = 4983
 
 
-Calculating Unigram LM with Laplace smoothing for: predict anticip rail strike report ongo rail strike 
+Calculating Unigram LM with Jelinek Mercer smoothing for: predict anticip rail strike report ongo rail strike 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'predict' = 4181
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'anticip' = 1685
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'rail' = 853
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'strike' = 5060
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -399,50 +469,62 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'report' = 33571
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'ongo' = 591
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'rail' = 853
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'strike' = 5060
 
 
-Calculating Unigram LM with Laplace smoothing for: poach method type wildlif 
+Calculating Unigram LM with Jelinek Mercer smoothing for: poach method type wildlif 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'poach' = 89
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'method' = 1385
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'type' = 2917
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'wildlif' = 909
 
 
-Calculating Unigram LM with Laplace smoothing for: sign contract preliminari agreement make tent reserv launch commerci satellit 
+Calculating Unigram LM with Jelinek Mercer smoothing for: sign contract preliminari agreement make tent reserv launch commerci satellit 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'sign' = 9637
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'contract' = 5159
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'preliminari' = 1611
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'agreement' = 7769
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -452,39 +534,48 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'make' = 24988
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'tent' = 1434
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'reserv' = 4789
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'launch' = 3756
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'commerci' = 3887
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'satellit' = 1144
 
 
-Calculating Unigram LM with Laplace smoothing for: current crimin action offic fail u. financi institut 
+Calculating Unigram LM with Jelinek Mercer smoothing for: current crimin action offic fail u. financi institut 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'current' = 8130
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'crimin' = 4217
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'action' = 9791
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -493,10 +584,12 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'offic' = 21535
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'fail' = 7626
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -506,53 +599,64 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'u.' = 27328
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'financi' = 7052
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'institut' = 6731
 
 
-Calculating Unigram LM with Laplace smoothing for: crime perpetr aid comput 
+Calculating Unigram LM with Jelinek Mercer smoothing for: crime perpetr aid comput 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'crime' = 3789
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'perpetr' = 198
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'aid' = 8802
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'comput' = 3193
 
 
-Calculating Unigram LM with Laplace smoothing for: effort non communist industri state regul transfer high tech good technolog undesir nation 
+Calculating Unigram LM with Jelinek Mercer smoothing for: effort non communist industri state regul transfer high tech good technolog undesir nation 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'effort' = 11047
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'non' = 6698
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'communist' = 6846
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'industri' = 12266
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -565,34 +669,42 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'state' = 36621
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'regul' = 4108
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'transfer' = 2308
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'high' = 15408
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'tech' = 532
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'good' = 13268
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'technolog' = 3142
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'undesir' = 90
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -606,21 +718,26 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'nation' = 34034
 
 
-Calculating Unigram LM with Laplace smoothing for: exist pend invest opec member state downstream oper 
+Calculating Unigram LM with Jelinek Mercer smoothing for: exist pend invest opec member state downstream oper 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'exist' = 4348
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'pend' = 2136
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'invest' = 5396
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'opec' = 316
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -629,6 +746,7 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'member' = 20199
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -641,9 +759,11 @@ _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'state' = 36621
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'downstream' = 89
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -652,90 +772,113 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'oper' = 13202
 
 
-Calculating Unigram LM with Laplace smoothing for: role israel iran contra affair 
+Calculating Unigram LM with Jelinek Mercer smoothing for: role israel iran contra affair 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'role' = 5601
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'israel' = 2914
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'iran' = 2702
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'contra' = 1489
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'affair' = 4983
 
 
-Calculating Unigram LM with Laplace smoothing for: comput applic crime solv 
+Calculating Unigram LM with Jelinek Mercer smoothing for: comput applic crime solv 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'comput' = 3193
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'applic' = 1770
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'crime' = 3789
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'solv' = 1708
 
 
-Calculating Unigram LM with Laplace smoothing for: actual studi unsubstanti concern safeti manufactur employe instal worker fine diamet fiber insul product 
+Calculating Unigram LM with Jelinek Mercer smoothing for: actual studi unsubstanti concern safeti manufactur employe instal worker fine diamet fiber insul product 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'actual' = 3455
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'studi' = 6978
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'unsubstanti' = 58
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'concern' = 9884
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'safeti' = 4080
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'manufactur' = 4043
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'employe' = 6369
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'instal' = 2364
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'worker' = 8653
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'fine' = 4181
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'diamet' = 260
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'fiber' = 286
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'insul' = 237
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -743,129 +886,161 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'product' = 10302
 
 
-Calculating Unigram LM with Laplace smoothing for: mci bell system breakup 
+Calculating Unigram LM with Jelinek Mercer smoothing for: mci bell system breakup 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'mci' = 88
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'bell' = 1088
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'system' = 10734
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'breakup' = 224
 
 
-Calculating Unigram LM with Laplace smoothing for: instanc fiber optic technolog actual 
+Calculating Unigram LM with Jelinek Mercer smoothing for: instanc fiber optic technolog actual 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'instanc' = 1252
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'fiber' = 286
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'optic' = 164
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'technolog' = 3142
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'actual' = 3455
 
 
-Calculating Unigram LM with Laplace smoothing for: individu organ produc fiber optic equip 
+Calculating Unigram LM with Jelinek Mercer smoothing for: individu organ produc fiber optic equip 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'individu' = 3906
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'organ' = 12690
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'produc' = 9024
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'fiber' = 286
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'optic' = 164
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'equip' = 4208
 
 
-Calculating Unigram LM with Laplace smoothing for: side controversi standard perform determin salari level incent pai contrast determin pai sole basi senior longev job 
+Calculating Unigram LM with Jelinek Mercer smoothing for: side controversi standard perform determin salari level incent pai contrast determin pai sole basi senior longev job 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'side' = 7754
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'controversi' = 2456
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'standard' = 4305
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'perform' = 5726
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'determin' = 6335
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'salari' = 1645
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'level' = 8329
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'incent' = 1115
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'pai' = 9969
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'contrast' = 1183
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'determin' = 6335
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'pai' = 9969
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'sole' = 1009
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'basi' = 2594
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'senior' = 5412
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'longev' = 58
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -873,32 +1048,39 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'job' = 8781
 
 
-Calculating Unigram LM with Laplace smoothing for: platform 1988 presidenti candid 
+Calculating Unigram LM with Jelinek Mercer smoothing for: platform 1988 presidenti candid 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'platform' = 746
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for '1988' = 11482
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'presidenti' = 4402
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'candid' = 4229
 
 
-Calculating Unigram LM with Laplace smoothing for: machin translat system 
+Calculating Unigram LM with Jelinek Mercer smoothing for: machin translat system 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'machin' = 2842
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'translat' = 910
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
@@ -906,28 +1088,34 @@ _search/scroll | Status: 200 OK
 Total term statistics for 'system' = 10734
 
 
-Calculating Unigram LM with Laplace smoothing for: acquisit armi specifi advanc weapon system 
+Calculating Unigram LM with Jelinek Mercer smoothing for: acquisit armi specifi advanc weapon system 
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'acquisit' = 1330
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'armi' = 7068
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'specifi' = 1028
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'advanc' = 5558
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'weapon' = 5189
+/ap_dataset/document/_search?filter_path=hits.hits.fields.ttf | STATUS: 200 OK
 /ap_dataset/document/_search?scroll=1m | STATUS: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 _search/scroll | Status: 200 OK
 Total term statistics for 'system' = 10734
-Total time taken: 7.516144929116667 minutes
+Total time taken: 6.387156654216667 minutes

@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class FileQueryReader {
     //    private final List<String> stopWords = QueryCleaner.getStopWords();
-    private final String QUERY_FILE_PATH = ConfigurationManager.getConfigurationValue("query.file.path");
+    public static final String QUERY_FILE_PATH = ConfigurationManager.getConfigurationValue("query.file.path");
 
-    public List<Query> getAllQueries() {
+    public List<Query> getAllQueries(String QUERY_FILE_PATH) {
         List<Query> queries = new ArrayList<Query>();
         try {
             FileInputStream stream = new FileInputStream(QUERY_FILE_PATH);

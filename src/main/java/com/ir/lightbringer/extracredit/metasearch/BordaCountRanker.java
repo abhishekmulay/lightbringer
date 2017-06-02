@@ -1,4 +1,4 @@
-package com.ir.lightbringer.metasearch;
+package com.ir.lightbringer.extracredit.metasearch;
 
 import com.ir.lightbringer.main.ConfigurationManager;
 import com.ir.lightbringer.pojos.Query;
@@ -16,31 +16,6 @@ import java.util.Map;
  * Created by Abhishek Mulay on 5/29/17.
  */
 public class BordaCountRanker {
-
-    // private class to hold structure of query in result file.
-    private static class QueryStats {
-        String queryId;
-        String documentId;
-        double rank;
-        double score;
-
-        public QueryStats(String queryId, String documentId, double rank, double score) {
-            this.queryId = queryId;
-            this.documentId = documentId;
-            this.rank = rank;
-            this.score = score;
-        }
-
-        @Override
-        public String toString() {
-            return "QueryStats{" +
-                    "queryId='" + queryId + '\'' +
-                    ", documentId='" + documentId + '\'' +
-                    ", rank=" + rank +
-                    ", score=" + score +
-                    '}';
-        }
-    }
 
     // read query from result file and create List<QueryStats> which contains info about that query.
     private static List<QueryStats> readQueryResultFile(String filepath) {
@@ -102,7 +77,7 @@ public class BordaCountRanker {
     private static List<QueryStats> getFilteredQueryStatsListForQuery(Query query, List<QueryStats> modelQueryStatList) {
         List<QueryStats> filteredList = new ArrayList<>();
         for (QueryStats stats :  modelQueryStatList) {
-            if (Integer.parseInt(stats.queryId) == query.getQueryId()) {
+            if (Integer.parseInt(stats.getQueryId()) == query.getQueryId()) {
                 filteredList.add(stats);
             }
         }
@@ -115,13 +90,13 @@ public class BordaCountRanker {
         double bordaScore = 0.0;
 
         for (QueryStats stat: modelQueryStatList) {
-            bordaScore = (maxScore - stat.rank);
+            bordaScore = (maxScore - stat.getRank());
 
-            if (finalScores.containsKey(stat.documentId)) {
-                double previous = finalScores.get(stat.documentId);
-                finalScores.put(stat.documentId, previous + bordaScore);
+            if (finalScores.containsKey(stat.getDocumentId())) {
+                double previous = finalScores.get(stat.getDocumentId());
+                finalScores.put(stat.getDocumentId(), previous + bordaScore);
             } else {
-                finalScores.put(stat.documentId, bordaScore);
+                finalScores.put(stat.getDocumentId(), bordaScore);
             }
         }
         return finalScores;
@@ -136,7 +111,7 @@ public class BordaCountRanker {
         file.delete(); // delete previous file
 
         FileQueryReader reader = new FileQueryReader();
-        List<Query> allQueries = reader.getAllQueries();
+        List<Query> allQueries = reader.getAllQueries(FileQueryReader.QUERY_FILE_PATH);
 
         for (Query query : allQueries) {
             Map<String, Double> finalScores = new HashMap<>();

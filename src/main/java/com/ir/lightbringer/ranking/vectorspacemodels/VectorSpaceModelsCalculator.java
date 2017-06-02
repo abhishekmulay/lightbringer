@@ -160,7 +160,8 @@ public class VectorSpaceModelsCalculator {
                     int docLength = hit.has("_source") ? hit.get("_source").get("docLength").asInt() : -1;
                     if (hit.has("fields")) {
                         double okapi = hit.get("fields").has("okapi") ? hit.get("fields").get("okapi").get(0).asDouble() : -1.0;
-                        double tfidf = hit.get("fields").has("tfidf") ? hit.get("fields").get("tfidf").get(0).asDouble() : -1.0;
+//                        double tfidf = hit.get("fields").has("tfidf") ? hit.get("fields").get("tfidf").get(0).asDouble() : -1.0;
+                        double tfidf = 0.001;
                         double bm25 = hit.get("fields").has("bm25") ? hit.get("fields").get("bm25").get(0).asDouble() : -1.0;
 
                         VectorStatistics stats = new VectorStatistics(term, documentId, docLength, okapi, tfidf, bm25);
