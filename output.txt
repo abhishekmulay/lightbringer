@@ -1,608 +1,547 @@
+Deleting [0] inverted index files in src/main/output/inverted_index/
 Reading [73] documents from file [ap890101]
 Reading [152] documents from file [ap890102]
 Reading [255] documents from file [ap890103]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17630
-
 Reading [281] documents from file [ap890104]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21793
+
 Reading [287] documents from file [ap890105]
 Reading [256] documents from file [ap890106]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21664
-
 Reading [164] documents from file [ap890107]
 Reading [96] documents from file [ap890108]
-Reading [349] documents from file [ap890109]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19113
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21828
 
+Reading [349] documents from file [ap890109]
 Reading [315] documents from file [ap890110]
 Reading [281] documents from file [ap890111]
 Reading [280] documents from file [ap890112]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22473
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26529
 
 Reading [291] documents from file [ap890113]
 Reading [157] documents from file [ap890114]
 Reading [90] documents from file [ap890115]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18702
-
 Reading [238] documents from file [ap890116]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22688
+
 Reading [276] documents from file [ap890117]
 Reading [328] documents from file [ap890118]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22858
-
 Reading [357] documents from file [ap890119]
 Reading [307] documents from file [ap890120]
-Reading [164] documents from file [ap890121]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22288
+[Map<term, Map<docId, IndexingUnit>>] total entries = 27023
 
+Reading [164] documents from file [ap890121]
 Reading [102] documents from file [ap890122]
 Reading [331] documents from file [ap890123]
 Reading [298] documents from file [ap890124]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22300
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24653
 
 Reading [328] documents from file [ap890125]
 Reading [298] documents from file [ap890126]
 Reading [307] documents from file [ap890127]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23280
-
 Reading [170] documents from file [ap890128]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25234
+
 Reading [90] documents from file [ap890129]
 Reading [276] documents from file [ap890130]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18640
-
 Reading [311] documents from file [ap890131]
 Reading [301] documents from file [ap890201]
-Reading [309] documents from file [ap890202]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23209
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24623
 
+Reading [309] documents from file [ap890202]
 Reading [280] documents from file [ap890203]
 Reading [181] documents from file [ap890204]
 Reading [100] documents from file [ap890205]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18707
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22769
 
 Reading [278] documents from file [ap890206]
 Reading [277] documents from file [ap890207]
 Reading [320] documents from file [ap890208]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23535
-
 Reading [267] documents from file [ap890209]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26614
+
 Reading [298] documents from file [ap890210]
 Reading [174] documents from file [ap890211]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20616
-
 Reading [98] documents from file [ap890212]
 Reading [275] documents from file [ap890213]
-Reading [252] documents from file [ap890214]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20149
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23124
 
+Reading [252] documents from file [ap890214]
 Reading [268] documents from file [ap890215]
 Reading [305] documents from file [ap890216]
 Reading [195] documents from file [ap890217]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21855
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24889
 
 Reading [89] documents from file [ap890218]
 Reading [110] documents from file [ap890219]
 Reading [173] documents from file [ap890220]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 14775
-
 Reading [316] documents from file [ap890221]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 20989
+
 Reading [291] documents from file [ap890222]
 Reading [312] documents from file [ap890223]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 24447
-
 Reading [288] documents from file [ap890224]
 Reading [162] documents from file [ap890225]
-Reading [104] documents from file [ap890226]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17968
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25105
 
+Reading [104] documents from file [ap890226]
 Reading [336] documents from file [ap890227]
 Reading [247] documents from file [ap890228]
 Reading [319] documents from file [ap890301]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 24199
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25506
 
 Reading [326] documents from file [ap890302]
 Reading [196] documents from file [ap890303]
 Reading [171] documents from file [ap890304]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20184
-
 Reading [80] documents from file [ap890305]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21384
+
 Reading [314] documents from file [ap890306]
 Reading [285] documents from file [ap890307]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20567
-
 Reading [296] documents from file [ap890308]
 Reading [291] documents from file [ap890309]
-Reading [347] documents from file [ap890310]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23524
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26870
 
+Reading [347] documents from file [ap890310]
 Reading [174] documents from file [ap890311]
 Reading [93] documents from file [ap890312]
 Reading [246] documents from file [ap890313]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18913
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23919
 
 Reading [310] documents from file [ap890314]
 Reading [314] documents from file [ap890315]
 Reading [297] documents from file [ap890316]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 24208
-
 Reading [274] documents from file [ap890317]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 27308
+
 Reading [171] documents from file [ap890318]
 Reading [107] documents from file [ap890319]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18382
-
 Reading [323] documents from file [ap890320]
 Reading [18] documents from file [ap890321]
-Reading [334] documents from file [ap890322]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21521
+[Map<term, Map<docId, IndexingUnit>>] total entries = 20663
 
+Reading [334] documents from file [ap890322]
 Reading [298] documents from file [ap890323]
 Reading [252] documents from file [ap890324]
 Reading [144] documents from file [ap890325]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20675
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25161
 
 Reading [87] documents from file [ap890326]
 Reading [247] documents from file [ap890327]
 Reading [231] documents from file [ap890328]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19220
-
 Reading [265] documents from file [ap890329]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23438
+
 Reading [267] documents from file [ap890330]
 Reading [144] documents from file [ap890401]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21055
-
 Reading [18] documents from file [ap890402]
 Reading [157] documents from file [ap890403]
-Reading [266] documents from file [ap890404]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 16769
+[Map<term, Map<docId, IndexingUnit>>] total entries = 20053
 
+Reading [266] documents from file [ap890404]
 Reading [294] documents from file [ap890405]
 Reading [273] documents from file [ap890406]
 Reading [324] documents from file [ap890407]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22509
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25701
 
 Reading [142] documents from file [ap890408]
 Reading [81] documents from file [ap890409]
 Reading [261] documents from file [ap890410]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18283
-
 Reading [242] documents from file [ap890411]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21593
+
 Reading [292] documents from file [ap890412]
 Reading [307] documents from file [ap890413]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22108
-
 Reading [304] documents from file [ap890414]
 Reading [139] documents from file [ap890415]
-Reading [83] documents from file [ap890416]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18262
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24979
 
+Reading [83] documents from file [ap890416]
 Reading [281] documents from file [ap890417]
 Reading [330] documents from file [ap890418]
 Reading [288] documents from file [ap890419]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23916
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24982
 
 Reading [293] documents from file [ap890420]
 Reading [285] documents from file [ap890421]
 Reading [144] documents from file [ap890422]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20868
-
 Reading [95] documents from file [ap890423]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22242
+
 Reading [312] documents from file [ap890424]
 Reading [319] documents from file [ap890425]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21604
-
 Reading [301] documents from file [ap890426]
 Reading [308] documents from file [ap890427]
-Reading [264] documents from file [ap890428]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23292
+[Map<term, Map<docId, IndexingUnit>>] total entries = 28061
 
+Reading [264] documents from file [ap890428]
 Reading [141] documents from file [ap890429]
 Reading [91] documents from file [ap890430]
 Reading [274] documents from file [ap890501]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18479
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22555
 
 Reading [314] documents from file [ap890502]
 Reading [315] documents from file [ap890503]
 Reading [303] documents from file [ap890504]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23124
-
 Reading [304] documents from file [ap890505]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26758
+
 Reading [146] documents from file [ap890506]
 Reading [100] documents from file [ap890507]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18459
-
 Reading [294] documents from file [ap890508]
 Reading [282] documents from file [ap890509]
-Reading [292] documents from file [ap890510]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22995
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22511
 
+Reading [292] documents from file [ap890510]
 Reading [288] documents from file [ap890511]
 Reading [300] documents from file [ap890512]
 Reading [163] documents from file [ap890513]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20958
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24890
 
 Reading [85] documents from file [ap890514]
 Reading [299] documents from file [ap890515]
 Reading [278] documents from file [ap890516]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20457
-
 Reading [288] documents from file [ap890517]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24417
+
 Reading [301] documents from file [ap890518]
 Reading [268] documents from file [ap890519]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22985
-
 Reading [132] documents from file [ap890520]
 Reading [94] documents from file [ap890521]
-Reading [359] documents from file [ap890522]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19519
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22293
 
+Reading [359] documents from file [ap890522]
 Reading [248] documents from file [ap890523]
 Reading [326] documents from file [ap890524]
 Reading [290] documents from file [ap890525]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22224
+[Map<term, Map<docId, IndexingUnit>>] total entries = 27075
 
 Reading [261] documents from file [ap890526]
 Reading [145] documents from file [ap890527]
 Reading [93] documents from file [ap890528]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17159
-
 Reading [161] documents from file [ap890529]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 19948
+
 Reading [285] documents from file [ap890530]
 Reading [308] documents from file [ap890531]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22373
-
 Reading [391] documents from file [ap890601]
 Reading [284] documents from file [ap890602]
-Reading [152] documents from file [ap890603]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 24860
+[Map<term, Map<docId, IndexingUnit>>] total entries = 30261
 
+Reading [152] documents from file [ap890603]
 Reading [57] documents from file [ap890604]
 Reading [183] documents from file [ap890605]
 Reading [211] documents from file [ap890606]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17404
+[Map<term, Map<docId, IndexingUnit>>] total entries = 20238
 
 Reading [258] documents from file [ap890607]
 Reading [293] documents from file [ap890608]
 Reading [282] documents from file [ap890609]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22492
-
 Reading [127] documents from file [ap890610]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24146
+
 Reading [86] documents from file [ap890611]
 Reading [294] documents from file [ap890612]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18748
-
 Reading [273] documents from file [ap890613]
 Reading [291] documents from file [ap890614]
-Reading [302] documents from file [ap890615]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23503
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25117
 
+Reading [302] documents from file [ap890615]
 Reading [261] documents from file [ap890616]
 Reading [155] documents from file [ap890617]
 Reading [88] documents from file [ap890618]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17802
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22412
 
 Reading [305] documents from file [ap890619]
 Reading [280] documents from file [ap890620]
 Reading [286] documents from file [ap890621]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 24049
-
 Reading [336] documents from file [ap890622]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 28060
+
 Reading [279] documents from file [ap890623]
 Reading [148] documents from file [ap890624]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21485
-
 Reading [82] documents from file [ap890625]
 Reading [288] documents from file [ap890626]
-Reading [262] documents from file [ap890627]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20614
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22841
 
+Reading [262] documents from file [ap890627]
 Reading [265] documents from file [ap890628]
 Reading [303] documents from file [ap890629]
 Reading [294] documents from file [ap890630]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22943
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26076
 
 Reading [162] documents from file [ap890701]
 Reading [72] documents from file [ap890702]
 Reading [307] documents from file [ap890703]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19128
-
 Reading [176] documents from file [ap890704]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21737
+
 Reading [212] documents from file [ap890705]
 Reading [277] documents from file [ap890706]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20016
-
 Reading [261] documents from file [ap890707]
 Reading [152] documents from file [ap890708]
-Reading [75] documents from file [ap890709]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17302
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23335
 
+Reading [75] documents from file [ap890709]
 Reading [282] documents from file [ap890710]
 Reading [262] documents from file [ap890711]
 Reading [288] documents from file [ap890712]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23901
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24914
 
 Reading [307] documents from file [ap890713]
 Reading [294] documents from file [ap890714]
 Reading [154] documents from file [ap890715]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21949
-
 Reading [107] documents from file [ap890716]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23506
+
 Reading [235] documents from file [ap890717]
 Reading [291] documents from file [ap890718]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19994
-
 Reading [306] documents from file [ap890719]
 Reading [293] documents from file [ap890720]
-Reading [271] documents from file [ap890721]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22383
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26008
 
+Reading [271] documents from file [ap890721]
 Reading [155] documents from file [ap890722]
 Reading [102] documents from file [ap890723]
 Reading [276] documents from file [ap890724]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18568
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22467
 
 Reading [307] documents from file [ap890725]
 Reading [312] documents from file [ap890726]
 Reading [297] documents from file [ap890727]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23324
-
 Reading [300] documents from file [ap890728]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26963
+
 Reading [153] documents from file [ap890729]
 Reading [86] documents from file [ap890730]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18475
-
 Reading [272] documents from file [ap890731]
 Reading [275] documents from file [ap890801]
-Reading [300] documents from file [ap890802]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23248
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22751
 
+Reading [300] documents from file [ap890802]
 Reading [332] documents from file [ap890803]
 Reading [195] documents from file [ap890804]
 Reading [152] documents from file [ap890805]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20461
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24510
 
 Reading [78] documents from file [ap890806]
 Reading [178] documents from file [ap890807]
 Reading [236] documents from file [ap890808]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 16416
-
 Reading [303] documents from file [ap890809]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21056
+
 Reading [258] documents from file [ap890810]
 Reading [251] documents from file [ap890811]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21925
-
 Reading [144] documents from file [ap890812]
 Reading [90] documents from file [ap890813]
-Reading [252] documents from file [ap890814]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17638
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21038
 
+Reading [252] documents from file [ap890814]
 Reading [258] documents from file [ap890815]
 Reading [274] documents from file [ap890816]
 Reading [228] documents from file [ap890817]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21121
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24925
 
 Reading [235] documents from file [ap890818]
 Reading [161] documents from file [ap890819]
 Reading [85] documents from file [ap890820]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17199
-
 Reading [252] documents from file [ap890821]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22351
+
 Reading [254] documents from file [ap890822]
 Reading [257] documents from file [ap890823]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22667
-
 Reading [262] documents from file [ap890824]
 Reading [264] documents from file [ap890825]
-Reading [150] documents from file [ap890826]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20309
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24914
 
+Reading [150] documents from file [ap890826]
 Reading [73] documents from file [ap890827]
 Reading [260] documents from file [ap890828]
 Reading [254] documents from file [ap890829]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19617
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21984
 
 Reading [283] documents from file [ap890830]
 Reading [282] documents from file [ap890831]
 Reading [250] documents from file [ap890901]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22390
-
 Reading [168] documents from file [ap890902]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24409
+
 Reading [86] documents from file [ap890903]
 Reading [163] documents from file [ap890904]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 15621
-
 Reading [251] documents from file [ap890905]
 Reading [312] documents from file [ap890906]
-Reading [306] documents from file [ap890907]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23575
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22805
 
+Reading [306] documents from file [ap890907]
 Reading [277] documents from file [ap890908]
 Reading [158] documents from file [ap890909]
 Reading [94] documents from file [ap890910]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18243
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22973
 
 Reading [288] documents from file [ap890911]
 Reading [281] documents from file [ap890912]
 Reading [314] documents from file [ap890913]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23334
-
 Reading [285] documents from file [ap890914]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26446
+
 Reading [291] documents from file [ap890915]
 Reading [174] documents from file [ap890916]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20888
-
 Reading [87] documents from file [ap890917]
 Reading [261] documents from file [ap890918]
-Reading [266] documents from file [ap890919]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20085
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23096
 
+Reading [266] documents from file [ap890919]
 Reading [285] documents from file [ap890920]
 Reading [288] documents from file [ap890921]
 Reading [316] documents from file [ap890922]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23245
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26245
 
 Reading [147] documents from file [ap890923]
 Reading [91] documents from file [ap890924]
 Reading [303] documents from file [ap890925]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 18846
-
 Reading [299] documents from file [ap890926]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22926
+
 Reading [295] documents from file [ap890927]
 Reading [310] documents from file [ap890928]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22701
-
 Reading [281] documents from file [ap890929]
 Reading [132] documents from file [ap890930]
-Reading [86] documents from file [ap891001]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17874
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24450
 
+Reading [86] documents from file [ap891001]
 Reading [346] documents from file [ap891002]
 Reading [282] documents from file [ap891003]
 Reading [310] documents from file [ap891004]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 24126
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25334
 
 Reading [290] documents from file [ap891005]
 Reading [285] documents from file [ap891006]
 Reading [145] documents from file [ap891007]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20904
-
 Reading [85] documents from file [ap891008]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22157
+
 Reading [223] documents from file [ap891009]
 Reading [284] documents from file [ap891010]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20283
-
 Reading [293] documents from file [ap891011]
 Reading [334] documents from file [ap891012]
-Reading [197] documents from file [ap891013]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22035
+[Map<term, Map<docId, IndexingUnit>>] total entries = 27121
 
+Reading [197] documents from file [ap891013]
 Reading [159] documents from file [ap891014]
 Reading [76] documents from file [ap891015]
 Reading [299] documents from file [ap891016]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19427
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22002
 
 Reading [284] documents from file [ap891017]
 Reading [309] documents from file [ap891018]
 Reading [346] documents from file [ap891019]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23347
-
 Reading [326] documents from file [ap891020]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26885
+
 Reading [172] documents from file [ap891021]
 Reading [101] documents from file [ap891022]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19277
-
 Reading [273] documents from file [ap891023]
 Reading [286] documents from file [ap891024]
-Reading [310] documents from file [ap891025]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23991
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23785
 
+Reading [310] documents from file [ap891025]
 Reading [287] documents from file [ap891026]
 Reading [300] documents from file [ap891027]
 Reading [175] documents from file [ap891028]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21684
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25766
 
 Reading [87] documents from file [ap891029]
 Reading [302] documents from file [ap891030]
 Reading [291] documents from file [ap891031]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20773
-
 Reading [293] documents from file [ap891101]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24652
+
 Reading [304] documents from file [ap891102]
 Reading [306] documents from file [ap891103]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23164
-
 Reading [134] documents from file [ap891104]
 Reading [104] documents from file [ap891105]
-Reading [287] documents from file [ap891106]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19483
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22440
 
+Reading [287] documents from file [ap891106]
 Reading [318] documents from file [ap891107]
 Reading [306] documents from file [ap891108]
 Reading [321] documents from file [ap891109]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23023
+[Map<term, Map<docId, IndexingUnit>>] total entries = 27873
 
 Reading [275] documents from file [ap891110]
 Reading [149] documents from file [ap891111]
 Reading [85] documents from file [ap891112]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17368
-
 Reading [269] documents from file [ap891113]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 21960
+
 Reading [277] documents from file [ap891114]
 Reading [298] documents from file [ap891115]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23506
-
 Reading [262] documents from file [ap891116]
 Reading [281] documents from file [ap891117]
-Reading [187] documents from file [ap891118]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21356
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26482
 
+Reading [187] documents from file [ap891118]
 Reading [82] documents from file [ap891119]
 Reading [236] documents from file [ap891120]
 Reading [269] documents from file [ap891121]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19841
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22558
 
 Reading [313] documents from file [ap891122]
 Reading [166] documents from file [ap891123]
 Reading [237] documents from file [ap891124]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21432
-
 Reading [143] documents from file [ap891125]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23148
+
 Reading [85] documents from file [ap891126]
 Reading [283] documents from file [ap891127]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17398
-
 Reading [229] documents from file [ap891128]
 Reading [301] documents from file [ap891129]
-Reading [269] documents from file [ap891130]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21432
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22824
 
+Reading [269] documents from file [ap891130]
 Reading [166] documents from file [ap891201]
 Reading [164] documents from file [ap891202]
 Reading [96] documents from file [ap891203]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 15821
+[Map<term, Map<docId, IndexingUnit>>] total entries = 20556
 
 Reading [282] documents from file [ap891204]
 Reading [238] documents from file [ap891205]
 Reading [220] documents from file [ap891206]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22225
-
 Reading [260] documents from file [ap891207]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 25785
+
 Reading [296] documents from file [ap891208]
 Reading [126] documents from file [ap891209]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 21184
-
 Reading [79] documents from file [ap891210]
 Reading [328] documents from file [ap891211]
-Reading [267] documents from file [ap891212]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22078
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24608
 
+Reading [267] documents from file [ap891212]
 Reading [296] documents from file [ap891213]
 Reading [255] documents from file [ap891214]
 Reading [298] documents from file [ap891215]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 23054
+[Map<term, Map<docId, IndexingUnit>>] total entries = 26218
 
 Reading [162] documents from file [ap891216]
 Reading [88] documents from file [ap891217]
 Reading [289] documents from file [ap891218]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19603
-
 Reading [249] documents from file [ap891219]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 23460
+
 Reading [304] documents from file [ap891220]
 Reading [276] documents from file [ap891221]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 22158
-
 Reading [296] documents from file [ap891222]
 Reading [134] documents from file [ap891223]
-Reading [72] documents from file [ap891224]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 17503
+[Map<term, Map<docId, IndexingUnit>>] total entries = 24252
 
+Reading [72] documents from file [ap891224]
 Reading [114] documents from file [ap891225]
 Reading [209] documents from file [ap891226]
 Reading [205] documents from file [ap891227]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19263
+[Map<term, Map<docId, IndexingUnit>>] total entries = 20318
 
 Reading [222] documents from file [ap891228]
 Reading [241] documents from file [ap891229]
 Reading [125] documents from file [ap891230]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 19258
-
 Reading [48] documents from file [ap891231]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 4089
+[Map<term, Map<docId, IndexingUnit>>] total entries = 19989
 
