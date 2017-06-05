@@ -4,6 +4,7 @@ import hw1.indexing.datareader.DataReader;
 import hw1.indexing.datareader.TextSanitizer;
 import hw1.main.ConfigurationManager;
 import hw1.pojos.HW1Model;
+import hw2.CatalogEntry;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -87,8 +88,8 @@ public class Indexer {
 
         DataReader reader = new DataReader();
         // delete previous inverted index files before creating new index.
-        deleteAllInvertedIndexFiles();
-        ArrayList<File> dataFiles = reader.getAllDataFiles(DATA_PATH);
+        deleteAllInvertedIndexAndCatalogFiles();
+        ArrayList<File> dataFiles = reader.getAllDataFiles(TEST_DATA_PATH);
         // break the entire dataset files into group of chunkSize, each file has around 300 documents.
         List<List<File>> partsOfDataFiles = splitIntoChunks(dataFiles, 4);
 
@@ -112,7 +113,8 @@ public class Indexer {
             }
             // write result of chunkSize files Map
             String invertedIndexFilePath =  INVERTED_INDEX_FOLDER + fileNameCounter + ".txt";
-            writeTermDocIdIndexingUnitMapToFile(termDocIdIndexingUnitMap, invertedIndexFilePath);
+            String catalogFilePath = INVERTED_INDEX_FOLDER + fileNameCounter + "_catalog.txt";
+            writeTermDocIdIndexingUnitMapToFile(termDocIdIndexingUnitMap, invertedIndexFilePath, catalogFilePath);
 
             System.out.println("[Map<term, Map<docId, IndexingUnit>>] total entries = " + termDocIdIndexingUnitMap.size() + "\n");
         }
@@ -123,13 +125,22 @@ public class Indexer {
     //     Writing Map<term, Map<docId, IndexingUnit>> to InvertedIndexFile   //
     ///////////////////////////////////////////////////////////////////////////
 
-    public static void writeTermDocIdIndexingUnitMapToFile(Map<String, Map<String, IndexingUnit>> docIdTermIndexingUnitMap, String invertedIndexFilePath) {
+    public static void writeTermDocIdIndexingUnitMapToFile(Map<String, Map<String, IndexingUnit>> docIdTermIndexingUnitMap, String invertedIndexFilePath, String catalogFilePath) {
+        StringBuffer buffer = new StringBuffer();
+        Map<String, CatalogEntry> catalogEntryMap = new HashMap<>();
+        int position = 0;
+        int offset = 0;
+
+        // iterate over all terms
         for (Map.Entry<String, Map<String, IndexingUnit>> entry : docIdTermIndexingUnitMap.entrySet()) {
             String term = entry.getKey();
             Map<String, IndexingUnit> docIdIndexingUnitMap = entry.getValue();
-            StringBuffer buffer = new StringBuffer();
+            // how many bytes in file
+            position = buffer.length();
+
             buffer.append(term).append('=');
 
+            // iterate over map <docId, IndexingUnit> for the term
             for (Map.Entry<String, IndexingUnit> docIdIndexingUnitEntry : docIdIndexingUnitMap.entrySet()) {
                 String documentId = docIdIndexingUnitEntry.getKey();
                 IndexingUnit indexingUnit = docIdIndexingUnitEntry.getValue();
@@ -148,11 +159,43 @@ public class Indexer {
                     buffer.append(';');
                 }
             }
-            String lineForTerm = buffer.append('\n').toString();
-            byte[] bytes = lineForTerm.getBytes(StandardCharsets.UTF_8);
+            //add new line after every term entry
+            buffer.append('\n');
+            offset = buffer.length() - position;
 
-            //save bytes[] into file
-            writeBytesToFile(bytes, invertedIndexFilePath);
+            CatalogEntry catalogEntry = new CatalogEntry(term, position, offset);
+            catalogEntryMap.put(term, catalogEntry);
+        }
+        String allTermsFromThisFileSet = buffer.toString();
+        byte[] bytes = allTermsFromThisFileSet.getBytes(StandardCharsets.UTF_8);
+
+
+        //save bytes[] into file
+        writeBytesToFile(bytes, invertedIndexFilePath);
+        // add entry for all terms in catalog
+        createCatalogFile(catalogEntryMap, catalogFilePath);
+    }
+
+    private static void createCatalogFile(Map<String, CatalogEntry> catalogEntryMap, String catalogFilePath) {
+        try {
+            File file = new File(catalogFilePath);
+            // create if file does not exist.
+            if (!file.exists())
+                file.createNewFile();
+
+            StringBuffer buffer = new StringBuffer();
+            for (Map.Entry<String, CatalogEntry> termCatalogEntryEntry : catalogEntryMap.entrySet()) {
+                CatalogEntry catalogEntry = termCatalogEntryEntry.getValue();
+                buffer.append(catalogEntry.getTerm()).append(':').append(catalogEntry.getPosition()).append(':').append(catalogEntry.getOffset()).append('\n');
+            }
+            String catalogEntries = buffer.toString();
+            // if file is already present, append to file.
+            FileOutputStream stream = new FileOutputStream(catalogFilePath, true);
+            byte[] bytes = catalogEntries.getBytes(StandardCharsets.UTF_8);
+            stream.write(bytes);
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -170,7 +213,7 @@ public class Indexer {
         }
     }
 
-    public static void deleteAllInvertedIndexFiles() {
+    public static void deleteAllInvertedIndexAndCatalogFiles() {
         File dir = new File(INVERTED_INDEX_FOLDER);
         File[] files = dir.listFiles();
         System.out.println("Deleting [" + files.length + "] inverted index files in " + INVERTED_INDEX_FOLDER);

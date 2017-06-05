@@ -22,7 +22,7 @@ public class TextSanitizer {
 
     // remove special characters like , etc. split into words and remove whitespace
     public static String[] tokenize(String text) {
-        return text.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
+        return text.toLowerCase().split(" ");
     }
 
 
