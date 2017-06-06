@@ -1,4 +1,4 @@
-package hw1.indexing;
+package hw2.indexing;
 
 import java.util.List;
 
@@ -31,10 +31,6 @@ public class IndexingUnit {
 
     @Override
     public String toString() {
-        return "IndexingUnit{" +
-                "term='" + term + '\'' +
-                ", termFrequency=" + termFrequency +
-                ", position=" + position +
-                '}';
+        return "IndexingUnit{" + term + '|' +", tf=" + termFrequency + ", positions=" + position + '}';
     }
 }

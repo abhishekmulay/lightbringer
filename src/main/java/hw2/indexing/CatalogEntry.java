@@ -1,4 +1,4 @@
-package hw2;
+package hw2.indexing;
 
 /**
  * Created by Abhishek Mulay on 6/5/17.
@@ -28,6 +28,6 @@ public class CatalogEntry {
 
     @Override
     public String toString() {
-        return "CatalogEntry{" + term + " | " + position + " | " + offset + '}';
+        return "CatalogEntry{term=" + term + ", position=" + position + ", offset=" + offset + '}';
     }
 }

@@ -1,6 +1,7 @@
 package hw1.indexing;
 
 import hw1.indexing.datareader.TextSanitizer;
+import hw2.indexing.Indexer;
 import junit.framework.TestCase;
 import org.junit.Assert;
 

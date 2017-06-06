@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class BordaCountRanker {
 
-    // read query from result file and create List<QueryStats> which contains info about that query.
+    // getCatalogAsMap query from result file and create List<QueryStats> which contains info about that query.
     private static List<QueryStats> readQueryResultFile(String filepath) {
         List<QueryStats> queryStatsList = new ArrayList<>();
         try {
