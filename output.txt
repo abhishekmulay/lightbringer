@@ -1,10 +1,18 @@
-Deleting [0] inverted index files in src/main/output/inverted_index/
+Deleting [6] inverted index files in src/main/output/inverted_index/
+Reading [0] documents from file [.DS_Store]
 Reading [73] documents from file [ap890101]
 Reading [152] documents from file [ap890102]
 Reading [255] documents from file [ap890103]
-Reading [281] documents from file [ap890104]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 37308
+[Map<term, Map<docId, IndexingUnit>>] total entries = 22687
 
+Reading [281] documents from file [ap890104]
 Reading [287] documents from file [ap890105]
-[Map<term, Map<docId, IndexingUnit>>] total entries = 20882
+Reading [256] documents from file [ap890106]
+Reading [164] documents from file [ap890107]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 32969
+
+Reading [96] documents from file [ap890108]
+Reading [349] documents from file [ap890109]
+Reading [315] documents from file [ap890110]
+[Map<term, Map<docId, IndexingUnit>>] total entries = 28258
 

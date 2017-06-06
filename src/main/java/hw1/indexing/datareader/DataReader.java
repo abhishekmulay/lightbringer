@@ -98,7 +98,7 @@ public class DataReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        throw new IllegalArgumentException("Could not read test data into JSON");
+        throw new IllegalArgumentException("Could not getCatalogAsMap test data into JSON");
     }
 
     public Map<String, String> getTestDatasetAsJSON() {
@@ -107,7 +107,7 @@ public class DataReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        throw new IllegalArgumentException("Could not read data into JSON");
+        throw new IllegalArgumentException("Could not getCatalogAsMap data into JSON");
     }
 
     private Map<String, String> getJSONDataSet(String dataSetType) throws IOException {

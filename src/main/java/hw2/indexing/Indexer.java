@@ -1,10 +1,9 @@
-package hw1.indexing;
+package hw2.indexing;
 
 import hw1.indexing.datareader.DataReader;
 import hw1.indexing.datareader.TextSanitizer;
 import hw1.main.ConfigurationManager;
 import hw1.pojos.HW1Model;
-import hw2.CatalogEntry;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -100,12 +99,12 @@ public class Indexer {
             // <term, <docId, IndexingUnit>
             Map<String, Map<String, IndexingUnit>> termDocIdIndexingUnitMap = new HashMap<>();
 
-            // read chunkSize files at once.
+            // getCatalogAsMap chunkSize files at once.
             for (File dataFile : listOfFiles) {
                 List<HW1Model> models = reader.readFileIntoModel(dataFile);
                 System.out.println("Reading [" + models.size() + "] documents from file [" + dataFile.getName() + "]");
 
-                // read all document models from one single file.
+                // getCatalogAsMap all document models from one single file.
                 for (HW1Model model : models) {
                     Map<String, Map<String, IndexingUnit>> termDocIdIndexingUnitMapForModel = getTermDocIdIndexingUnitMapForModel(model, termDocIdIndexingUnitMap);
                     termDocIdIndexingUnitMap.putAll(termDocIdIndexingUnitMapForModel);
@@ -176,7 +175,7 @@ public class Indexer {
         createCatalogFile(catalogEntryMap, catalogFilePath);
     }
 
-    private static void createCatalogFile(Map<String, CatalogEntry> catalogEntryMap, String catalogFilePath) {
+    public static void createCatalogFile(Map<String, CatalogEntry> catalogEntryMap, String catalogFilePath) {
         try {
             File file = new File(catalogFilePath);
             // create if file does not exist.
@@ -199,7 +198,7 @@ public class Indexer {
         }
     }
 
-    private static void writeBytesToFile(byte[] bytes, String invertedIndexFilePath) {
+    public static void writeBytesToFile(byte[] bytes, String invertedIndexFilePath) {
         try {
             File file = new File(invertedIndexFilePath);
             // create if file does not exist.
