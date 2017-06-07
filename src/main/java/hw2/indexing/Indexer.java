@@ -4,7 +4,9 @@ import hw1.indexing.datareader.DataReader;
 import hw1.indexing.datareader.TextSanitizer;
 import hw1.main.ConfigurationManager;
 import hw1.pojos.HW1Model;
+import hw2.merging.BulkMerger;
 
+import javax.xml.soap.Text;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -43,7 +45,8 @@ public class Indexer {
     public static Map<String, Map<String, IndexingUnit>> getTermDocIdIndexingUnitMapForModel(final HW1Model model, Map<String, Map<String, IndexingUnit>> termDocIdIndexingUnitMap) {
         String documentId = model.getDocno();
         String text = model.getText();
-        String[] tokens = TextSanitizer.tokenize(text);
+        // remove stopwords and tokenize
+        String[] tokens = TextSanitizer.removeStopWords(text);
 
         for (String term : tokens) {
             if (!term.isEmpty()) {
@@ -84,11 +87,12 @@ public class Indexer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        long timeAtStart = System.nanoTime();
 
         DataReader reader = new DataReader();
         // delete previous inverted index files before creating new index.
         deleteAllInvertedIndexAndCatalogFiles();
-        ArrayList<File> dataFiles = reader.getAllDataFiles(TEST_DATA_PATH);
+        ArrayList<File> dataFiles = reader.getAllDataFiles(DATA_PATH);
         // break the entire dataset files into group of chunkSize, each file has around 300 documents.
         List<List<File>> partsOfDataFiles = splitIntoChunks(dataFiles, 4);
 
@@ -117,6 +121,15 @@ public class Indexer {
 
             System.out.println("[Map<term, Map<docId, IndexingUnit>>] total entries = " + termDocIdIndexingUnitMap.size() + "\n");
         }
+
+
+        BulkMerger merger = new BulkMerger(INVERTED_INDEX_FOLDER);
+        merger.bulkMerge();
+
+        long timeAtEnd = System.nanoTime();
+        long elapsedTime = timeAtEnd - timeAtStart;
+        double seconds = (double) elapsedTime / 1000000000.0;
+        System.out.println("Total time taken: " + seconds / 60.0 + " minutes");
 
     }
 
