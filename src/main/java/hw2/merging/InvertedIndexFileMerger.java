@@ -7,8 +7,15 @@ import hw2.indexing.Indexer;
 import org.omg.IOP.ENCODING_CDR_ENCAPS;
 
 import javax.management.StringValueExp;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +24,8 @@ import java.util.Map;
 public class InvertedIndexFileMerger {
 
     final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
+
+    final static String DESTINATION_FOLDER = ConfigurationManager.getConfigurationValue("completed.files.directory");
     final static String INVERTED_INDEX_RECORD_SEPARATOR = ConfigurationManager.getConfigurationValue("inverted.index" +
             ".file.record.sepatator");
 
@@ -93,6 +102,29 @@ public class InvertedIndexFileMerger {
 
         Indexer.writeBytesToFile(bytes, mergedInvertedIndexFilePath);
         Indexer.createCatalogFile(mergedCatalog, mergedCatalogFilePath);
+
+        // these files are merged, move them to other folder.
+        copyCatalogAndIndexFilesToFolder(catalogFile1, catalogFile2, DESTINATION_FOLDER);
+    }
+
+    private static void copyCatalogAndIndexFilesToFolder(String catalogFile1, String catalogFile2, String destinationFolder) {
+        List<File> filesToMove = new ArrayList<>();
+        filesToMove.add(new File(catalogFile1));
+        filesToMove.add(new File(catalogFile2));
+
+        String invertedIndexFile1 = getInvertedIndexFileForCatalog(catalogFile1);
+        String invertedIndexFile2 = getInvertedIndexFileForCatalog(catalogFile2);
+        filesToMove.add(new File(invertedIndexFile1));
+        filesToMove.add(new File(invertedIndexFile2));
+
+        for (File file : filesToMove) {
+            // move these files to destination folder and delete from current folder.
+            try {
+                Files.move(Paths.get(INVERTED_INDEX_FOLDER + file.getName()), Paths.get(DESTINATION_FOLDER + file.getName()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static String getMergedFilePath(String file1, String file2) {
@@ -109,7 +141,6 @@ public class InvertedIndexFileMerger {
         String mergedFilePath = INVERTED_INDEX_FOLDER + indexFileName + "_" + indexFileName2 + ".txt";
         return mergedFilePath;
     }
-
 
     // 1) remove line breakes from both lines
     // 2) remove term from first line and get remaining record as substring
@@ -152,16 +183,5 @@ public class InvertedIndexFileMerger {
             throw new IllegalArgumentException("Illegal file parameter");
         String catalogFilePath = invertedIndexFilePath.replaceAll("\\.", "_catalog.");
         return catalogFilePath;
-    }
-
-    public static void main(String[] args) {
-        String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
-        String invertedIndexFile1 = INVERTED_INDEX_FOLDER + "1.txt";
-        String invertedIndexFile2 = INVERTED_INDEX_FOLDER + "2.txt";
-
-        String catalogFilePath1 = INVERTED_INDEX_FOLDER + "1_catalog.txt";
-        String catalogFilePath2 = INVERTED_INDEX_FOLDER + "2_catalog.txt";
-
-        merge(catalogFilePath1, catalogFilePath2);
     }
 }

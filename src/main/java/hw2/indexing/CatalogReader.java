@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class CatalogReader {
 //
+    final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
     private CatalogReader() {}
 
     /**
@@ -23,7 +24,7 @@ public class CatalogReader {
     public static String read(final String invertedIndexFilePath ,final int position,final int offset) {
         String entry = "";
         try {
-            RandomAccessFile randomAccessFile = new RandomAccessFile(invertedIndexFilePath, "r");
+            RandomAccessFile randomAccessFile = new RandomAccessFile(INVERTED_INDEX_FOLDER + invertedIndexFilePath, "r");
             // move file pointer to position from where we want to getCatalogAsMap
             randomAccessFile.seek(position);
             byte [] entryForTerm = new byte[offset];
@@ -47,7 +48,7 @@ public class CatalogReader {
     public static Map<String, CatalogEntry> getCatalogAsMap(final String catalogFilePath) {
         Map<String, CatalogEntry> catalogEntryMap = new HashMap<>();
         try {
-            FileReader fileReader = new FileReader(catalogFilePath);
+            FileReader fileReader = new FileReader(INVERTED_INDEX_FOLDER + catalogFilePath);
             BufferedReader br = new BufferedReader(fileReader);
 
             String line;
@@ -66,18 +67,6 @@ public class CatalogReader {
             e.printStackTrace();
         }
         return catalogEntryMap;
-    }
-
-    public static void main(String[] args) {
-        final String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
-        final String catalogFilePath = INVERTED_INDEX_FOLDER + "1_catalog.txt";
-        final String invertedIndexFilePath = INVERTED_INDEX_FOLDER + "1.txt";
-
-        getCatalogAsMap(catalogFilePath);
-        int position = 7975663;
-        int offset = 151;
-        String line = CatalogReader.read(invertedIndexFilePath, position, offset);
-        System.out.println("Read from catalog \n" + line);
     }
 
 }

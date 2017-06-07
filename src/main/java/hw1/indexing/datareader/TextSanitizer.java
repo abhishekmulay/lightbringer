@@ -28,16 +28,25 @@ public class TextSanitizer {
         String removeComma = removedQuote.replaceAll(",", "");
         String removeTick = removeComma.replaceAll("`", "");
         String replaceNewLineWithSpace = removeTick.replaceAll("\n", " ");
+        String replaceForwardSlash = replaceNewLineWithSpace.replaceAll("\\/","");
+        String replaceEndingFullStop = replaceForwardSlash.replaceAll("\\.(?!\\w)", "");
+        String removeBrackets = replaceEndingFullStop.replaceAll("[()]", "");
+        String removeQuestionMark = removeBrackets.replaceAll("\\?", "");
 
-        String[] tokens = replaceNewLineWithSpace.split(" ");
-        for (String s : tokens)
+        String[] tokens = removeQuestionMark.split(" ");
+
+        ArrayList<String> tokenList = new ArrayList<>(Arrays.asList(tokens));
+        //remove all elements that are null or equals to ""
+        tokenList.removeAll(Arrays.asList(null,""));
+
+        for (String s : tokenList)
             s.trim().replaceAll("\\s+","");
 
-        return tokens;
+        return tokenList.toArray(new String[0]);
     }
 
 
-    public static String removeStopWords (String text) {
+    public static String[] removeStopWords (String text) {
         List<String> stopWords = Collections.unmodifiableList(getStopWords());
         String[] tokens = tokenize(text);
         List<String> tokenList = new ArrayList<>(Arrays.asList(tokens));
@@ -45,9 +54,9 @@ public class TextSanitizer {
 
         StringBuffer buffer = new StringBuffer();
         for (String token : tokenList)
-            buffer.append(token);
+            buffer.append(token).append(" ");
 
-        return buffer.toString();
+        return buffer.toString().split(" ");
     }
 
 
@@ -115,9 +124,10 @@ public class TextSanitizer {
                 "claiming the entertainer reneged on a promise to support him for\n" +
                 "life. Liberace died of AIDS in 1987.";
 
-        String[] tokens = tokenize(text);
-        for (String s : tokens)
-            System.out.println("<"+s+">");
+
+            String[] tokenList = removeStopWords(text);
+            for (String term : tokenList)
+                System.out.println("["+term+"]");
     }
 
 
