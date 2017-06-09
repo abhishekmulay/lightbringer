@@ -1,8 +1,13 @@
 package hw2.merging;
 
 import hw1.main.ConfigurationManager;
+import util.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +38,29 @@ public class BulkMerger {
 
     public void bulkMerge() {
         List<File> allCatalogFiles = getAllCatalogFiles();
-        if (allCatalogFiles.size() < 2) {
-            // base case
+        if (allCatalogFiles.size() < 1) { // base case
+            System.out.println(allCatalogFiles+ ">>>>>>>>");
             return;
+        }
+        if (allCatalogFiles.size() == 1) { // base case, there will be one catalog and one index file.
+            File catalogFile = allCatalogFiles.get(0);
+            String invertedIndexFileForCatalog = FileUtils.getInvertedIndexFileForCatalog(catalogFile.getPath());
+            File indexFile = new File(invertedIndexFileForCatalog);
+            try {
+                Path catalogOld  = Paths.get(catalogFile.getPath());
+                Files.move(catalogOld, catalogOld.resolveSibling("index_catalog.txt"));
+
+                Path indexOld  = Paths.get(indexFile.getPath());
+                Files.move(indexOld, indexOld.resolveSibling("index.txt"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else {
             System.out.println("\nMerging " + allCatalogFiles.size() + " index files.");
             for (int index=0; index < allCatalogFiles.size()-1; index+=2) {
                 File firstCatalogFile = allCatalogFiles.get(index);
                 File secondCatalogFile = allCatalogFiles.get(index+1);
-                InvertedIndexFileMerger.merge(firstCatalogFile.getName(), secondCatalogFile.getName());
+                InvertedIndexFileMerger.merge(firstCatalogFile.getPath(), secondCatalogFile.getPath());
             }
             // recur
             bulkMerge();

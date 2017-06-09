@@ -6,7 +6,7 @@ import hw1.main.ConfigurationManager;
 import hw1.pojos.Query;
 import hw1.queryprocessor.FileQueryReader;
 import hw1.restclient.RestCallHandler;
-import hw1.util.MapUtils;
+import util.MapUtils;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
 

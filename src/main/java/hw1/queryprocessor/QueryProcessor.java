@@ -7,7 +7,7 @@ import hw1.ranking.vectorspacemodels.BM25Calculator;
 import hw1.ranking.languagemodels.UnigramWithLaplaceSmoothingCalculator;
 import hw1.pojos.VectorStatistics;
 import hw1.restclient.DocumentIdExtractor;
-import hw1.util.MapUtils;
+import util.MapUtils;
 import hw1.ranking.vectorspacemodels.OkapiTFCalculator;
 import hw1.statistics.StatisticsProvider;
 import hw1.pojos.TermStatistics;
@@ -29,9 +29,10 @@ public class QueryProcessor {
             Map<String, List<TermStatistics>> termStatistics = null;
             try {
 //                termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
-//                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf(termStatistics);
-                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
-                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf_from_es(vectorTermStatisticsForQuery);
+                termStatistics = StatisticsProvider.getStatisticsForQueryFromIndex(query);
+                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf(termStatistics);
+//                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
+//                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf_from_es(vectorTermStatisticsForQuery);
                 Map<String, Double> sortedDocIdOkapiValuesMap = MapUtils.sortByValue(docIdOkapiValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdOkapiValuesMap, okapiOutputFile);
             } catch (IOException e) {

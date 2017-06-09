@@ -3,6 +3,7 @@ package hw2.merging;
 import hw1.main.ConfigurationManager;
 import hw2.indexing.CatalogEntry;
 import hw2.indexing.CatalogReader;
+import hw2.indexreading.IndexReader;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
@@ -28,29 +29,47 @@ public class InvertedIndexFileMergerTest extends TestCase {
     }
 
     // returns line2 + record1
-    public void testMergeEntries() {
+    public void testMergeEntries1() {
         // both lines have separator at the end
-        final String line1 = "rival=AP890103-0122:1.0:-1.0:-1.0:[303.0];AP890102-0006:1.0:-1.0:-1.0:[476.0];";
-        final String line2 = "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0];AP890105-0214:1.0:-1.0:-1.0:[18.0];";
-        final String expected = "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0];AP890105-0214:1.0:-1.0:-1.0:[18.0];AP890103-0122:1.0:-1.0:-1.0:[303.0];AP890102-0006:1.0:-1.0:-1.0:[476.0];";
+        final String line1 = "rival=AP890103-0122:1:-1:-1:[303];AP890102-0006:3:-1:-1:[476, 123, 333];";
+        final String line2 = "rival=AP890105-0084:2:-1:-1:[24, 50];AP890105-0214:5:-1:-1:[18, 10, 12, 12, 15];";
+        final String expected = "rival=AP890105-0214:5:-1:-1:[18, 10, 12, 12, 15];" +
+                                      "AP890102-0006:3:-1:-1:[476, 123, 333];" +
+                                      "AP890105-0084:2:-1:-1:[24, 50];" +
+                                      "AP890103-0122:1:-1:-1:[303]";
 
         String actual = InvertedIndexFileMerger.mergeEntries(line1, line2);
         Assert.assertEquals(expected, actual);
 
-        // when line1 has only one record
-        final String line1_1 = "rival=AP890103-0122:1.0:-1.0:-1.0:[303.0]";
-        final String line2_1 = "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0];AP890105-0214:1.0:-1.0:-1.0:[18.0];";
-        final String expected_1 = "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0];AP890105-0214:1.0:-1.0:-1.0:[18.0];AP890103-0122:1.0:-1.0:-1.0:[303.0];";
+//        // when line1 has only one record
+//        final String line1_1 = "rival=AP890103-0122:1.0:-1.0:-1.0:[303.0]";
+//        final String line2_1 = "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0];AP890105-0214:1.0:-1.0:-1.0:[18.0];";
+//        final String expected_1 = "rival=AP890105-0084:1:-1:-1:[24];AP890105-0214:1:-1:-1:[18];AP890103-0122:1:-1:-1:[303];";
+//
+//        String actual_1 = InvertedIndexFileMerger.mergeEntries(line1_1, line2_1);
+//        Assert.assertEquals(expected_1, actual_1);
+//
+//        // when line2 does not have a separator
+//        final String line1_2 = "rival=AP890103-0122:1:-1:-1:[303];";
+//        final String line2_2 = "rival=AP890105-0084:1:-1:-1:[24]";
+//        final String expected_2 =  "rival=AP890105-0084:1:-1:-1:[24];AP890103-0122:1:-1:-1:[303];";
+//
+//        String actual_2 = InvertedIndexFileMerger.mergeEntries(line1_2, line2_2);
+//        Assert.assertEquals(expected_2, actual_2);
+    }
 
-        String actual_1 = InvertedIndexFileMerger.mergeEntries(line1_1, line2_1);
-        Assert.assertEquals(expected_1, actual_1);
+    public void testMergeEntries() {
+        final String line1 = "rival=AP890102-0006:3:-1:-1:[476, 123, 333];AP890103-0122:1:-1:-1:[303];";
+        final String line2 = "rival=AP890105-0214:5:-1:-1:[18, 10, 12, 12, 15];AP890105-0084:2:-1:-1:[24, 50];";
 
-        // when line2 does not have a separator
-        final String line1_2 = "rival=AP890103-0122:1.0:-1.0:-1.0:[303.0];";
-        final String line2_2 = "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0]";
-        final String expected_2 =  "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0];AP890103-0122:1.0:-1.0:-1.0:[303.0];";
+        final String expected =   "rival=AP890105-0214:5:-1:-1:[18, 10, 12, 12, 15];" +
+                                        "AP890102-0006:3:-1:-1:[476, 123, 333];" +
+                                        "AP890105-0084:2:-1:-1:[24, 50];" +
+                                        "AP890103-0122:1:-1:-1:[303];";
 
-        String actual_2 = InvertedIndexFileMerger.mergeEntries(line1_2, line2_2);
-        Assert.assertEquals(expected_2, actual_2);
+        System.out.println(IndexReader.parseIndexEntry(line1));
+        System.out.println(IndexReader.mergeEntries(line1, line2));
+
+        Assert.assertEquals(expected, IndexReader.mergeEntries(line1, line2));
     }
 }

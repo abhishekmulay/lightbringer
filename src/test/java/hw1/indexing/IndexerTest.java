@@ -126,7 +126,7 @@ public class IndexerTest extends TestCase {
     }
 
     public void testGetTermFrequencyinText() throws Exception {
-        String[] tokens = TextSanitizer.tokenize(text);
+        String[] tokens = TextSanitizer.tokenize(text, true);
         String testTerm = "celluloid";
         String notPresentTerm = "Abhishek";
         double termFrequencyinText = Indexer.getTermFrequencyinText(testTerm, tokens);

@@ -4,18 +4,11 @@ import hw1.main.ConfigurationManager;
 import hw2.indexing.CatalogEntry;
 import hw2.indexing.CatalogReader;
 import hw2.indexing.Indexer;
-import org.omg.IOP.ENCODING_CDR_ENCAPS;
+import hw2.indexreading.IndexReader;
+import util.FileUtils;
 
-import javax.management.StringValueExp;
-import java.io.File;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,41 +17,40 @@ import java.util.Map;
 public class InvertedIndexFileMerger {
 
     final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
-
     final static String DESTINATION_FOLDER = ConfigurationManager.getConfigurationValue("completed.files.directory");
-    final static String INVERTED_INDEX_RECORD_SEPARATOR = ConfigurationManager.getConfigurationValue("inverted.index" +
-            ".file.record.sepatator");
 
     // Takes in two catalog files and merges the inverted index files corresponding to those catalogs into a new
     // inverted index and a catalog.
-
+    private static int treeLevel = 1;
     public static void merge(final String catalogFile1, final String catalogFile2) {
         System.out.println("Merging [" + catalogFile1 + "] and [" + catalogFile2 + "]");
+        String invertedIndexFile1 = FileUtils.getInvertedIndexFileForCatalog(catalogFile1);
+        String invertedIndexFile2 = FileUtils.getInvertedIndexFileForCatalog(catalogFile2);
 
-        String invertedIndexFile1 = getInvertedIndexFileForCatalog(catalogFile1);
-        String invertedIndexFile2 = getInvertedIndexFileForCatalog(catalogFile2);
-
-        String mergedInvertedIndexFilePath = getMergedFilePath(invertedIndexFile1, invertedIndexFile2);
-        String mergedCatalogFilePath = getMergedFilePath(catalogFile1, catalogFile2);
+        long seed = (long) Math.round(Math.random() * 100000);
+        String mergedInvertedIndexFilePath = getMergedFilePath(invertedIndexFile1, invertedIndexFile2, seed, treeLevel);
+        String mergedCatalogFilePath = getMergedFilePath(catalogFile1, catalogFile2, seed, treeLevel);
+        treeLevel +=1;
 
         // need to getCatalogAsMap catalog files into a map in memory
         Map<String, CatalogEntry> catalogMap1 = CatalogReader.getCatalogAsMap(catalogFile1);
         Map<String, CatalogEntry> catalogMap2 = CatalogReader.getCatalogAsMap(catalogFile2);
 
-        StringBuffer buffer = new StringBuffer();
         int position = 0;
         int offset = 0;
+        int bytesSoFar = 0;
 
         // catalog for newly merged index files created.
         Map<String, CatalogEntry> mergedCatalog = new HashMap<>();
 
         // loop over for each term
         for (Map.Entry<String, CatalogEntry> entry1 : catalogMap1.entrySet()) {
+            StringBuilder buffer = new StringBuilder();
             String term = entry1.getKey();
             String lineFromIndex1 = "";
 
             // where is this entry going to be written, bytes
-            position = buffer.length();
+            position = bytesSoFar;
 
             CatalogEntry catalogEntry1 = entry1.getValue();
             lineFromIndex1 = CatalogReader.read(invertedIndexFile1, catalogEntry1.getPosition(), catalogEntry1.getOffset());
@@ -75,14 +67,22 @@ public class InvertedIndexFileMerger {
             }
             buffer.append("\n");
 
-            offset = buffer.length() - position;
+            bytesSoFar += buffer.length();
+            offset = bytesSoFar - position;
             mergedCatalog.put(term, new CatalogEntry(term, position, offset));
+
+            // write to index and catalog
+            String combinedEntry = buffer.toString();
+            byte[] bytes = combinedEntry.getBytes(StandardCharsets.UTF_8);
+
+            FileUtils.writeBytesToFile(bytes, mergedInvertedIndexFilePath);
         }
 
         // after these two loops, map1 will get over, there might be entries left in map2.
         for (Map.Entry<String, CatalogEntry> entry2 : catalogMap2.entrySet()) {
+            StringBuilder buffer = new StringBuilder();
             String term = entry2.getKey();
-            position = buffer.length();
+            position = bytesSoFar;
 
             // if the term is not present in mergedCatalog then add it
             if (!mergedCatalog.containsKey(term)) {
@@ -91,54 +91,38 @@ public class InvertedIndexFileMerger {
                 buffer.append(lineFromIndex2);
                 buffer.append('\n');
 
-                offset = buffer.length() - position;
+                bytesSoFar += buffer.length();
+                offset = bytesSoFar - position;
                 mergedCatalog.put(term, new CatalogEntry(term, position, offset));
+
+                // write to index and catalog
+                String combinedEntry = buffer.toString();
+                byte[] bytes = combinedEntry.getBytes(StandardCharsets.UTF_8);
+
+                FileUtils.writeBytesToFile(bytes, mergedInvertedIndexFilePath);
             }
         }
 
-        // create new index and catalog
-        String combinedEntry = buffer.toString();
-        byte[] bytes = combinedEntry.getBytes(StandardCharsets.UTF_8);
-
-        Indexer.writeBytesToFile(bytes, mergedInvertedIndexFilePath);
+        // create catalog for newly merged index
         Indexer.createCatalogFile(mergedCatalog, mergedCatalogFilePath);
 
         // these files are merged, move them to other folder.
-        copyCatalogAndIndexFilesToFolder(catalogFile1, catalogFile2, DESTINATION_FOLDER);
+        FileUtils.copyCatalogAndIndexFilesToFolder(catalogFile1, catalogFile2, DESTINATION_FOLDER);
     }
 
-    private static void copyCatalogAndIndexFilesToFolder(String catalogFile1, String catalogFile2, String destinationFolder) {
-        List<File> filesToMove = new ArrayList<>();
-        filesToMove.add(new File(catalogFile1));
-        filesToMove.add(new File(catalogFile2));
-
-        String invertedIndexFile1 = getInvertedIndexFileForCatalog(catalogFile1);
-        String invertedIndexFile2 = getInvertedIndexFileForCatalog(catalogFile2);
-        filesToMove.add(new File(invertedIndexFile1));
-        filesToMove.add(new File(invertedIndexFile2));
-
-        for (File file : filesToMove) {
-            // move these files to destination folder and delete from current folder.
-            try {
-                Files.move(Paths.get(INVERTED_INDEX_FOLDER + file.getName()), Paths.get(DESTINATION_FOLDER + file.getName()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static String getMergedFilePath(String file1, String file2) {
+    public static String getMergedFilePath(String file1, String file2, long seed, int treeLevel) {
         if (file1.isEmpty() || file2.isEmpty() || file1 == null || file2 == null)
             throw new IllegalArgumentException("Illegal file parameter");
 
         String indexFileName = file1.replace(INVERTED_INDEX_FOLDER, "").replace(".txt", "");
         String indexFileName2 = file2.replace(INVERTED_INDEX_FOLDER, "").replace(".txt", "");
 
+        String mergedFilePath = INVERTED_INDEX_FOLDER + "v_"+ (treeLevel) + "_" + seed;
         if (indexFileName.contains("_catalog")) {
-            indexFileName = indexFileName.replace("_catalog", "");
+            mergedFilePath += "_catalog";
         }
 
-        String mergedFilePath = INVERTED_INDEX_FOLDER + indexFileName + "_" + indexFileName2 + ".txt";
+        mergedFilePath += ".txt";
         return mergedFilePath;
     }
 
@@ -146,42 +130,6 @@ public class InvertedIndexFileMerger {
     // 2) remove term from first line and get remaining record as substring
     // 3) append the record from line1 to end of line2
     public static String mergeEntries(String line1, String line2) {
-        // remove line break, line break will be added while being written to file.
-        line1 = line1.replace("\n", "").replace("\r", "").trim();
-        line2 = line2.replace("\n", "").replace("\r", "").trim();
-
-        int indexOfTerm1 = line1.indexOf("=");
-        String record1 = line1.substring(indexOfTerm1 + 1, line1.length());
-
-        // check if record1 ends with separator
-        String lastCharacter = String.valueOf(record1.charAt(record1.length() - 1));
-        if (!lastCharacter.equals(INVERTED_INDEX_RECORD_SEPARATOR)) {
-            // record 1 should have a separator at the end
-            record1 += INVERTED_INDEX_RECORD_SEPARATOR;
-        }
-
-        // check if line2 ends with separator
-        String lastCharacterInLineTwo = String.valueOf(line2.charAt(line2.length() - 1));
-        if (!lastCharacterInLineTwo.equals(INVERTED_INDEX_RECORD_SEPARATOR)) {
-            // line2 should have a separator at the end as we are going to add a new record at the end of line2
-            line2 += INVERTED_INDEX_RECORD_SEPARATOR;
-        }
-
-        String combinedEntry = line2 + record1;
-        return combinedEntry;
-    }
-
-    public static String getInvertedIndexFileForCatalog(final String catalogFile) {
-        if (catalogFile.isEmpty() || catalogFile == null)
-            throw new IllegalArgumentException("Illegal file parameter");
-        String invertedIndexFile = catalogFile.replaceAll("_catalog", "");
-        return invertedIndexFile;
-    }
-
-    public static String getCatalogFileForInvertedIndexFile(final String invertedIndexFilePath) {
-        if (invertedIndexFilePath.isEmpty() || invertedIndexFilePath == null)
-            throw new IllegalArgumentException("Illegal file parameter");
-        String catalogFilePath = invertedIndexFilePath.replaceAll("\\.", "_catalog.");
-        return catalogFilePath;
+        return  IndexReader.mergeEntries(line1, line2);
     }
 }
