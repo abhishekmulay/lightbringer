@@ -4,7 +4,7 @@ import hw1.main.ConfigurationManager;
 import hw1.pojos.Query;
 import hw1.queryprocessor.FileQueryReader;
 import hw1.queryprocessor.QueryResultWriter;
-import hw1.util.MapUtils;
+import util.MapUtils;
 
 import java.io.*;
 import java.util.ArrayList;

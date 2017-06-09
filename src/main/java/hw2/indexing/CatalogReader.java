@@ -24,7 +24,7 @@ public class CatalogReader {
     public static String read(final String invertedIndexFilePath ,final int position,final int offset) {
         String entry = "";
         try {
-            RandomAccessFile randomAccessFile = new RandomAccessFile(INVERTED_INDEX_FOLDER + invertedIndexFilePath, "r");
+            RandomAccessFile randomAccessFile = new RandomAccessFile(invertedIndexFilePath, "r");
             // move file pointer to position from where we want to getCatalogAsMap
             randomAccessFile.seek(position);
             byte [] entryForTerm = new byte[offset];
@@ -48,7 +48,7 @@ public class CatalogReader {
     public static Map<String, CatalogEntry> getCatalogAsMap(final String catalogFilePath) {
         Map<String, CatalogEntry> catalogEntryMap = new HashMap<>();
         try {
-            FileReader fileReader = new FileReader(INVERTED_INDEX_FOLDER + catalogFilePath);
+            FileReader fileReader = new FileReader(catalogFilePath);
             BufferedReader br = new BufferedReader(fileReader);
 
             String line;

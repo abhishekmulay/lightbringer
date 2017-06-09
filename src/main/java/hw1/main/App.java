@@ -107,7 +107,7 @@ public class App {
 //       For indexing documents
 //        startIndexing();
 
-//        runOkapi();
+        runOkapi();
 //        runTfIdf();
 //        runBM25();
 //        runUnigramWithLaplaceSmoothing();

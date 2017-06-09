@@ -11,8 +11,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
+import util.FileUtils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -21,6 +23,9 @@ import java.util.*;
 public class DataReader {
     final String DATA_PATH = ConfigurationManager.getConfigurationValue("data.set.path");
     final String TEST_DATA_PATH = ConfigurationManager.getConfigurationValue("test.data.set.path");
+    private final String DOCUMENT_SUMMARY_FILE = ConfigurationManager.getConfigurationValue("document.summary.file");
+    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stemming.enabled"));
+    private static int docIdMappingNumber = 0;
 
     public ArrayList<File> getAllDataFiles(String PATH) {
         File folder = new File(PATH);
@@ -29,7 +34,7 @@ public class DataReader {
         ArrayList<File> files = new ArrayList<File>(Arrays.asList(allFiles));
         File toReomve = null;
         for (File f : files) {
-            if (f.getName().equalsIgnoreCase("readme")) {
+            if (f.getName().equalsIgnoreCase("readme") || f.getName().equalsIgnoreCase(".DS_Store")) {
                 toReomve = f;
             }
         }
@@ -38,6 +43,7 @@ public class DataReader {
     }
 
     public List<HW1Model> readFileIntoModel(File dataFile) throws IOException {
+        Map<Integer, DocumentSummary> docIdMappingNoSummaryMap = new HashMap<>();
         List<HW1Model> models = new ArrayList<HW1Model>();
         String charset = "UTF-8";
 
@@ -64,12 +70,28 @@ public class DataReader {
                 bylines.add(byline.text());
             }
 
-            String[] tokens = TextSanitizer.tokenize(text);
+            String[] tokens = TextSanitizer.tokenize(text, STEMMING_ENABLED);
+            int documentLength = tokens.length;
+            docIdMappingNumber += 1;
+            docIdMappingNoSummaryMap.put(docIdMappingNumber, new DocumentSummary(docId, docIdMappingNumber, documentLength));
             String cleanedText = String.join(" ", tokens);
             models.add(new HW1Model(docId, cleanedText, fileId, first, second, dateline, heads, bylines));
         }
 
+//        createDocumentInfoFile(docIdMappingNoSummaryMap);
         return models;
+    }
+
+    private void createDocumentInfoFile(Map<Integer, DocumentSummary> docIdMappingNoSummaryMap) {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Integer, DocumentSummary> entry : docIdMappingNoSummaryMap.entrySet()) {
+            Integer docIdMappingNumber = entry.getKey();
+            DocumentSummary summary = entry.getValue();
+            builder.append(docIdMappingNumber).append(" ").append(summary.getDocumentId()).append(" ").append(summary.getDocumentLength()).append('\n');
+        }
+        String data = builder.toString();
+        byte[] bytes = data.getBytes(StandardCharsets.UTF_8);
+        FileUtils.writeBytesToFile(bytes, DOCUMENT_SUMMARY_FILE);
     }
 
     public String convertModelToJSON(HW1Model model) {

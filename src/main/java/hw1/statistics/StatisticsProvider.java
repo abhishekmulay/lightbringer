@@ -8,6 +8,9 @@ import hw1.pojos.TermStatistics;
 import hw1.ranking.vectorspacemodels.VectorSpaceModelsCalculator;
 import hw1.pojos.VectorStatistics;
 import hw1.restclient.RestCallHandler;
+import hw2.indexing.IndexingUnit;
+import hw2.search.DocumentSummaryProvider;
+import hw2.search.TermSearcher;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
 
@@ -23,10 +26,10 @@ public class StatisticsProvider {
     private static String TYPE_NAME = ConfigurationManager.getConfigurationValue("type.name");
     private final static String STATISTICS_API = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?scroll=1m";
     private final static String scrollEndPoint = "_search/scroll";
-
     private final static String GET_TTF_ENDPOINT = "/" + INDEX_NAME + "/" + TYPE_NAME + "/_search?filter_path=hits.hits.fields.ttf";
     private final static double vocabularySize = Double.parseDouble(ConfigurationManager.getConfigurationValue("corpus.vocabulary.size"));
     private final static double lambda = 0.5;
+    private static DocumentSummaryProvider summaryProvider = new DocumentSummaryProvider();
 
     // avoid instantiation
     private StatisticsProvider(){}
@@ -102,7 +105,6 @@ public class StatisticsProvider {
         handler.closeConnection();
         return extractStatistics(term, jsonString);
     }
-
 
     private static Map<String, List<TermStatistics>> extractStatistics(String term, String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
@@ -181,7 +183,6 @@ public class StatisticsProvider {
         return docIdTermStatisticsMap;
     }
 
-
     public static Map<String, List<VectorStatistics>> getVectorTermStatisticsForQuery(Query query) throws IOException {
         String cleanedQuery = query.getCleanedQuery();
         String[] terms = cleanedQuery.split(" ");
@@ -247,6 +248,64 @@ public class StatisticsProvider {
             }
         }
         return termStatisticsMap;
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+    //                Reading from Inverted Index.
+    ////////////////////////////////////////////////////////////////////////
+
+    ////// Map<documentId, List<TermStatistics>> for a query
+    public static Map<String,List<TermStatistics>> getStatisticsForQueryFromIndex(Query query) throws IOException {
+        String cleanedQuery = query.getCleanedQuery();
+        String[] terms = cleanedQuery.split(" ");
+
+        Map<String, List<TermStatistics>> docIdTermStatisticsMap = new HashMap<>();
+
+        for (String term : terms) {
+            // get map of <docId, List[stats for terms in that docId]>
+            Map<String, List<TermStatistics>> statistics = StatisticsProvider.getStatisticsFromIndex(term);
+
+            // update main map with values
+            for (Map.Entry<String, List<TermStatistics>> entry : statistics.entrySet()) {
+                String documentId = entry.getKey();
+                List<TermStatistics> statisticsForDocumentId = entry.getValue();
+
+                if (docIdTermStatisticsMap.containsKey(documentId)) {
+                    List<TermStatistics> previousTermStatistics = docIdTermStatisticsMap.get(documentId);
+                    previousTermStatistics.addAll(statisticsForDocumentId);
+                    docIdTermStatisticsMap.put(documentId, previousTermStatistics);
+                } else {
+                    docIdTermStatisticsMap.put(documentId, statisticsForDocumentId);
+                }
+            }
+        }
+
+        return docIdTermStatisticsMap;
+    }
+
+    // Map<documentId, List<TermStatistics>> for a single word/term
+    public static Map<String, List<TermStatistics>> getStatisticsFromIndex(final String term) {
+        List<IndexingUnit> indexingUnits = TermSearcher.search(term);
+        Map<String, List<TermStatistics>> docIdTermStatisticsMap = new HashMap<>();
+        for (IndexingUnit unit : indexingUnits) {
+            String documentId = unit.getDocumentId();
+            int tf = unit.getTermFrequency();
+            int df = unit.getDocumentFrequency();
+            int ttf = unit.getTtf();
+            int documentLength = summaryProvider.getDocumentLength(documentId);
+
+            TermStatistics termStatistics = new TermStatistics(term, documentId, documentLength, tf, df, ttf);
+            if (docIdTermStatisticsMap.containsKey(documentId)) {
+                List<TermStatistics> previousTermStatisticsList = docIdTermStatisticsMap.get(documentId);
+                previousTermStatisticsList.add(termStatistics);
+                docIdTermStatisticsMap.put(documentId, previousTermStatisticsList);
+            } else {
+                List<TermStatistics> newList = new ArrayList<>();
+                newList.add(termStatistics);
+                docIdTermStatisticsMap.put(documentId, newList);
+            }
+        }
+        return docIdTermStatisticsMap;
     }
 }
 
