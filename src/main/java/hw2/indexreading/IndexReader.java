@@ -7,6 +7,7 @@ import hw2.indexing.IndexingUnit;
 import hw2.search.DocumentSummaryProvider;
 import util.FileUtils;
 import util.ListUtils;
+import util.MapUtils;
 
 import java.io.File;
 import java.util.*;
@@ -42,36 +43,69 @@ public class IndexReader {
         return stringListMap.get(term);
     }
 
-//    naturalized=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
+    //    naturalized=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
     public static Map<String, List<IndexingUnit>> parseIndexEntry(String entry) {
-//        System.out.println(entry);
         String term = entry.substring(0, entry.indexOf("="));
-        String docBlocksString = entry.substring(entry.indexOf("=")+1, entry.length());
+        String docBlocksString = entry.substring(entry.indexOf("=") + 1, entry.length());
         String[] docBlocks = docBlocksString.split(INVERTED_INDEX_SEPARATOR);
         Map<String, List<IndexingUnit>> termIndexingUnitListMap = new HashMap<>();
 
         List<IndexingUnit> indexingUnitList = new ArrayList<>();
         for (String block : docBlocks) {
             String[] indexingUnitParts = block.split(":");
+            try {
+                int docIdMappingNumber = Integer.parseInt(indexingUnitParts[0]);
+                String documentId = DocumentSummaryProvider.getOriginalDocumentId(docIdMappingNumber);
 
-            int docIdMappingNumber = Integer.parseInt(indexingUnitParts[0]);
-            String documentId = summaryProvider.getOriginalDocumentId(docIdMappingNumber);
+                int termFrequency = Integer.parseInt(indexingUnitParts[1]);
+                int documentFrequency = Integer.parseInt(indexingUnitParts[2]);
+                int ttf = Integer.parseInt(indexingUnitParts[3]);
 
-            int termFrequency = Integer.parseInt(indexingUnitParts[1]);
-            int documentFrequency = Integer.parseInt(indexingUnitParts[2]);
-            int ttf = Integer.parseInt(indexingUnitParts[3]);
+                List<Integer> asList = new ArrayList<>();
+                int[] positionArray = ListUtils.fromString(indexingUnitParts[4]);
+                for (int i : positionArray) {
+                    asList.add(i);
+                }
 
-            List<Integer> asList = new ArrayList<>();
-            int[] positionArray = ListUtils.fromString(indexingUnitParts[4]);
-            for (int i : positionArray) {
-                asList.add(i);
+                indexingUnitList.add(new IndexingUnit(term, documentId, docIdMappingNumber, termFrequency, asList, ttf, documentFrequency));
+            } catch (Exception e) {
+                System.out.println("Exception while parsing term: [" + term + "]");
+                e.printStackTrace();
             }
-
-            indexingUnitList.add(new IndexingUnit(term, documentId, docIdMappingNumber, termFrequency, asList, ttf, documentFrequency));
         }
         termIndexingUnitListMap.put(term, indexingUnitList);
         return termIndexingUnitListMap;
     }
+
+    // each line is => cancel=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
+    public static String getMergedLineForTerm(String term, List<String> linesForTerm) {
+        List<IndexingUnit> indexingUnitList = new ArrayList<>();
+
+        for (int index=0; index < linesForTerm.size(); index++) {
+            String line = linesForTerm.get(index);
+            line = line.replace("\n", "").replace("\r", "").trim();
+            Map<String, List<IndexingUnit>> parsedTermIndexingUnitMap = parseIndexEntry(line);
+            indexingUnitList.addAll(parsedTermIndexingUnitMap.get(term));
+        }
+
+        Collections.sort(indexingUnitList, (o1, o2) -> {
+            if (o1.getTermFrequency() > o2.getTermFrequency()) {
+                return -1;
+            } else if (o1.getTermFrequency() < o2.getTermFrequency()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(term).append("=");
+        for (IndexingUnit docBlock : indexingUnitList) {
+            builder.append(docBlock.toString());
+        }
+        return builder.toString();
+    }
+
 
     // line should be of like => cancel=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
     public static String mergeEntries(String line1, String line2) {
@@ -105,7 +139,7 @@ public class IndexReader {
 
     private static List<IndexingUnit> mergeIndexingUnitsList(List<IndexingUnit> list1, List<IndexingUnit> list2) {
         List<IndexingUnit> mergedIndexingUnitsList = new ArrayList<>();
-        int i =0, j =0;
+        int i = 0, j = 0;
         int list1Length = list1.size();
         int list2Length = list2.size();
 

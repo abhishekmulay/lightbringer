@@ -25,7 +25,7 @@ public class BulkMerger {
         }
     }
 
-    private List<File> getAllCatalogFiles() {
+    public List<File> getAllCatalogFiles() {
         File dir = new File(INVERTED_INDEX_FOLDER);
         File[] allFiles = dir.listFiles();
         List<File> catalogList = new ArrayList<>();
@@ -37,34 +37,36 @@ public class BulkMerger {
     }
 
     public void bulkMerge() {
+
+        while (true) {
+            List<File> allCatalogFiles = getAllCatalogFiles();
+            // last catalog remaining.
+            if (allCatalogFiles.size() == 1) {
+                break;
+            }
+            for (int index=0; index < (allCatalogFiles.size() - 1); index+=2) {
+                File catalog1 = allCatalogFiles.get(index);
+                File catalog2 = allCatalogFiles.get(index + 1);
+//                IndexMerger.merge(catalog1.getPath(), catalog2.getPath());
+            }
+        }
+        // last index and catalog are remaining. Rename them to standard names.
+        renameLastCatalogAndIndex();
+    }
+
+    private void renameLastCatalogAndIndex() {
         List<File> allCatalogFiles = getAllCatalogFiles();
-        if (allCatalogFiles.size() < 1) { // base case
-            System.out.println(allCatalogFiles+ ">>>>>>>>");
-            return;
-        }
-        if (allCatalogFiles.size() == 1) { // base case, there will be one catalog and one index file.
-            File catalogFile = allCatalogFiles.get(0);
-            String invertedIndexFileForCatalog = FileUtils.getInvertedIndexFileForCatalog(catalogFile.getPath());
-            File indexFile = new File(invertedIndexFileForCatalog);
-            try {
-                Path catalogOld  = Paths.get(catalogFile.getPath());
-                Files.move(catalogOld, catalogOld.resolveSibling("index_catalog.txt"));
+        File catalogFile = allCatalogFiles.get(0);
+        String invertedIndexFileForCatalog = FileUtils.getInvertedIndexFileForCatalog(catalogFile.getPath());
+        File indexFile = new File(invertedIndexFileForCatalog);
+        try {
+            Path catalogOld  = Paths.get(catalogFile.getPath());
+            Files.move(catalogOld, catalogOld.resolveSibling("index_catalog.txt"));
 
-                Path indexOld  = Paths.get(indexFile.getPath());
-                Files.move(indexOld, indexOld.resolveSibling("index.txt"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else {
-            System.out.println("\nMerging " + allCatalogFiles.size() + " index files.");
-            for (int index=0; index < allCatalogFiles.size()-1; index+=2) {
-                File firstCatalogFile = allCatalogFiles.get(index);
-                File secondCatalogFile = allCatalogFiles.get(index+1);
-                InvertedIndexFileMerger.merge(firstCatalogFile.getPath(), secondCatalogFile.getPath());
-            }
-            // recur
-            bulkMerge();
+            Path indexOld  = Paths.get(indexFile.getPath());
+            Files.move(indexOld, indexOld.resolveSibling("index.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 }

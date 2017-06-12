@@ -292,7 +292,7 @@ public class StatisticsProvider {
             int tf = unit.getTermFrequency();
             int df = unit.getDocumentFrequency();
             int ttf = unit.getTtf();
-            int documentLength = summaryProvider.getDocumentLength(documentId);
+            int documentLength = DocumentSummaryProvider.getDocumentLength(documentId);
 
             TermStatistics termStatistics = new TermStatistics(term, documentId, documentLength, tf, df, ttf);
             if (docIdTermStatisticsMap.containsKey(documentId)) {

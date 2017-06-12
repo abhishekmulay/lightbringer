@@ -1,5 +1,6 @@
 package hw1.queryprocessor;
 
+import hw1.indexing.datareader.TextSanitizer;
 import hw1.main.ConfigurationManager;
 import hw1.pojos.Query;
 
@@ -37,6 +38,13 @@ public class FileQueryReader {
     }
 
     private String cleanQuery(String query) {
-        return QueryCleaner.analyzeString(query);
+        // using own stemmer
+//        return QueryCleaner.analyzeString(query);
+        return stemQuery(query);
+    }
+
+    private String stemQuery(String query) {
+        String[] tokens = TextSanitizer.removeStopWordsAndTokenize(query, true);
+        return String.join(" ", tokens);
     }
 }

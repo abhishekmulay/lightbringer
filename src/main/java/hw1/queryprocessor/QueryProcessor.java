@@ -13,6 +13,7 @@ import hw1.statistics.StatisticsProvider;
 import hw1.pojos.TermStatistics;
 import hw1.ranking.vectorspacemodels.TfIdfCalculator;
 
+import javax.print.Doc;
 import java.io.IOException;
 import java.util.*;
 
@@ -46,9 +47,11 @@ public class QueryProcessor {
             System.out.println("\n\nCalculating TF-IDF for: " + query.getCleanedQuery());
             try {
 //                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
-//                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf(termStatistics);
-                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
-                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf_from_es(vectorTermStatisticsForQuery);
+//                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
+//                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf_from_es(vectorTermStatisticsForQuery);
+
+                Map<String, List<TermStatistics>> termStatistics =  StatisticsProvider.getStatisticsForQueryFromIndex(query);
+                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf(termStatistics);
                 Map<String, Double> sortedDocIdOkapiValuesMap = MapUtils.sortByValue(docIdTfIdfValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdOkapiValuesMap, tfIdfOutputFile);
             } catch (IOException e) {
@@ -62,9 +65,11 @@ public class QueryProcessor {
             System.out.println("\n\nCalculating BM25 for: " + query.getCleanedQuery());
             try {
 //                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
-//                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25(termStatistics, query);
-                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
-                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25_from_es(vectorTermStatisticsForQuery);
+//                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
+//                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25_from_es(vectorTermStatisticsForQuery);
+
+                Map<String, List<TermStatistics>> termStatistics =  StatisticsProvider.getStatisticsForQueryFromIndex(query);
+                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25(termStatistics, query);
                 Map<String, Double> sortedDocIdBm25ValuesMap = MapUtils.sortByValue(docIdBm25ValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdBm25ValuesMap, bm25OutputFile);
             } catch (IOException e) {
@@ -78,8 +83,9 @@ public class QueryProcessor {
         DocumentIdExtractor extractor = new DocumentIdExtractor();
         Set<String> allDocumentIds = null;
         try {
-            allDocumentIds = extractor.getAllDocumentIds();
-        } catch (IOException e) {
+//            allDocumentIds = extractor.getAllDocumentIds();
+            allDocumentIds = DocumentIdExtractor.getAllDocumentIdsFromIndex();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -92,7 +98,8 @@ public class QueryProcessor {
                 docIdFinalLaplaceValue.put(id, defaultValue);
             }
             try {
-                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
+//                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
+                Map<String, List<TermStatistics>> termStatistics =  StatisticsProvider.getStatisticsForQueryFromIndex(query);
                 Map<String, Double> docIdUnigramValuesMap = UnigramWithLaplaceSmoothingCalculator.lm_laplace(termStatistics, docIdFinalLaplaceValue);
                 Map<String, Double> sortedDocIdUnigramValuesMap = MapUtils.sortByValue(docIdUnigramValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdUnigramValuesMap, unigramWithLaplaceSmoothingOutputFile);

@@ -3,6 +3,7 @@ package hw2;
 import hw1.main.ConfigurationManager;
 import hw2.indexing.Indexer;
 import hw2.merging.BulkMerger;
+import hw2.merging.IndexMerger;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,16 +21,27 @@ public class App {
     final static String TEST_DATA_PATH = ConfigurationManager.getConfigurationValue("test.data.set.path");
 
     private static void index() {
+        long timeAtStart = System.nanoTime();
         try {
-            Indexer.runIndex(TEST_DATA_PATH , FILE_CHUNK_SIZE);
+            Indexer.runIndex(DATA_PATH, FILE_CHUNK_SIZE);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        long timeAtEnd = System.nanoTime();
+        long elapsedTime = timeAtEnd - timeAtStart;
+        double seconds = (double) elapsedTime / 1000000000.0;
+        System.out.println("\nIndexing took: " + seconds / 60.0 + " minutes");
     }
 
     private static void merge() {
-        BulkMerger merger = new BulkMerger(INVERTED_INDEX_FOLDER);
-        merger.bulkMerge();
+        long timeAtStart = System.nanoTime();
+//        BulkMerger merger = new BulkMerger(INVERTED_INDEX_FOLDER);
+//        merger.bulkMerge();
+        IndexMerger.merge();
+        long timeAtEnd = System.nanoTime();
+        long elapsedTime = timeAtEnd - timeAtStart;
+        double seconds = (double) elapsedTime / 1000000000.0;
+        System.out.println("\nMerging took: " + seconds / 60.0 + " minutes");
     }
 
     public static void main(String[] args) {
@@ -42,9 +54,11 @@ public class App {
         long timeAtStart = System.nanoTime();
         ///////////////////////////////////////////////////////////////////
         System.out.println(STEMMING_ENABLED ? "Stemming is [ON]" : "Stemming is [OFF]");
-        index();
+//        index();
         merge();
-        hw1.main.App.runOkapi();
+//        hw1.main.App.runTfIdf();
+//        hw1.main.App.runBM25();
+//        hw1.main.App.runUnigramWithLaplaceSmoothing();
         ///////////////////////////////////////////////////////////////////
         long timeAtEnd = System.nanoTime();
         long elapsedTime = timeAtEnd - timeAtStart;

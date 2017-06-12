@@ -75,7 +75,7 @@ public class IndexingUnit {
     public String toString() {
         return docIdMappingNumber + INVERTED_INDEX_CATALOG_SEPARATOR + termFrequency
                 + INVERTED_INDEX_CATALOG_SEPARATOR + documentFrequency + INVERTED_INDEX_CATALOG_SEPARATOR + ttf +
-                INVERTED_INDEX_CATALOG_SEPARATOR + position + INVERTED_INDEX_RECORD_SEPARATOR;
+                INVERTED_INDEX_CATALOG_SEPARATOR + ListUtils.toCompactString(position) + INVERTED_INDEX_RECORD_SEPARATOR;
     }
 
     public static String toWritableString(String term, List<IndexingUnit> indexingUnitList) {

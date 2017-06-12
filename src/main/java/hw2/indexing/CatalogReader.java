@@ -4,8 +4,7 @@ import hw1.main.ConfigurationManager;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Abhishek Mulay on 6/4/17.
@@ -13,6 +12,9 @@ import java.util.Map;
 public class CatalogReader {
 //
     final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
+    final static String FINAL_CATALOG_PATH = ConfigurationManager.getConfigurationValue("final.catalog.name");
+    final static String VOCABULARY_FILE_PATH = ConfigurationManager.getConfigurationValue("vocabulary.file.path");
+
     private CatalogReader() {}
 
     /**
@@ -29,7 +31,7 @@ public class CatalogReader {
             randomAccessFile.seek(position);
             byte [] entryForTerm = new byte[offset];
             randomAccessFile.read(entryForTerm, 0, entryForTerm.length);
-            entry = new String(entryForTerm, StandardCharsets.UTF_8);
+            entry = new String(entryForTerm);
             // remove whitespace and line break
             entry = entry.replace("\n", "").replace("\r", "").trim();
             randomAccessFile.close();
@@ -67,6 +69,21 @@ public class CatalogReader {
             e.printStackTrace();
         }
         return catalogEntryMap;
+    }
+
+    public static Set<String> getVocabulary() {
+        Set<String> vocabulary = new HashSet<>();
+        try {
+            InputStream content = new FileInputStream(VOCABULARY_FILE_PATH);
+            BufferedReader br = new BufferedReader(new InputStreamReader(content));
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                vocabulary.add(line.trim());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return vocabulary;
     }
 
 }

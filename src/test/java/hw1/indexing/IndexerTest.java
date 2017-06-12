@@ -1,14 +1,19 @@
 package hw1.indexing;
 
 import hw1.indexing.datareader.TextSanitizer;
+import hw1.main.ConfigurationManager;
 import hw2.indexing.Indexer;
+import hw2.merging.IndexMerger;
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Created by Abhishek Mulay on 6/2/17.
  */
 public class IndexerTest extends TestCase {
+
+    final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
 
     final String documentId = "AP890101-0001";
     final String text = "The celluloid torch has been passed to a new\n" +
@@ -125,8 +130,27 @@ public class IndexerTest extends TestCase {
         super.setUp();
     }
 
+
+    // test is wrong, static varibale not available in test
+    @Test
+    public void testGetMergedFilePath() {
+        String index1 = "1.txt";
+        String index2 = "2.txt";
+
+        String catalog1 = "1_catalog.txt";
+        String catalog2 = "2_catalog.txt";
+
+        int indexNumber = Indexer.INDEX_NUMBER;
+        String mergedIndexFilePath = IndexMerger.getMergedFilePath(index1, index2, indexNumber+1);
+        String mergedCatalogFilePath = IndexMerger.getMergedFilePath(catalog1, catalog2, indexNumber+1);
+
+        // this method will return full path
+        Assert.assertEquals(INVERTED_INDEX_FOLDER + "3.txt", mergedIndexFilePath);
+        Assert.assertEquals( INVERTED_INDEX_FOLDER + "3_catalog.txt", mergedCatalogFilePath);
+    }
+
     public void testGetTermFrequencyinText() throws Exception {
-        String[] tokens = TextSanitizer.tokenize(text, true);
+        String[] tokens = TextSanitizer.removeStopWordsAndTokenize(text, true);
         String testTerm = "celluloid";
         String notPresentTerm = "Abhishek";
         double termFrequencyinText = Indexer.getTermFrequencyinText(testTerm, tokens);

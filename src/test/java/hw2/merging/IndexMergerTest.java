@@ -6,13 +6,20 @@ import hw2.indexing.CatalogReader;
 import hw2.indexreading.IndexReader;
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.omg.CORBA.INV_FLAG;
+import org.omg.PortableInterceptor.INACTIVE;
+import util.MapUtils;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Abhishek Mulay on 6/5/17.
  */
-public class InvertedIndexFileMergerTest extends TestCase {
+public class IndexMergerTest extends TestCase {
     final String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
 
     public void testReadFromCatalog() {
@@ -38,7 +45,7 @@ public class InvertedIndexFileMergerTest extends TestCase {
                                       "AP890105-0084:2:-1:-1:[24, 50];" +
                                       "AP890103-0122:1:-1:-1:[303]";
 
-        String actual = InvertedIndexFileMerger.mergeEntries(line1, line2);
+        String actual = IndexMerger.mergeEntries(line1, line2);
         Assert.assertEquals(expected, actual);
 
 //        // when line1 has only one record
@@ -46,7 +53,7 @@ public class InvertedIndexFileMergerTest extends TestCase {
 //        final String line2_1 = "rival=AP890105-0084:1.0:-1.0:-1.0:[24.0];AP890105-0214:1.0:-1.0:-1.0:[18.0];";
 //        final String expected_1 = "rival=AP890105-0084:1:-1:-1:[24];AP890105-0214:1:-1:-1:[18];AP890103-0122:1:-1:-1:[303];";
 //
-//        String actual_1 = InvertedIndexFileMerger.mergeEntries(line1_1, line2_1);
+//        String actual_1 = IndexMerger.mergeEntries(line1_1, line2_1);
 //        Assert.assertEquals(expected_1, actual_1);
 //
 //        // when line2 does not have a separator
@@ -54,7 +61,7 @@ public class InvertedIndexFileMergerTest extends TestCase {
 //        final String line2_2 = "rival=AP890105-0084:1:-1:-1:[24]";
 //        final String expected_2 =  "rival=AP890105-0084:1:-1:-1:[24];AP890103-0122:1:-1:-1:[303];";
 //
-//        String actual_2 = InvertedIndexFileMerger.mergeEntries(line1_2, line2_2);
+//        String actual_2 = IndexMerger.mergeEntries(line1_2, line2_2);
 //        Assert.assertEquals(expected_2, actual_2);
     }
 
@@ -72,4 +79,27 @@ public class InvertedIndexFileMergerTest extends TestCase {
 
         Assert.assertEquals(expected, IndexReader.mergeEntries(line1, line2));
     }
+
+    public void testDupesInIndex() {
+        String finalIndexFile = INVERTED_INDEX_FOLDER + "index.txt";
+        Map<String, Integer> wordLineNoMap = new HashMap<>();
+        try {
+            InputStream content = new FileInputStream(finalIndexFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(content));
+            String line = "";
+            int lineNumber = 0;
+            while ((line = br.readLine()) != null) {
+                String term = line.substring(0, line.indexOf("="));
+                if (wordLineNoMap.containsKey(term)) {
+                    System.out.println("[" + term + "] is duplicate at line: " + lineNumber);
+                }
+                ++lineNumber;
+                wordLineNoMap.put(term, lineNumber);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(MapUtils.getPrettyString(wordLineNoMap));
+    }
+
 }

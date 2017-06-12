@@ -5,7 +5,9 @@ import hw1.main.ConfigurationManager;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Abhishek Mulay on 6/9/17.
@@ -13,14 +15,18 @@ import java.util.Map;
 public class DocumentSummaryProvider {
     private static final String DOCUMENT_SUMMARY_FILE = ConfigurationManager.getConfigurationValue("document.summary.file");
 
-    private Map<Integer, DocumentSummary> intDocSummaryMap = new HashMap<>();
-    private Map<String, DocumentSummary> originalDocIdSummaryMap = new HashMap<>();
+    private static Map<Integer, DocumentSummary> intDocSummaryMap = new HashMap<>();
+    private static Map<String, DocumentSummary> originalDocIdSummaryMap = new HashMap<>();
+
+    static {
+        initializeMaps();
+    }
 
     public DocumentSummaryProvider() {
         this.initializeMaps();
     }
 
-    private void initializeMaps() {
+    private static void initializeMaps() {
         try {
             InputStream content = new FileInputStream(DOCUMENT_SUMMARY_FILE);
             BufferedReader br = new BufferedReader(new InputStreamReader(content));
@@ -39,19 +45,27 @@ public class DocumentSummaryProvider {
         }
     }
 
-    public String getOriginalDocumentId(final int docIdMappingNumber) {
+    public static String getOriginalDocumentId(final int docIdMappingNumber) {
         DocumentSummary documentSummary = intDocSummaryMap.get(docIdMappingNumber);
         return documentSummary.getDocumentId();
     }
 
-    public int getDocIdMappingNumber(final String documentId) {
+    public static int getDocIdMappingNumber(final String documentId) {
         DocumentSummary documentSummary = originalDocIdSummaryMap.get(documentId);
         return documentSummary.getDocIdMappingNumber();
     }
 
-    public int getDocumentLength(final String documentId) {
+    public static int getDocumentLength(final String documentId) {
         DocumentSummary documentSummary = originalDocIdSummaryMap.get(documentId);
         return documentSummary.getDocumentLength();
     }
 
+    public static Set<String> getAllDocumentIds() {
+        Set<String> documentIds = new HashSet<>();
+        originalDocIdSummaryMap.entrySet().forEach((Map.Entry<String, DocumentSummary> entry) -> {
+            String documentId = entry.getKey();
+            documentIds.add(documentId);
+        });
+        return documentIds;
+    }
 }

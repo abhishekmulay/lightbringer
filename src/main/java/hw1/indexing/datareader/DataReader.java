@@ -14,7 +14,6 @@ import org.jsoup.select.Elements;
 import util.FileUtils;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -70,7 +69,7 @@ public class DataReader {
                 bylines.add(byline.text());
             }
 
-            String[] tokens = TextSanitizer.tokenize(text, STEMMING_ENABLED);
+            String[] tokens = TextSanitizer.removeStopWordsAndTokenize(text, STEMMING_ENABLED);
             int documentLength = tokens.length;
             docIdMappingNumber += 1;
             docIdMappingNoSummaryMap.put(docIdMappingNumber, new DocumentSummary(docId, docIdMappingNumber, documentLength));
@@ -90,8 +89,9 @@ public class DataReader {
             builder.append(docIdMappingNumber).append(" ").append(summary.getDocumentId()).append(" ").append(summary.getDocumentLength()).append('\n');
         }
         String data = builder.toString();
-        byte[] bytes = data.getBytes(StandardCharsets.UTF_8);
-        FileUtils.writeBytesToFile(bytes, DOCUMENT_SUMMARY_FILE);
+        byte[] bytes = data.getBytes();
+//        FileUtils.writeBytesToFile(bytes, DOCUMENT_SUMMARY_FILE);
+        FileUtils.writeLineToFile(data, DOCUMENT_SUMMARY_FILE);
     }
 
     public String convertModelToJSON(HW1Model model) {
@@ -153,5 +153,10 @@ public class DataReader {
         }
         System.out.println(jsonData.size() + " json objects created.");
         return jsonData;
+    }
+
+    public static void main(String[] args) {
+        DataReader reader = new DataReader();
+        reader.getDataSetAsJSON();
     }
 }
