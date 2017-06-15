@@ -73,7 +73,7 @@ public class IndexerTest extends TestCase {
             "Goodman and James Chaney.\n" +
             "   They were reported missing on June 21, several hours after being\n" +
             "stopped for speeding near Philadelphia, Miss. After a nationally\n" +
-            "publicized search, their bodies were discovered Aug. 4 on a farm\n" +
+            "publicized getMinimumSpan, their bodies were discovered Aug. 4 on a farm\n" +
             "just outside the town.\n" +
             "   One of those who recalled the incident was Gerolmo, a student in\n" +
             "the New York public school system at the time. The screenwriter said\n" +

@@ -93,6 +93,17 @@ public class App {
         processor.calculateUnigramWithJeliekSmoothing(allQueries, unigramWithJelinekSmoothingOutputFile);
     }
 
+    ///////////// PROXIMITY MODEL //////////////////////////////
+    public static void runPromixtyModel() {
+        String proximityOutputFile = ConfigurationManager.getConfigurationValue("proximity.output.file");
+        File file = new File(proximityOutputFile);
+        file.delete(); // delete previous file
+        FileQueryReader reader = new FileQueryReader();
+        List<Query> allQueries = reader.getAllQueries(FileQueryReader.QUERY_FILE_PATH);
+        QueryProcessor processor = new QueryProcessor();
+        processor.calculatePromixty(allQueries, proximityOutputFile);
+    }
+
     //////////////////// MAIN /////////////////////////////
     public static void main(String[] args) {
         // Writes output to output.txt file instead of stdout

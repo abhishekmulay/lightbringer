@@ -2,7 +2,6 @@ package hw2;
 
 import hw1.main.ConfigurationManager;
 import hw2.indexing.Indexer;
-import hw2.merging.BulkMerger;
 import hw2.merging.IndexMerger;
 
 import java.io.File;
@@ -55,10 +54,11 @@ public class App {
         ///////////////////////////////////////////////////////////////////
         System.out.println(STEMMING_ENABLED ? "Stemming is [ON]" : "Stemming is [OFF]");
 //        index();
-        merge();
+//        merge();
 //        hw1.main.App.runTfIdf();
 //        hw1.main.App.runBM25();
 //        hw1.main.App.runUnigramWithLaplaceSmoothing();
+        hw1.main.App.runPromixtyModel();
         ///////////////////////////////////////////////////////////////////
         long timeAtEnd = System.nanoTime();
         long elapsedTime = timeAtEnd - timeAtStart;

@@ -1,5 +1,7 @@
 package hw1.pojos;
 
+import java.util.List;
+
 /**
  * Created by Abhishek Mulay on 5/22/17.
  */
@@ -11,6 +13,7 @@ public class TermStatistics {
     private int documentFrequency;
     private int documentLength;
     private int ttf;
+    private List<Integer> positions;
 
     public TermStatistics(String term, String documentId, int documentLength, int termFrequency, int documentFrequency, int ttf) {
         this.term = term;
@@ -19,6 +22,17 @@ public class TermStatistics {
         this.termFrequency = termFrequency;
         this.documentFrequency = documentFrequency;
         this.ttf = ttf;
+    }
+
+    // for hw2 proximity search
+    public TermStatistics(String term, String documentId, int documentLength, int termFrequency, int documentFrequency, int ttf, List<Integer> positions) {
+        this.term = term;
+        this.documentId = documentId;
+        this.documentLength = documentLength;
+        this.termFrequency = termFrequency;
+        this.documentFrequency = documentFrequency;
+        this.ttf = ttf;
+        this.positions = positions;
     }
 
     public String getTerm() {
@@ -69,14 +83,34 @@ public class TermStatistics {
         this.documentLength = documentLength;
     }
 
+    public List<Integer> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(List<Integer> positions) {
+        this.positions = positions;
+    }
+
     @Override
     public String toString() {
-        return "TermStatistics{" +
-                "term='" + term + '\'' +
-                ", documentId='" + documentId + '\'' +
-                ", termFrequency=" + termFrequency +
-                ", documentFrequency=" + documentFrequency +
-                ", ttf=" + ttf +
+        if (this.positions.size() > 0) {
+            return "TermStatistics" +
+                    "{" +
+                        "term='" + term + '\'' +
+                        ", documentId='" + documentId + '\'' +
+                        ", termFrequency=" + termFrequency +
+                        ", documentFrequency=" + documentFrequency +
+                        ", ttf=" + ttf +
+                        ", position=" + positions +
+                    '}';
+        }
+        return "TermStatistics" +
+                "{" +
+                    "term='" + term + '\'' +
+                    ", documentId='" + documentId + '\'' +
+                    ", termFrequency=" + termFrequency +
+                    ", documentFrequency=" + documentFrequency +
+                    ", ttf=" + ttf +
                 '}';
     }
 }

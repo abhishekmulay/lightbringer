@@ -3,6 +3,7 @@ package hw1.queryprocessor;
 import hw1.main.ConfigurationManager;
 import hw1.pojos.Query;
 import hw1.ranking.languagemodels.UnigramWithJelinekSmoothingCalculator;
+import hw1.ranking.proximitymodel.ProximityScoreCalculator;
 import hw1.ranking.vectorspacemodels.BM25Calculator;
 import hw1.ranking.languagemodels.UnigramWithLaplaceSmoothingCalculator;
 import hw1.pojos.VectorStatistics;
@@ -124,6 +125,21 @@ public class QueryProcessor {
                 Map<String, Double> finalDocIdJmValuesForQuery = UnigramWithJelinekSmoothingCalculator.applyJMModelAndGetValuesMap(query, allDocumentIds);
                 Map<String, Double> sortedFinalDocIdJmValuesForQuery = MapUtils.sortByValue(finalDocIdJmValuesForQuery);
                 QueryResultWriter.writeQueryResultToFile(query, sortedFinalDocIdJmValuesForQuery, unigramWithJelinekSmoothingOutputFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void calculatePromixty(List<Query> queryList, String proximityModelOutputFile) {
+        for (Query query : queryList) {
+            System.out.println("\n\nCalculating Proximity score for: [" +query.getQueryId() +"], "+ query.getCleanedQuery());
+            Map<String, List<TermStatistics>> termStatistics = null;
+            try {
+                termStatistics = StatisticsProvider.getStatisticsForQueryFromIndex(query);
+                Map<String, Double> docIdOkapiValuesMap = ProximityScoreCalculator.getProximityScoreMap(termStatistics);
+                Map<String, Double> sortedDocIdProximityScoreValuesMap = MapUtils.sortByValue(docIdOkapiValuesMap);
+                QueryResultWriter.writeQueryResultToFile(query, sortedDocIdProximityScoreValuesMap, proximityModelOutputFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }

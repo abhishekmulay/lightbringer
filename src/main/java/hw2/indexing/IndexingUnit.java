@@ -3,6 +3,7 @@ package hw2.indexing;
 import hw1.main.ConfigurationManager;
 import util.ListUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,12 +71,14 @@ public class IndexingUnit {
         this.documentFrequency = documentFrequency;
     }
 
-    //    cancel=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
+//    inverted.index.file.record.separator=;
+//    inverted.index.term.separator==
+//    inverted.index.catalog.separator=:
+    // docIdMappingNumber1:tf1:pos1,pos2,pos3
     @Override
     public String toString() {
         return docIdMappingNumber + INVERTED_INDEX_CATALOG_SEPARATOR + termFrequency
-                + INVERTED_INDEX_CATALOG_SEPARATOR + documentFrequency + INVERTED_INDEX_CATALOG_SEPARATOR + ttf +
-                INVERTED_INDEX_CATALOG_SEPARATOR + ListUtils.toCompactString(position) + INVERTED_INDEX_RECORD_SEPARATOR;
+                + INVERTED_INDEX_CATALOG_SEPARATOR + ListUtils.toCompactString(position) + INVERTED_INDEX_RECORD_SEPARATOR;
     }
 
     public static String toWritableString(String term, List<IndexingUnit> indexingUnitList) {
@@ -87,7 +90,17 @@ public class IndexingUnit {
     }
 
     public String toPrettyString() {
-        return "IndexingUnit {term=" + term + ", docId=" + documentId + ", docId=" + docIdMappingNumber+ ", tf=" +  termFrequency + ", df=" + documentFrequency + ", " + "ttf=" + ttf + ", positions=" + ListUtils.toCompactString(position) + "}";
+        return "IndexingUnit {term=" + term + ", docId=" + documentId + ", docIdMapping=" + docIdMappingNumber+ ", tf="
+                +  termFrequency + ", df=" + documentFrequency + ", " + "ttf=" + ttf + ", positions=" + ListUtils.toCompactString(position) + "}";
     }
 
+
+//    public static void main(String[] args) {
+//        List<Integer> intList = new ArrayList<>();
+//        intList.add(1);
+//        intList.add(2);
+//        intList.add(3);
+//        IndexingUnit unit = new IndexingUnit("cancel", "AP89081234-1234", 1234, 3, intList, 10, 5);
+//        System.out.println(unit);
+//    }
 }

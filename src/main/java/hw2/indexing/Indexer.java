@@ -116,34 +116,35 @@ public class Indexer {
             Map<String, IndexingUnit> docIdIndexingUnitMap = entry.getValue();
             // how many bytes in file
             position = buffer.length();
-
             buffer.append(term).append('=');
+            int df = 0, ttf = 0;
 
+            StringBuilder bufferForTerm = new StringBuilder();
             // iterate over map <docId, IndexingUnit> for the term
             for (Map.Entry<String, IndexingUnit> docIdIndexingUnitEntry : docIdIndexingUnitMap.entrySet()) {
                 String documentId = docIdIndexingUnitEntry.getKey();
                 IndexingUnit indexingUnit = docIdIndexingUnitEntry.getValue();
-
                 int tf = indexingUnit.getTermFrequency();
+                df += 1;
+                ttf += tf;
                 List<Integer> positionList = indexingUnit.getPosition();
                 String positions = ListUtils.toCompactString(positionList);
-                int df = 1;
-                int ttf = tf;
 
                 int docIdMappingNumber = DocumentSummaryProvider.getDocIdMappingNumber(documentId);
-                // term=docIdMappingNumber:tf1:df1:ttf1:[pos1, pos2, pos3];docId2:tf2:df2:ttf2:[pos1, pos2, pos3]
-                buffer.append(docIdMappingNumber).append(':').append(tf).append(':').append(df).append(':').append(ttf).append(':').append(positions).append(';');
+                // term=df;ttf;docIdMappingNumber1:tf1:pos1,pos2,pos3];docIdMappingNumber2:tf2:pos1,pos2,pos3];docIdMappingNumber3:tf3:pos1,pos2,pos3];
+                bufferForTerm.append(docIdMappingNumber).append(':').append(tf).append(':').append(positions).append(';');
             }
+            bufferForTerm.append('\n');
+            String docBlocks = bufferForTerm.toString();
+            buffer.append(df).append(";").append(ttf).append(";").append(docBlocks);
+
             //add new line after every term entry
-            buffer.append('\n');
             offset = buffer.length() - position;
 
             CatalogEntry catalogEntry = new CatalogEntry(term, position, offset);
             catalogEntryMap.put(term, catalogEntry);
         }
         String allTermsFromThisFileSet = buffer.toString();
-        byte[] bytes = allTermsFromThisFileSet.getBytes();
-
 
         //save bytes[] into file
 //        FileUtils.writeBytesToFile(bytes, invertedIndexFilePath);
@@ -224,7 +225,6 @@ public class Indexer {
             }
 
             vocabulary.addAll(termDocIdIndexingUnitMap.keySet());
-            writeVocabularyToFile(vocabulary);
 
             // write result of chunkSize files Map
             String invertedIndexFilePath = INVERTED_INDEX_FOLDER + INDEX_NUMBER + ".txt";
@@ -233,6 +233,7 @@ public class Indexer {
 
             System.out.println("Documents=[" + documentsProcessedInChunk + "], index=[" + new File(invertedIndexFilePath).getName() + "], totalDocumentsProcessed =[" + TOTAL_DOCUMENTS_PROCESSED + "], vocabulary size=["+ vocabulary.size() +"]\n");
         }
+        writeVocabularyToFile(vocabulary);
     }
 
     private static void writeVocabularyToFile(Set<String> vocabulary) {

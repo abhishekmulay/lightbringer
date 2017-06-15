@@ -24,6 +24,8 @@ public class IndexMerger {
     final static String FINAL_CATALOG_FILE_NAME = ConfigurationManager.getConfigurationValue("final.catalog.name");
     final static String MERGED_CATALOG_FILE_PATH = INVERTED_INDEX_FOLDER + FINAL_CATALOG_FILE_NAME;
 
+    private static final Set<String> vocabularySet = CatalogReader.getVocabulary();
+
     // Takes in two catalog files and merges the inverted index files corresponding to those catalogs into a new
     // inverted index and a catalog.
     // file path needs to be complete path
@@ -150,7 +152,7 @@ public class IndexMerger {
     public static void merge() {
         // Map<CatalogFile, Map<term, CatalogEntry>
         Map<File, Map<String, CatalogEntry>> allCatalogTermEntryMap = new HashMap<>();
-        Set<String> vocabularySet = CatalogReader.getVocabulary();
+//        Set<String> vocabularySet = CatalogReader.getVocabulary();
 
         List<File> allCatalogFiles = FileUtils.getAllCatalogFiles();
         System.out.println("Merging [" + allCatalogFiles.size() + "] catalog files.");
@@ -158,7 +160,6 @@ public class IndexMerger {
             Map<String, CatalogEntry> catalogAsMap = CatalogReader.getCatalogAsMap(catalogFile.getPath());
             allCatalogTermEntryMap.put(catalogFile, catalogAsMap);
         }
-
 
         Map<String, CatalogEntry> mergedCatalog = new HashMap<>();
         int position = 0, offset=0;

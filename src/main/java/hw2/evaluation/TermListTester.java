@@ -68,7 +68,6 @@ public class TermListTester {
         FileUtils.writeLineToFile(data, outputFilePath);
     }
 
-
     public void testStemmedOutputFile() {
         testTermsAgainstIndex(STEMMED_OUTPUT_FILE);
     }
@@ -95,13 +94,14 @@ public class TermListTester {
     }
 
     public static void main(String[] args) throws IOException {
-//        TermListTester termListTester = new TermListTester();
-//        termListTester.testStemmedOutputFile();
+        TermListTester termListTester = new TermListTester();
+        termListTester.testStemmedOutputFile();
 //
-//        final String expected = STEMMED_EXPECTED_OUTPUT_FILE;
-//        final String actual = STEMMED_OUTPUT_FILE;
-//        OutputAccuracy.compareFiles(expected, actual);
-        testSingleTerm("away", true);
+        final String expected = STEMMED_EXPECTED_OUTPUT_FILE;
+        final String actual = STEMMED_OUTPUT_FILE;
+        OutputAccuracy.compareFiles(expected, actual);
+
+//        testSingleTerm("encryption", true);
     }
 
 }

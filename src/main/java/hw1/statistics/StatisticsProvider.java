@@ -293,8 +293,9 @@ public class StatisticsProvider {
             int df = unit.getDocumentFrequency();
             int ttf = unit.getTtf();
             int documentLength = DocumentSummaryProvider.getDocumentLength(documentId);
+            List<Integer> positions = unit.getPosition();
 
-            TermStatistics termStatistics = new TermStatistics(term, documentId, documentLength, tf, df, ttf);
+            TermStatistics termStatistics = new TermStatistics(term, documentId, documentLength, tf, df, ttf, positions);
             if (docIdTermStatisticsMap.containsKey(documentId)) {
                 List<TermStatistics> previousTermStatisticsList = docIdTermStatisticsMap.get(documentId);
                 previousTermStatisticsList.add(termStatistics);
