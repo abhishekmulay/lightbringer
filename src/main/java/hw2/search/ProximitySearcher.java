@@ -98,7 +98,6 @@ public class ProximitySearcher {
             index += 1;
         }
 
-        System.out.println("Min " + minSpanHeap.poll());
         return minSpanHeap.poll();
     }
 

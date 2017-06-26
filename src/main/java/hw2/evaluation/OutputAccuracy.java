@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Created by shikhar.prasoon on 6/10/17.
  */
 public class OutputAccuracy {
-    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stemming.enabled"));
+    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stopwords.removal.and.stemming.enabled"));
 
     private static final String STEMMED_OUTPUT_FILE = ConfigurationManager.getConfigurationValue("indexing.test" + ".output.file.stemmed");
     private static final String NON_STEMMED_OUTPUT_FILE = ConfigurationManager.getConfigurationValue("indexing.test.output.file.non.stemmed");

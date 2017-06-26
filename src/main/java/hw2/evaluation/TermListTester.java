@@ -21,6 +21,7 @@ public class TermListTester {
 
     private static final String STEMMED_EXPECTED_OUTPUT_FILE = ConfigurationManager.getConfigurationValue("indexing.test.expected.output.file.stemmed");
     private static final String NON_STEMMED_EXPECTED_OUTPUT_FILE = ConfigurationManager.getConfigurationValue("indexing.test.expected.output.file.non.stemmed");
+    final static boolean STEMMING_AND_STOPWORD_REMOVAL_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stopwords.removal.and.stemming.enabled"));
 
     private List<String> readTestTerms() {
         List<String> testTerms = new ArrayList<String>();
@@ -37,7 +38,7 @@ public class TermListTester {
         return testTerms;
     }
 
-    public void testTermsAgainstIndex(final String outputFilePath) {
+    public void testTermsAgainstIndex(final String outputFilePath, final boolean stemmingEnabled) {
         // delete previous file and create new
         File file = new File(outputFilePath);
         if (file.exists()) {
@@ -47,8 +48,14 @@ public class TermListTester {
         List<String> testTerms = readTestTerms();
         StringBuilder builder = new StringBuilder();
         for (String term : testTerms) {
-            String stemmedTerm = TextSanitizer.stem(term);
-            List<IndexingUnit> indexingUnitList = TermSearcher.search(stemmedTerm);
+            List<IndexingUnit> indexingUnitList = new ArrayList<>();
+            if (stemmingEnabled) {
+                String stemmedTerm = TextSanitizer.stem(term);
+                indexingUnitList = TermSearcher.search(stemmedTerm);
+            } else {
+                indexingUnitList = TermSearcher.search(term);
+            }
+
             // word found in data set
             if (indexingUnitList.size() > 0) {
                 builder.append(term).append(" ");
@@ -64,16 +71,15 @@ public class TermListTester {
         String data = builder.toString();
         System.out.println(data);
         byte[] bytes = data.getBytes();
-//        FileUtils.writeBytesToFile(bytes, outputFilePath);
         FileUtils.writeLineToFile(data, outputFilePath);
     }
 
     public void testStemmedOutputFile() {
-        testTermsAgainstIndex(STEMMED_OUTPUT_FILE);
+        testTermsAgainstIndex(STEMMED_OUTPUT_FILE, true);
     }
 
     public void testNonStemmedOutputFile() {
-        testTermsAgainstIndex(NON_STEMMED_OUTPUT_FILE);
+        testTermsAgainstIndex(NON_STEMMED_OUTPUT_FILE, false);
     }
 
     public static void testSingleTerm(String term, boolean stemmingEnabled) {
@@ -94,14 +100,19 @@ public class TermListTester {
     }
 
     public static void main(String[] args) throws IOException {
-        TermListTester termListTester = new TermListTester();
-        termListTester.testStemmedOutputFile();
+//        TermListTester termListTester = new TermListTester();
+//        termListTester.testStemmedOutputFile();
+////        termListTester.testNonStemmedOutputFile();
 //
-        final String expected = STEMMED_EXPECTED_OUTPUT_FILE;
-        final String actual = STEMMED_OUTPUT_FILE;
-        OutputAccuracy.compareFiles(expected, actual);
+//        final String expectedStemmed = STEMMED_EXPECTED_OUTPUT_FILE;
+//        final String actualStemmed = STEMMED_OUTPUT_FILE;
+//
+//        final String expectedNonStemmed = NON_STEMMED_EXPECTED_OUTPUT_FILE;
+//        final String actualNonStemmed = NON_STEMMED_OUTPUT_FILE;
+////        OutputAccuracy.compareFiles(expectedNonStemmed, actualNonStemmed);
+//        OutputAccuracy.compareFiles(expectedStemmed, actualStemmed);
 
-//        testSingleTerm("encryption", true);
+        testSingleTerm("borwein", STEMMING_AND_STOPWORD_REMOVAL_ENABLED);
     }
 
 }

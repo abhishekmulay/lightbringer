@@ -8,6 +8,8 @@ import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Abhishek Mulay on 5/17/17.
@@ -18,6 +20,7 @@ public class QueryCleaner {
     private static String INDEX_NAME = ConfigurationManager.getConfigurationValue("index.name");
     private static final String STOP_WORDS_FILE_PATH = ConfigurationManager.getConfigurationValue("stop.words.file.path");
     private final static String ANALYSER_ENDPOINT = "/" + INDEX_NAME + "/" + "_analyze?filter_path=tokens.token";
+
 
 
     public static String analyzeString(String query) {
@@ -46,5 +49,43 @@ public class QueryCleaner {
             e.printStackTrace();
         }
         return buffer.toString();
+    }
+
+
+    public static String removeStopWords(String query) {
+        String[] terms = query.split(" ");
+        List<String> termList = new ArrayList<>();
+        for (String term : terms) {
+            term = term.trim();
+            termList.add(term);
+        }
+        List<String> stopWords = getStopWords();
+        termList.removeAll(stopWords);
+        StringBuilder builder = new StringBuilder();
+        for (String term : termList) {
+            builder.append(term).append(" ");
+        }
+        String text = builder.toString().toLowerCase();
+        // remove punctuations
+        text = text.replaceAll("[$\\\\//*,^&~;|!:'`?\\/]", "");
+        // remove period at end of word
+        text = text.replaceAll("\\.(?!\\w)", " ");
+        text = text.replaceAll("[^\\w\\s.\\-{}=@()\\[\\]]", " ");
+        return text;
+    }
+
+    private static List<String> getStopWords() {
+        List<String> stopWords = new ArrayList<String>();
+        try {
+            InputStream content = new FileInputStream(STOP_WORDS_FILE_PATH);
+            BufferedReader br = new BufferedReader(new InputStreamReader(content));
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                stopWords.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stopWords;
     }
 }

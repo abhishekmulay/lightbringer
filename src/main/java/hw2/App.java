@@ -13,7 +13,7 @@ import java.io.PrintStream;
  */
 public class App {
 
-    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stemming.enabled"));
+    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stopwords.removal.and.stemming.enabled"));
     final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
     final static int FILE_CHUNK_SIZE = Integer.parseInt(ConfigurationManager.getConfigurationValue("indexing.data.file.chunk.size"));
     final static String DATA_PATH = ConfigurationManager.getConfigurationValue("data.set.path");
@@ -52,12 +52,13 @@ public class App {
         }
         long timeAtStart = System.nanoTime();
         ///////////////////////////////////////////////////////////////////
-        System.out.println(STEMMING_ENABLED ? "Stemming is [ON]" : "Stemming is [OFF]");
+        System.out.println("Stemming and Stopword removal is " + (STEMMING_ENABLED ?  "[ON]" : "[OFF]"));
 //        index();
 //        merge();
-//        hw1.main.App.runTfIdf();
-//        hw1.main.App.runBM25();
-//        hw1.main.App.runUnigramWithLaplaceSmoothing();
+        hw1.main.App.runOkapi();
+        hw1.main.App.runTfIdf();
+        hw1.main.App.runBM25();
+        hw1.main.App.runUnigramWithLaplaceSmoothing();
         hw1.main.App.runPromixtyModel();
         ///////////////////////////////////////////////////////////////////
         long timeAtEnd = System.nanoTime();

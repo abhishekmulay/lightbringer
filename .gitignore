@@ -13,7 +13,6 @@ Icon
 *.class
 
 # Log file
-*.log
 
 # BlueJ files
 *.ctxt
@@ -32,8 +31,7 @@ Icon
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-.idea
-idea	
+idea
 
 ## File-based project format:
 *.iws
@@ -152,3 +150,6 @@ ENV/
 # Rope project settings
 .ropeproject
 /src/main/output/inverted_index/
+!/app.log
+!/src/main/output/example1.log
+/app.log

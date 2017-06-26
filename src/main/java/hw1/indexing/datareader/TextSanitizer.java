@@ -32,7 +32,7 @@ public class TextSanitizer {
     }
 
     // remove special characters like , etc. split into words and remove whitespace
-    private static ArrayList<String> tokenize(String text) {
+    private static List<String> tokenize(String text) {
         text = text.toLowerCase();
         text = text.replaceAll("([^\\w.\\s]|(?!\\d)\\.(?!\\d))+", " ");
         text = text.replaceAll("[^\\w\\s.\\-{}()\\[\\]]", " ");
@@ -53,18 +53,11 @@ public class TextSanitizer {
         //remove all elements that are null or equals to ""
         tokenList.removeAll(Arrays.asList(null, ""));
 
-        List<String> oneLetterWords = new ArrayList<>();
         for (int index = 0; index < tokenList.size(); index++) {
             String str = tokenList.get(index);
-            if (str.length() < 2) {
-                oneLetterWords.add(str);
-            } else {
-                str = str.trim();
-                tokenList.set(index, str);
-            }
+            str = str.trim();
+            tokenList.set(index, str);
         }
-
-        tokenList.removeAll(oneLetterWords);
         return tokenList;
     }
 
@@ -78,16 +71,14 @@ public class TextSanitizer {
 
     // removes stopwords.
     // if stemming is enabled, stems each word.
-    public static String[] removeStopWordsAndTokenize(String text, boolean stemmingEnabled) {
+    private static String[] removeStopWordsAndTokenize(String text) {
         List<String> stopWords = Collections.unmodifiableList(getStopWords());
         // tokenize
         List<String> tokenList = tokenize(text);
         // remove stopwords
         tokenList.removeAll(stopWords);
         // stem each word
-        if (stemmingEnabled) {
-            tokenList = stemTokens(tokenList);
-        }
+        tokenList = stemTokens(tokenList);
 
         StringBuffer buffer = new StringBuffer();
         for (String token : tokenList)
@@ -95,7 +86,6 @@ public class TextSanitizer {
 
         return buffer.toString().split(" ");
     }
-
 
     private static List<String> getStopWords() {
         List<String> stopWords = new ArrayList<String>();
@@ -112,6 +102,14 @@ public class TextSanitizer {
         return stopWords;
     }
 
+    public static String[] getTokens(String text, boolean stopwordsRemovalAndStemmingEnabled) {
+        if (stopwordsRemovalAndStemmingEnabled) {
+            return removeStopWordsAndTokenize(text);
+        } else {
+            List<String> tokenList = tokenize(text);
+            return tokenList.toArray(new String[tokenList.size()]);
+        }
+    }
 
     public static void main(String[] args) {
         String text = "away furthermore little the henceforth would while " +
@@ -165,9 +163,11 @@ public class TextSanitizer {
                 "life. Liberace died of AIDS in 1987. anybody anybody anybody anybody a b c d e f g hi h i 1 2 3 4 " +
                 "_perlmutt f.s.b earphones; _1.6770 32|; 3.superwoman missouri; 16.martika abhi{ mulay] (jhalak) " +
                 "`tick` colon: ;semicolon; dash-dash  abc,def new\nline abhi@gmail.com " +
-                "Maheshwari. ~yolo $ !100$ $200 stopword_score abhi=mulay \"aafasda\" a.j.s ";
-        String[] tokenList = removeStopWordsAndTokenize(text, true);
-        for (String term : tokenList)
+                "Maheshwari. ~yolo $ !100$ $200 stopword_score abhi=mulay \"aafasda\" a.j.s a the";
+//        String[] tokenList = removeStopWordsAndTokenize(text, true);
+
+        List<String> stringList = tokenize(text);
+        for (String term : stringList)
             System.out.println("<" + term + ">");
     }
 

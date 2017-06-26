@@ -19,7 +19,7 @@ public class Indexer {
 
     final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
     final static String COMPLETED_FOLDER = ConfigurationManager.getConfigurationValue("completed.files.directory");
-    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stemming.enabled"));
+    final static boolean STEMMING_AND_STOPWORD_REMOVAL_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stopwords.removal.and.stemming.enabled"));
     final static String VOCABULARY_FILE_PATH = ConfigurationManager.getConfigurationValue("vocabulary.file.path");
 
     private static DocumentSummaryProvider summaryProvider = new DocumentSummaryProvider();
@@ -54,7 +54,9 @@ public class Indexer {
         int docIdMappingNumber = DocumentSummaryProvider.getDocIdMappingNumber(documentId);
         String text = model.getText();
         // remove stop-words and tokenize
-        String[] tokens = TextSanitizer.removeStopWordsAndTokenize(text, STEMMING_ENABLED);
+
+//        String[] tokens = TextSanitizer.removeStopWordsAndTokenize(text, STEMMING_AND_STOPWORD_REMOVAL_ENABLED);
+        String[] tokens =TextSanitizer.getTokens(text, STEMMING_AND_STOPWORD_REMOVAL_ENABLED);
 
         for (String term : tokens) {
             int tf = getTermFrequencyinText(term, tokens);

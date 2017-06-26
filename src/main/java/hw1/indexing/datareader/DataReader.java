@@ -23,8 +23,8 @@ public class DataReader {
     final String DATA_PATH = ConfigurationManager.getConfigurationValue("data.set.path");
     final String TEST_DATA_PATH = ConfigurationManager.getConfigurationValue("test.data.set.path");
     private final String DOCUMENT_SUMMARY_FILE = ConfigurationManager.getConfigurationValue("document.summary.file");
-    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stemming.enabled"));
     private static int docIdMappingNumber = 0;
+    final static boolean STEMMING_AND_STOPWORD_REMOVAL_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stopwords.removal.and.stemming.enabled"));
 
     public ArrayList<File> getAllDataFiles(String PATH) {
         File folder = new File(PATH);
@@ -69,7 +69,8 @@ public class DataReader {
                 bylines.add(byline.text());
             }
 
-            String[] tokens = TextSanitizer.removeStopWordsAndTokenize(text, STEMMING_ENABLED);
+            String[] tokens = TextSanitizer.getTokens(text, STEMMING_AND_STOPWORD_REMOVAL_ENABLED);
+
             int documentLength = tokens.length;
             docIdMappingNumber += 1;
             docIdMappingNoSummaryMap.put(docIdMappingNumber, new DocumentSummary(docId, docIdMappingNumber, documentLength));

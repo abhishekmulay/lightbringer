@@ -30,8 +30,8 @@ public class ProximityScoreCalculator {
     }
 
     private static double getProximityScore(List<TermStatistics> termStatisticsList) {
-        System.out.println(termStatisticsList);
         List<List<Integer>> listOfPositionList = new LinkedList<>();
+
         for (TermStatistics statistics : termStatisticsList) {
             listOfPositionList.add(statistics.getPositions());
         }
