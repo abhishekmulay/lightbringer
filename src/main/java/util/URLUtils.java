@@ -103,12 +103,8 @@ public class URLUtils {
         for (Element anchor : anchors) {
             String href = anchor.attr("abs:href");
 
-//            boolean urlAllowed = RobotsTxtReader.isUrlAllowed(href);
-            // this will be checked while crawling
-            boolean urlAllowed = true;
-
             try {
-                if (urlAllowed) {
+                if (!href.isEmpty()) {
                     URI uri = URI.create(href);
                     String canonicalURL = URLUtils.getCanonicalURL(href);
                     String text = anchor.text();

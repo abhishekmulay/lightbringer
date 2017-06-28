@@ -1,5 +1,6 @@
 package hw3.crawler;
 
+import hw3.LinkSelectorProvider;
 import hw3.models.CrawlableURL;
 import hw3.models.HW3Model;
 import hw3.SeedURLProvider;
@@ -84,11 +85,23 @@ public class RobotsTxtReaderTest extends TestCase {
     public void testNonWikipediaURLs() {
         final String url1 = "http://www.world-nuclear.org/info/Safety-and-Security/Safety-of-Plants/Fukushima-Accident/";
         final String url2 = "http://fukushimaupdate.com"; // 126
+        final String url = "https://en.wikipedia.org/wiki/Special:BookSources/981-210-210-8";
 
-        CrawlableURL curl = new CrawlableURL(URI.create(url1), url1, "", 0);
+//        Document document = null;
+//        try {
+//            document = Jsoup.connect(url).followRedirects(true).get();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        HW3Model hw3Model = Crawler.crawl(curl, 1);
-//        System.out.println(hw3Model);
+
+        for (CrawlableURL curl : SeedURLProvider.getSeedUrls()) {
+            HW3Model hw3Model = Crawler.crawl(curl, 1);
+            System.out.println(hw3Model.getOutlinks().size());
+//            String json = HW3Model.convertModelToJSON(hw3Model);
+//            System.out.println(json);
+        }
+
     }
 
 }

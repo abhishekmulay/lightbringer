@@ -1,5 +1,10 @@
 package hw3.crawler;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hw1.main.ConfigurationManager;
 import hw3.models.CrawlableURL;
 import hw3.models.HW3Model;
@@ -26,10 +31,9 @@ public class Crawler {
     private static final String OUTPUT_FILE = ConfigurationManager.getConfigurationValue("hw3.models.file.path");
     private static final long POLITENESS_TIMEOUT = Long.parseLong(ConfigurationManager.getConfigurationValue("politeness.timeout"));
     private static final String outlinksOutputFilePath = ConfigurationManager.getConfigurationValue("out.linkmap.output.file");
-    private static final String inlinksMapOutputFilePath= ConfigurationManager.getConfigurationValue("in.linkmap" + ".output.file");
+    private static final String inlinksMapOutputFilePath = ConfigurationManager.getConfigurationValue("in.linkmap" + ".output.file");
     private static final String logFilePath = ConfigurationManager.getConfigurationValue("log.file.path");
 
-    private static final long START_TIME = System.nanoTime();
     private static final int MAX_URL_CRAWL_COUNT = 21000;
     // frontier
     private static PriorityQueue<CrawlableURL> frontier = new PriorityQueue<>(5, new Comparator<CrawlableURL>() {
@@ -50,12 +54,16 @@ public class Crawler {
     // map of depth/wave and links found in that wave
     private static Map<Integer, Set<CrawlableURL>> depthLinksMap = new HashMap<>();
 
+    private static JsonFactory jsonFactory = new JsonFactory();
+    private static FileOutputStream file = null;
+    private static JsonGenerator jsonGen = null;
+
     private static void checkPolitenessTimeout(final String hostName) {
         if (domainTimeMap.containsKey(hostName)) {
             long timeElapsed = System.currentTimeMillis() - domainTimeMap.get(hostName);
             if (timeElapsed < POLITENESS_TIMEOUT) {
                 try {
-                    Thread.sleep(1000 - timeElapsed);
+                    Thread.sleep(POLITENESS_TIMEOUT - timeElapsed);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -63,14 +71,32 @@ public class Crawler {
         }
     }
 
+    private static void createOuputJSONFile() {
+        try {
+            File opFile = new File(OUTPUT_FILE);
+            if (!opFile.exists()) {
+                opFile.createNewFile();
+            } else {
+                opFile.delete();
+                opFile.createNewFile();
+            }
+            file = new FileOutputStream(opFile, true);
+            jsonGen = jsonFactory.createJsonGenerator(file, JsonEncoding.UTF8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        jsonGen.setCodec(new ObjectMapper());
+    }
+
+
     public static HW3Model crawl(final CrawlableURL curl, int nextDepth) {
-        LOG.info("URL no = [" + (visitedURLs.size() + 1) + "],\tcurrentDepth = ["+(nextDepth-1)+"],\tCrawling:\t" + curl.getOriginalUrl().toString());
+        LOG.info("URL no = [" + (visitedURLs.size() + 1) + "],\tcurrentDepth = [" + (nextDepth - 1) + "],\tCrawling:\t" + curl.getOriginalUrl().toString());
         HW3Model model = null;
         try {
             String url = curl.getOriginalUrl().toString();
 
             if (!RobotsTxtReader.isUrlAllowed(url)) {
-                LOG.warn("[" + curl +"] not allowed to be crawled according to Robot.txt rules.");
+                LOG.warn("[" + curl + "] not allowed to be crawled according to Robot.txt rules.");
                 return null;
             }
 
@@ -79,13 +105,13 @@ public class Crawler {
             String selector = LinkSelectorProvider.getAnchorSelector(hostName);
 
             Connection.Response response = Jsoup.connect(url)
-                    .timeout(10*1000)
+                    .timeout(10 * 1000)
                     .followRedirects(true)
                     .userAgent("Googlebot/2.1 (+http://www.google.com/bot.html)")
                     .execute();
 
             if (response.statusCode() != 200) {
-                LOG.warn("[" + curl +"] returned status code =[" + response.statusCode()+ "]. Ignoring...");
+                LOG.warn("[" + curl + "] returned status code =[" + response.statusCode() + "]. Ignoring...");
                 return null;
             }
             // update delay
@@ -127,13 +153,12 @@ public class Crawler {
                 }
             }
 
-            LOG.info("Adding [" + crawlableUrlOutlinks.size() +"] URLs to map at depth = [" + nextDepth+ "]");
+            LOG.info("Adding [" + crawlableUrlOutlinks.size() + "] URLs to map at depth = [" + nextDepth + "]");
 
-            // create model for this page and write to file
             model = new HW3Model(curl, rawHtml, content, headersMap, crawlableUrlOutlinks);
-
+            jsonGen.writeObject(model);
             visitedURLs.add(curl);
-            LOG.info("Current depth = ["+ (nextDepth - 1)+"], Done crawling = [" + curl.getOriginalUrl() + "]");
+            LOG.info("Current depth = [" + (nextDepth - 1) + "], Done crawling = [" + curl.getOriginalUrl() + "]\n");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,66 +167,41 @@ public class Crawler {
     }
 
     public static void main(String[] args) {
-        // Writes output to output.txt file instead of stdout
-        try {
-            System.setOut(new PrintStream(new File("output.txt")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         long timeAtStart = System.nanoTime();
         ///////////////////////////////////////////////////////////////////
         cleanup();
-        File file = new File(OUTPUT_FILE);
-        try {
-            if (file.exists()) {
-                file.delete();
-                file.createNewFile();
-            }
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true));
-            PrintWriter writer = new PrintWriter(bufferedWriter);
+        createOuputJSONFile();
 
-            List<CrawlableURL> seedUrls = SeedURLProvider.getSeedUrls();
-            Set<CrawlableURL> set = new HashSet<>();
-            set.addAll(seedUrls);
-            int nextDepth = 1;
-            // depth 0 -> seed urls
-            depthLinksMap.put(0, set);
-            frontier.addAll(seedUrls);
-            LOG.info("Added [" + seedUrls.size() + "] seed URLs to frontier.\n" + seedUrls + "\n\n");
+        List<CrawlableURL> seedUrls = SeedURLProvider.getSeedUrls();
+        Set<CrawlableURL> set = new HashSet<>();
+        set.addAll(seedUrls);
+        int nextDepth = 1;
+        // depth 0 -> seed urls
+        depthLinksMap.put(0, set);
+        frontier.addAll(seedUrls);
+        LOG.info("Added [" + seedUrls.size() + "] seed URLs to frontier.\n" + seedUrls + "\n\n");
 
-            while (visitedURLs.size() < MAX_URL_CRAWL_COUNT) {
+        while (visitedURLs.size() < MAX_URL_CRAWL_COUNT) {
 
-                if (frontier.isEmpty()) {
-                    Set<CrawlableURL> crawlableURLS = depthLinksMap.get(nextDepth);
-                    if (crawlableURLS == null || crawlableURLS.size() == 0) {
-                        LOG.fatal("No outlinks found for crawling at depth=" + nextDepth);
-                        continue;
-                    }
-                    frontier.addAll(crawlableURLS);
-                    nextDepth += 1;
-                    LOG.info("=========================================================================\n\n");
-                    LOG.info("Starting new wave at depth=[" + nextDepth + "], added [" + crawlableURLS.size() + "] URLs " + " to frontier.");
+            if (frontier.isEmpty()) {
+                Set<CrawlableURL> crawlableURLS = depthLinksMap.get(nextDepth);
+                if (crawlableURLS == null || crawlableURLS.size() == 0) {
+                    LOG.fatal("No outlinks found for crawling at depth=" + nextDepth);
+                    continue;
+                }
+                frontier.addAll(crawlableURLS);
+                depthLinksMap.remove(nextDepth);
+                nextDepth += 1;
+                LOG.info("=========================================================================\n\n");
+                LOG.info("Starting new wave at depth=[" + (nextDepth - 1) + "], added [" + crawlableURLS.size() + "] " + "URLs " + " to frontier.");
 //                    crawlableURLS.forEach( foundUrl-> LOG.info("Added in frontier: "+ foundUrl));
 
-                } else {
-                    CrawlableURL urlToCrawl = frontier.poll();
-
-                    String hostName = urlToCrawl.getOriginalUrl().getHost();
-                    checkPolitenessTimeout(hostName);
-
-                    HW3Model model = crawl(urlToCrawl, nextDepth);
-                    if (model != null) {
-                        LOG.info("Writing ["+ urlToCrawl + "] Model JSON to file= [" + file.getName() + "]\n");
-                        String jsonString = model.convertModelToJSON();
-                        writer.write(jsonString + "\n");
-                    }
-                }
+            } else {
+                CrawlableURL urlToCrawl = frontier.poll();
+                String hostName = urlToCrawl.getOriginalUrl().getHost();
+                checkPolitenessTimeout(hostName);
+                HW3Model model = crawl(urlToCrawl, nextDepth);
             }
-
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         writeLinkMapToFile(outlinksMap, outlinksOutputFilePath);
@@ -248,7 +248,7 @@ public class Crawler {
 
             builder.append(originalUrl);
 
-            for (CrawlableURL oulink : outlinks){
+            for (CrawlableURL oulink : outlinks) {
                 builder.append(" ").append(oulink);
             }
             builder.append("\n");
@@ -262,7 +262,7 @@ public class Crawler {
 
     private static void cleanup() {
         // delete : app.log, outlinks map and models.json
-        String [] filesToDelete = {OUTPUT_FILE, outlinksOutputFilePath, inlinksMapOutputFilePath};
+        String[] filesToDelete = {OUTPUT_FILE, outlinksOutputFilePath, inlinksMapOutputFilePath};
         for (String filePath : filesToDelete) {
             File file = new File(filePath);
             if (file.exists()) {

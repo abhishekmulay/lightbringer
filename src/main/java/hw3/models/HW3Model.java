@@ -3,6 +3,7 @@ package hw3.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.util.TokenBuffer;
 
 import java.util.Map;
 import java.util.Set;
@@ -47,13 +48,19 @@ public class HW3Model {
     }
 
 
-    public String convertModelToJSON() {
+//    https://github.com/FasterXML/jackson-docs/wiki/JacksonStreamingApi/
+    public static String convertModelToJSON(HW3Model model) {
 //        ObjectWriter writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        ObjectWriter writer = new ObjectMapper().writer();
+//        ObjectWriter writer = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
+
+//        TokenBuffer buffer = new TokenBuffer();
+        // serialize object as JSON tokens (but don't serialize as JSON text!)
         String json = "";
         try {
-            json = writer.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
+//            mapper.writeValue(buffer, model);
+            json = mapper.writeValueAsString(model);
+        } catch (java.io.IOException e) {
             e.printStackTrace();
         }
         return json;
