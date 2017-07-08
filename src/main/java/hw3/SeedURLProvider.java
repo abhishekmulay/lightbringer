@@ -18,19 +18,19 @@ public class SeedURLProvider {
         final String url2 = "http://en.wikipedia.org/wiki/Nuclear_and_radiation_accidents_and_incidents";
         final String url3 = "http://www.world-nuclear.org/info/Safety-and-Security/Safety-of-Plants/Fukushima-Accident/";
         final String url4 = "http://en.wikipedia.org/wiki/Fukushima_Daiichi_nuclear_disaster";
-        final String url5 = "http://fukushimaupdate.com";
+        final String url5 = "http://fukushimaupdate.com/archiv/";
 
         List<String> urlKeywords1 = new ArrayList<>();
-        String keywords1 = "nuclear"+"radioactive"+"disaster"+"incident";
+        String keywords1 = "nuclear,"+"radioactive,"+"disaster,"+"incident";
 
         List<String> urlKeywords2 = new ArrayList<>();
-        String keywords2 = "nuclear"+"radioactive"+"accident" +"incident";
+        String keywords2 = "nuclear,"+"radioactive,"+"accident," +"incident,";
 
         List<String> urlKeywords3 = new ArrayList<>();
-        String keywords3 = "nuclear"+"radioactive"+"accident"+"incident" + "saftey" + "security";
+        String keywords3 = "nuclear,"+"radioactive,"+"accident,"+"incident," + "saftey," + "security,";
 
         List<String> urlKeywords4 = new ArrayList<>();
-        String keywords4 = "fukushima"+"daiichi"+"accident"+"nuclear";
+        String keywords4 = "fukushima,"+"daiichi,"+"accident,"+"nuclear,";
 
         List<String> urlKeywords5 = new ArrayList<>();
         String keywords5 = "fukushima";

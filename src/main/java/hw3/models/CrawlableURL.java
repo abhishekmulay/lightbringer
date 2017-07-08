@@ -44,7 +44,7 @@ public class CrawlableURL {
     }
 
     private int calculatePriorityScore(URI originalUrl, String canonicalizedUrl, String titleKeywords) {
-        return URLPriorityCalculator.calculatePriority(originalUrl, canonicalizedUrl, titleKeywords);
+        return URLPriorityCalculator.calculatePriority(titleKeywords);
     }
 
 

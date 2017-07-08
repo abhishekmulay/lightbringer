@@ -5,11 +5,13 @@ import hw3.models.CrawlableURL;
 import hw3.models.HW3Model;
 import hw3.SeedURLProvider;
 import junit.framework.TestCase;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.junit.Assert;
 import org.junit.Test;
+import weka.core.pmml.jaxbbindings.REALSparseArray;
 
 import java.io.IOException;
 import java.net.URI;
@@ -84,23 +86,27 @@ public class RobotsTxtReaderTest extends TestCase {
     @Test
     public void testNonWikipediaURLs() {
         final String url1 = "http://www.world-nuclear.org/info/Safety-and-Security/Safety-of-Plants/Fukushima-Accident/";
-        final String url2 = "http://fukushimaupdate.com"; // 126
         final String url = "https://en.wikipedia.org/wiki/Special:BookSources/981-210-210-8";
 
-//        Document document = null;
-//        try {
-//            document = Jsoup.connect(url).followRedirects(true).get();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        final String url2 = "http://www.fukushimaupdate.com"; // 126
 
+        Document document = null;
+        try {
+            URI uri = URI.create(url2);
 
-        for (CrawlableURL curl : SeedURLProvider.getSeedUrls()) {
-            HW3Model hw3Model = Crawler.crawl(curl, 1);
-            System.out.println(hw3Model.getOutlinks().size());
-//            String json = HW3Model.convertModelToJSON(hw3Model);
-//            System.out.println(json);
+            Connection.Response response = Jsoup.connect(uri.toString())
+                    .timeout(10 * 1000)
+                    .followRedirects(true)
+                    .ignoreHttpErrors(true)
+                    .userAgent("Googlebot/2.1 (+http://www.google.com/bot.html)")
+                    .execute();
+
+            document = response.parse();
+            System.out.println("Links found = " + document.select(LinkSelectorProvider.defaultLinkSelector).size());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
 
     }
 

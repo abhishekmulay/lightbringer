@@ -92,7 +92,7 @@ public class URLUtils {
             port = -1;
         }
 
-        String canUrl = myurl.getProtocol().toLowerCase() + "://" + myurl.getHost().toLowerCase() + (port > -1 ? ":" + myurl.getPort() : "") + path;
+        String canUrl = "http" + "://" + myurl.getHost().toLowerCase() + (port > -1 ? ":" + myurl.getPort() : "")+ path;
         return canUrl;
     }
 
@@ -107,9 +107,9 @@ public class URLUtils {
                 if (!href.isEmpty()) {
                     URI uri = URI.create(href);
                     String canonicalURL = URLUtils.getCanonicalURL(href);
-                    String text = anchor.text();
-                    String titleText = anchor.attr("title");
-                    String keywords = text + " " + titleText;
+                    String text = anchor.text().toLowerCase();
+                    String titleText = anchor.attr("title").toLowerCase();
+                    String keywords = titleText.contains(text) ? titleText : (titleText + text);
                     CrawlableURL crawlableURL = new CrawlableURL(uri, canonicalURL, keywords, currentDepth + 1);
                     crawlableURLList.add(crawlableURL);
                 }
