@@ -1,5 +1,6 @@
 import properties
 import math
+import operator
 
 # Source= CS 6200:Information Retrieval, Spring 2017, Homework 2.
 #
@@ -53,7 +54,22 @@ def create_inlinks_map():
     print "inlinks dict created. size = [" + str(len(inlinks_dict)) + "]"
 
 
-def create_outlinks_map(inlinks_map):
+def outlink_to_inlink(outlinks_map):
+    inlinks_dict = dict()
+    for link, outlinks in outlinks_map.iteritems():
+        for outlink in outlinks:
+            if outlink in inlinks_dict:
+                previous = inlinks_dict.get(outlink, [])
+                previous.update([link])
+                inlinks_dict[outlink] = previous
+            else:
+                inlinks_dict[outlink] = set([link])
+
+    print "Created inlink dict of size = [" + str(len(inlinks_dict)) + "]"
+    return inlinks_dict
+
+
+def inlink_to_outlink(inlinks_map):
     for page, inlinks in inlinks_map.iteritems():
         for inlink in inlinks:
             if inlink in outlinks_dict:
@@ -73,7 +89,7 @@ def create_outlinks_map(inlinks_map):
 
 def page_rank():
     create_inlinks_map()
-    create_outlinks_map(inlinks_dict)
+    inlink_to_outlink(inlinks_dict)
     newPR = dict()
 
     P = inlinks_dict.keys()  # equal to N
@@ -99,12 +115,13 @@ def page_rank():
         for p in P:
             PR[p] = newPR[p]
 
+    sort_and_write_dict(PR)
+
 
 def is_converged(PR, P):
     global perplexity
     global previous_perplexity
     if len(perplexity) == 4:
-        # all 4 values are True
         if all(i < 1 for i in perplexity):
             print "PageRank has converged."
             return True
@@ -120,6 +137,18 @@ def is_converged(PR, P):
     previous_perplexity = perp
     return False
 
+
+def sort_and_write_dict(map):
+    # ex. sorted_list = [('p3', 3212), ('p1', 123), ('p2', 111)]
+    sorted_list = sorted(map.items(), key=operator.itemgetter(1), reverse=True)
+    filepath = properties.page_rank_output_file_path
+    rank = 0
+    with open(filepath, 'w') as op_file:
+        for key, val in sorted_list:
+            rank += 1
+            line = str(key) + ' ' + str(rank) + ' ' + str(val) + '\n'
+            op_file.write(line.encode('utf-8', 'ignore'))
+    print "Wrote sorted dict to file = [" + filepath + ']'
 
 if __name__ == '__main__':
     page_rank()
