@@ -81,7 +81,9 @@ def inlink_to_outlink(inlinks_map):
 
     print "outlinks dict created. size = [" + str(len(outlinks_dict)) + "]"
 
-    for key in inlinks_dict.keys():
+
+def create_sink_nodes_set(P, outlinks_dict):
+    for key in P:
         if key not in outlinks_dict:
             sink_nodes_set.add(key)
     print "sink nodes set created. size = [" + str(len(sink_nodes_set)) + "]"
@@ -91,8 +93,11 @@ def page_rank():
     create_inlinks_map()
     inlink_to_outlink(inlinks_dict)
     newPR = dict()
+    P = set()
+    P.update(inlinks_dict.keys())
+    P.update(outlinks_dict.keys())
+    create_sink_nodes_set(P, outlinks_dict)
 
-    P = inlinks_dict.keys()  # equal to N
     for x in P:
         PR[x] = 1.0 / N
 

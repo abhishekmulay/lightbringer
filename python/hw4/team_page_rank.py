@@ -36,6 +36,9 @@ sink_nodes_set = set()  # 26,21,993
 N = 2698619.0
 d = 0.85
 
+# iteration = [48], Perplexity = [0.6322930664755404, 0.5318524055182934, 0.44770473008975387, 0.37700916919857264]
+
+
 previous_perplexity = 0
 perplexity = []  # should hold 4 values.
 
@@ -68,7 +71,7 @@ def outlink_to_inlink(outlinks_map):
     for link, outlinks in outlinks_map.iteritems():
         for outlink in outlinks:
             if outlink in inlinks_dict:
-                previous = inlinks_dict.get(outlink, [])
+                previous = inlinks_dict.get(outlink, {})
                 previous.update([link])
                 inlinks_dict[outlink] = previous
             else:
