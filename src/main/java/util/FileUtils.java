@@ -4,7 +4,11 @@ import hw1.main.ConfigurationManager;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,37 +35,34 @@ public class FileUtils {
     }
 
     public static void copyCatalogAndIndexFilesToFolder(String catalogFile1, String catalogFile2, String destinationFolder) {
-        List<File> catalogFilesToMove = new ArrayList<>();
-        catalogFilesToMove.add(new File(catalogFile1));
-        catalogFilesToMove.add(new File(catalogFile2));
+        List<File> filesToMove = new ArrayList<>();
+        filesToMove.add(new File(catalogFile1));
+        filesToMove.add(new File(catalogFile2));
 
-        List<File> indexFilesToMove = new ArrayList<>();
         String invertedIndexFile1 = getInvertedIndexFileForCatalog(catalogFile1);
         String invertedIndexFile2 = getInvertedIndexFileForCatalog(catalogFile2);
-        indexFilesToMove.add(new File(invertedIndexFile1));
-        indexFilesToMove.add(new File(invertedIndexFile2));
+        filesToMove.add(new File(invertedIndexFile1));
+        filesToMove.add(new File(invertedIndexFile2));
 
-        for (File file : indexFilesToMove) {
+        for (File file : filesToMove) {
             // move these files to destination folder and delete from current folder.
             try {
-                File destination = new File(destinationFolder + "index/");
-                destination.mkdir();
-                Files.move(Paths.get(INVERTED_INDEX_FOLDER + file.getName()), Paths.get(destination.getPath() + file.getName()));
+                Files.move(Paths.get(INVERTED_INDEX_FOLDER + file.getName()), Paths.get(destinationFolder + file.getName()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        for (File file : catalogFilesToMove) {
-            // move these files to destination folder and delete from current folder.
-            try {
-                File destination = new File(destinationFolder + "catalog/");
-                destination.mkdir();
-                Files.move(Paths.get(INVERTED_INDEX_FOLDER + file.getName()), Paths.get(destination.getPath() + file.getName()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        for (File file : catalogFilesToMove) {
+//            // move these files to destination folder and delete from current folder.
+//            try {
+//                File destination = new File(destinationFolder + "catalog/");
+//                destination.mkdir();
+//                Files.move(Paths.get(INVERTED_INDEX_FOLDER + file.getName()), Paths.get(destination.getPath() + file.getName()));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     }
 
@@ -73,7 +74,6 @@ public class FileUtils {
                 file.createNewFile();
             FileOutputStream stream = new FileOutputStream(invertedIndexFilePath, true);
             stream.write(bytes);
-            stream.flush();
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -105,4 +105,5 @@ public class FileUtils {
         }
         return catalogList;
     }
+
 }

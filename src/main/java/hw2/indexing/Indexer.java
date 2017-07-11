@@ -1,6 +1,8 @@
 package hw2.indexing;
 
 import hw1.indexing.datareader.DataReader;
+
+import hw1.indexing.datareader.DocumentSummary;
 import hw1.indexing.datareader.TextSanitizer;
 import hw1.main.ConfigurationManager;
 import hw1.pojos.HW1Model;
@@ -10,6 +12,8 @@ import util.ListUtils;
 import util.MapUtils;
 
 import java.io.*;
+
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -19,12 +23,8 @@ public class Indexer {
 
     final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
     final static String COMPLETED_FOLDER = ConfigurationManager.getConfigurationValue("completed.files.directory");
-    final static boolean STEMMING_AND_STOPWORD_REMOVAL_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stopwords.removal.and.stemming.enabled"));
-    final static String VOCABULARY_FILE_PATH = ConfigurationManager.getConfigurationValue("vocabulary.file.path");
-
+    final static boolean STEMMING_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stemming.enabled"));
     private static DocumentSummaryProvider summaryProvider = new DocumentSummaryProvider();
-    private static int TOTAL_DOCUMENTS_PROCESSED = 0;
-    public static int INDEX_NUMBER = 0;
 
     // get term frequency for given word in given text
     public static int getTermFrequencyinText(final String term, final String[] tokens) {
@@ -51,28 +51,28 @@ public class Indexer {
     // for a HW1Model return a map of  Map<term, Map<docId, IndexingUnit>>
     public static Map<String, Map<String, IndexingUnit>> getTermDocIdIndexingUnitMapForModel(final HW1Model model, Map<String, Map<String, IndexingUnit>> termDocIdIndexingUnitMap) {
         String documentId = model.getDocno();
-        int docIdMappingNumber = DocumentSummaryProvider.getDocIdMappingNumber(documentId);
+        int docIdMappingNumber = summaryProvider.getDocIdMappingNumber(documentId);
         String text = model.getText();
         // remove stop-words and tokenize
-
-//        String[] tokens = TextSanitizer.removeStopWordsAndTokenize(text, STEMMING_AND_STOPWORD_REMOVAL_ENABLED);
-        String[] tokens =TextSanitizer.getTokens(text, STEMMING_AND_STOPWORD_REMOVAL_ENABLED);
+        String[] tokens = TextSanitizer.removeStopWords(text, STEMMING_ENABLED);
 
         for (String term : tokens) {
-            int tf = getTermFrequencyinText(term, tokens);
-            List<Integer> termPositionInText = getTermPositionInText(term, tokens);
-            int ttf = tf, df = 1;
-            IndexingUnit indexingUnit = new IndexingUnit(term, documentId, docIdMappingNumber, tf, termPositionInText, ttf, df);
+            if (!term.isEmpty()) {
+                int tf = getTermFrequencyinText(term, tokens);
+                List<Integer> termPositionInText = getTermPositionInText(term, tokens);
+                int ttf = tf, df = 1;
+                IndexingUnit indexingUnit = new IndexingUnit(term, documentId, docIdMappingNumber, tf, termPositionInText, ttf, df);
 
-            if (termDocIdIndexingUnitMap.containsKey(term)) {
-                Map<String, IndexingUnit> previosuDocIdIndexingUnitMap = termDocIdIndexingUnitMap.get(term);
-                previosuDocIdIndexingUnitMap.put(documentId, indexingUnit);
-                termDocIdIndexingUnitMap.put(term, MapUtils.sortByTF(previosuDocIdIndexingUnitMap));
+                if (termDocIdIndexingUnitMap.containsKey(term)) {
+                    Map<String, IndexingUnit> previosuDocIdIndexingUnitMap = termDocIdIndexingUnitMap.get(term);
+                    previosuDocIdIndexingUnitMap.put(documentId, indexingUnit);
+                    termDocIdIndexingUnitMap.put(term, MapUtils.sortByTF(previosuDocIdIndexingUnitMap));
 
-            } else {
-                Map<String, IndexingUnit> newDocIdIndexingUnitMap = new TreeMap<>();
-                newDocIdIndexingUnitMap.put(documentId, indexingUnit);
-                termDocIdIndexingUnitMap.put(term, newDocIdIndexingUnitMap);
+                } else {
+                    Map<String, IndexingUnit> newDocIdIndexingUnitMap = new TreeMap<>();
+                    newDocIdIndexingUnitMap.put(documentId, indexingUnit);
+                    termDocIdIndexingUnitMap.put(term, newDocIdIndexingUnitMap);
+                }
             }
         }
         // update df and ttf for records so far
@@ -103,6 +103,15 @@ public class Indexer {
         }
         return termDocIdIndexingUnitMap;
     }
+    // chops a list into non-view sublists of length chunkSize
+    static <T> List<List<T>> splitIntoChunks(List<T> list, final int chunkSize) {
+        List<List<T>> parts = new ArrayList<List<T>>();
+        final int N = list.size();
+        for (int i = 0; i < N; i += chunkSize) {
+            parts.add(new ArrayList<T>(list.subList(i, Math.min(N, i + chunkSize))));
+        }
+        return parts;
+    }
 
     /////////////////////////////////////////////////////////////////////////////
 
@@ -118,39 +127,38 @@ public class Indexer {
             Map<String, IndexingUnit> docIdIndexingUnitMap = entry.getValue();
             // how many bytes in file
             position = buffer.length();
-            buffer.append(term).append('=');
-            int df = 0, ttf = 0;
 
-            StringBuilder bufferForTerm = new StringBuilder();
+            buffer.append(term).append('=');
+
             // iterate over map <docId, IndexingUnit> for the term
             for (Map.Entry<String, IndexingUnit> docIdIndexingUnitEntry : docIdIndexingUnitMap.entrySet()) {
                 String documentId = docIdIndexingUnitEntry.getKey();
                 IndexingUnit indexingUnit = docIdIndexingUnitEntry.getValue();
+
                 int tf = indexingUnit.getTermFrequency();
-                df += 1;
-                ttf += tf;
                 List<Integer> positionList = indexingUnit.getPosition();
                 String positions = ListUtils.toCompactString(positionList);
+                int df = 1;
+                int ttf = tf;
 
-                int docIdMappingNumber = DocumentSummaryProvider.getDocIdMappingNumber(documentId);
-                // term=df;ttf;docIdMappingNumber1:tf1:pos1,pos2,pos3];docIdMappingNumber2:tf2:pos1,pos2,pos3];docIdMappingNumber3:tf3:pos1,pos2,pos3];
-                bufferForTerm.append(docIdMappingNumber).append(':').append(tf).append(':').append(positions).append(';');
+                int docIdMappingNumber = summaryProvider.getDocIdMappingNumber(documentId);
+                // term=docIdMappingNumber:tf1:df1:ttf1:[pos1, pos2, pos3];docId2:tf2:df2:ttf2:[pos1, pos2, pos3]
+                buffer.append(docIdMappingNumber).append(':').append(tf).append(':').append(df).append(':').append(ttf).append(':').append(positions).append(';');
             }
-            bufferForTerm.append('\n');
-            String docBlocks = bufferForTerm.toString();
-            buffer.append(df).append(";").append(ttf).append(";").append(docBlocks);
-
             //add new line after every term entry
+            buffer.append('\n');
+
             offset = buffer.length() - position;
 
             CatalogEntry catalogEntry = new CatalogEntry(term, position, offset);
             catalogEntryMap.put(term, catalogEntry);
         }
         String allTermsFromThisFileSet = buffer.toString();
+        byte[] bytes = allTermsFromThisFileSet.getBytes(StandardCharsets.UTF_8);
+
 
         //save bytes[] into file
-//        FileUtils.writeBytesToFile(bytes, invertedIndexFilePath);
-        FileUtils.writeLineToFile(allTermsFromThisFileSet, invertedIndexFilePath);
+        FileUtils.writeBytesToFile(bytes, invertedIndexFilePath);
         // add entry for all terms in catalog
         createCatalogFile(catalogEntryMap, catalogFilePath);
     }
@@ -170,7 +178,8 @@ public class Indexer {
             String catalogEntries = buffer.toString();
             // if file is already present, append to file.
             FileOutputStream stream = new FileOutputStream(catalogFilePath, true);
-            byte[] bytes = catalogEntries.getBytes();
+
+            byte[] bytes = catalogEntries.getBytes(StandardCharsets.UTF_8);
             stream.write(bytes);
             stream.close();
         } catch (IOException e) {
@@ -183,14 +192,16 @@ public class Indexer {
         File[] files = dir.listFiles();
         System.out.println("Deleting [" + files.length + "] inverted index files in " + INVERTED_INDEX_FOLDER);
         for (File file : files)
-            file.delete();
+            if (!file.isDirectory())
+                file.delete();
 
 
         File folder = new File(COMPLETED_FOLDER);
         File[] completedfiles = folder.listFiles();
-        System.out.println("Deleting [" + completedfiles.length + "] completed files in " + COMPLETED_FOLDER + "\n");
+        System.out.println("Deleting [" + completedfiles.length + "] completed files in " + COMPLETED_FOLDER);
         for (File file : completedfiles)
-            file.delete();
+            if (!file.isDirectory())
+                file.delete();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -203,19 +214,20 @@ public class Indexer {
         deleteAllInvertedIndexAndCatalogFiles();
         ArrayList<File> dataFiles = reader.getAllDataFiles(dataPath);
         // break the entire dataset files into group of chunkSize, each file has around 300 documents.
-        List<List<File>> partsOfDataFiles = ListUtils.splitIntoChunks(dataFiles, fileChunkSize);
+        List<List<File>> partsOfDataFiles = splitIntoChunks(dataFiles, fileChunkSize);
 
-        Set<String> vocabulary = new HashSet<>();
+        int fileNameCounter = 0;
         for (List<File> listOfFiles : partsOfDataFiles) {
             // for file name: ex. INVERTED_INDEX_FOLDER/1.txt
-            INDEX_NUMBER += 1;
+            fileNameCounter += 1;
+
             // <term, <docId, IndexingUnit>
             Map<String, Map<String, IndexingUnit>> termDocIdIndexingUnitMap = new HashMap<>();
             int documentsProcessedInChunk = 0;
             // getCatalogAsMap chunkSize files at once.
             for (File dataFile : listOfFiles) {
                 List<HW1Model> models = reader.readFileIntoModel(dataFile);
-                TOTAL_DOCUMENTS_PROCESSED += models.size();
+
                 documentsProcessedInChunk += models.size();
                 System.out.println("Reading [" + models.size() + "] documents from file [" + dataFile.getName() + "]");
 
@@ -226,25 +238,13 @@ public class Indexer {
                 }
             }
 
-            vocabulary.addAll(termDocIdIndexingUnitMap.keySet());
-
             // write result of chunkSize files Map
-            String invertedIndexFilePath = INVERTED_INDEX_FOLDER + INDEX_NUMBER + ".txt";
-            String catalogFilePath = INVERTED_INDEX_FOLDER + INDEX_NUMBER + "_catalog.txt";
+            String invertedIndexFilePath = INVERTED_INDEX_FOLDER + fileNameCounter + ".txt";
+            String catalogFilePath = INVERTED_INDEX_FOLDER + fileNameCounter + "_catalog.txt";
             writeTermDocIdIndexingUnitMapToFile(termDocIdIndexingUnitMap, invertedIndexFilePath, catalogFilePath);
 
-            System.out.println("Documents=[" + documentsProcessedInChunk + "], index=[" + new File(invertedIndexFilePath).getName() + "], totalDocumentsProcessed =[" + TOTAL_DOCUMENTS_PROCESSED + "], vocabulary size=["+ vocabulary.size() +"]\n");
+            System.out.println("[Map<term, Map<docId, IndexingUnit>>] total entries = [" + termDocIdIndexingUnitMap.size() + "] documents processed [" + documentsProcessedInChunk + "]\n");
         }
-        writeVocabularyToFile(vocabulary);
     }
-
-    private static void writeVocabularyToFile(Set<String> vocabulary) {
-        StringBuilder builder = new StringBuilder();
-        for (String term : vocabulary) {
-            builder.append(term).append('\n');
-        }
-        FileUtils.writeLineToFile(builder.toString(), VOCABULARY_FILE_PATH);
-    }
-
 
 }

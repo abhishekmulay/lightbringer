@@ -3,7 +3,7 @@ package hw1.queryprocessor;
 import hw1.main.ConfigurationManager;
 import hw1.pojos.Query;
 import hw1.ranking.languagemodels.UnigramWithJelinekSmoothingCalculator;
-import hw1.ranking.proximitymodel.ProximityScoreCalculator;
+
 import hw1.ranking.vectorspacemodels.BM25Calculator;
 import hw1.ranking.languagemodels.UnigramWithLaplaceSmoothingCalculator;
 import hw1.pojos.VectorStatistics;
@@ -14,7 +14,7 @@ import hw1.statistics.StatisticsProvider;
 import hw1.pojos.TermStatistics;
 import hw1.ranking.vectorspacemodels.TfIdfCalculator;
 
-import javax.print.Doc;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -48,11 +48,9 @@ public class QueryProcessor {
             System.out.println("\n\nCalculating TF-IDF for: " + query.getCleanedQuery());
             try {
 //                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
-//                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
-//                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf_from_es(vectorTermStatisticsForQuery);
-
-                Map<String, List<TermStatistics>> termStatistics =  StatisticsProvider.getStatisticsForQueryFromIndex(query);
-                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf(termStatistics);
+//                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf(termStatistics);
+                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
+                Map<String, Double> docIdTfIdfValuesMap = TfIdfCalculator.tfidf_from_es(vectorTermStatisticsForQuery);
                 Map<String, Double> sortedDocIdOkapiValuesMap = MapUtils.sortByValue(docIdTfIdfValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdOkapiValuesMap, tfIdfOutputFile);
             } catch (IOException e) {
@@ -66,11 +64,9 @@ public class QueryProcessor {
             System.out.println("\n\nCalculating BM25 for: " + query.getCleanedQuery());
             try {
 //                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
-//                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
-//                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25_from_es(vectorTermStatisticsForQuery);
-
-                Map<String, List<TermStatistics>> termStatistics =  StatisticsProvider.getStatisticsForQueryFromIndex(query);
-                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25(termStatistics, query);
+//                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25(termStatistics, query);
+                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
+                Map<String, Double> docIdBm25ValuesMap = BM25Calculator.bm25_from_es(vectorTermStatisticsForQuery);
                 Map<String, Double> sortedDocIdBm25ValuesMap = MapUtils.sortByValue(docIdBm25ValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdBm25ValuesMap, bm25OutputFile);
             } catch (IOException e) {
@@ -84,9 +80,8 @@ public class QueryProcessor {
         DocumentIdExtractor extractor = new DocumentIdExtractor();
         Set<String> allDocumentIds = null;
         try {
-//            allDocumentIds = extractor.getAllDocumentIds();
-            allDocumentIds = DocumentIdExtractor.getAllDocumentIdsFromIndex();
-        } catch (Exception e) {
+            allDocumentIds = extractor.getAllDocumentIds();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -99,8 +94,7 @@ public class QueryProcessor {
                 docIdFinalLaplaceValue.put(id, defaultValue);
             }
             try {
-//                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
-                Map<String, List<TermStatistics>> termStatistics =  StatisticsProvider.getStatisticsForQueryFromIndex(query);
+                Map<String, List<TermStatistics>> termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
                 Map<String, Double> docIdUnigramValuesMap = UnigramWithLaplaceSmoothingCalculator.lm_laplace(termStatistics, docIdFinalLaplaceValue);
                 Map<String, Double> sortedDocIdUnigramValuesMap = MapUtils.sortByValue(docIdUnigramValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdUnigramValuesMap, unigramWithLaplaceSmoothingOutputFile);
@@ -131,18 +125,4 @@ public class QueryProcessor {
         }
     }
 
-    public void calculatePromixty(List<Query> queryList, String proximityModelOutputFile) {
-        for (Query query : queryList) {
-            System.out.println("\n\nCalculating Proximity score for: [" +query.getQueryId() +"], "+ query.getCleanedQuery());
-            Map<String, List<TermStatistics>> termStatistics = null;
-            try {
-                termStatistics = StatisticsProvider.getStatisticsForQueryFromIndex(query);
-                Map<String, Double> docIdOkapiValuesMap = ProximityScoreCalculator.getProximityScoreMap(termStatistics);
-                Map<String, Double> sortedDocIdProximityScoreValuesMap = MapUtils.sortByValue(docIdOkapiValuesMap);
-                QueryResultWriter.writeQueryResultToFile(query, sortedDocIdProximityScoreValuesMap, proximityModelOutputFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

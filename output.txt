@@ -1,0 +1,208 @@
+Stemming is [ON]
+Deleting [9] inverted index files in /Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/
+Deleting [0] completed files in /Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/completed/
+Reading [73] documents from file [ap890101]
+Reading [152] documents from file [ap890102]
+Reading [255] documents from file [ap890103]
+[Map<term, Map<docId, IndexingUnit>>] total entries = [17726] documents processed [480]
+
+Reading [281] documents from file [ap890104]
+Reading [287] documents from file [ap890105]
+Reading [256] documents from file [ap890106]
+[Map<term, Map<docId, IndexingUnit>>] total entries = [22731] documents processed [824]
+
+Reading [164] documents from file [ap890107]
+Reading [96] documents from file [ap890108]
+Reading [349] documents from file [ap890109]
+[Map<term, Map<docId, IndexingUnit>>] total entries = [19542] documents processed [609]
+
+Reading [315] documents from file [ap890110]
+[Map<term, Map<docId, IndexingUnit>>] total entries = [13948] documents processed [315]
+
+
+Merging 4 index files.
+Merging [/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/1_catalog.txt] and [/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/2_catalog.txt]
+Merging [/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/3_catalog.txt] and [/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/4_catalog.txt]
+
+Merging 2 index files.
+Merging [/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/v_1_74057_catalog.txt] and [/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/v_2_58406_catalog.txt]
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+/ap_dataset/_analyze?filter_path=tokens.token | Status: 200 OK
+
+
+Calculating Okapi for: alleg measur taken corrupt public offici government jurisdict worldwid 
+Term [alleg] is not present in data set.
+Term [measur] is not present in data set.
+Term [offici] is not present in data set.
+Term [jurisdict] is not present in data set.
+Term [worldwid] is not present in data set.
+
+
+Calculating Okapi for: type weather event directli caus least fatal locat 
+Term [directli] is not present in data set.
+Term [caus] is not present in data set.
+Term [locat] is not present in data set.
+
+
+Calculating Okapi for: predict prime lend rate report actual prime rate move 
+
+
+Calculating Okapi for: incurs land air water border area countri militari forc second countri guerrilla group base second countri 
+Term [incurs] is not present in data set.
+Term [countri] is not present in data set.
+Term [militari] is not present in data set.
+Term [forc] is not present in data set.
+Term [countri] is not present in data set.
+Term [countri] is not present in data set.
+
+
+Calculating Okapi for: event result polit motiv hostag take 
+Term [polit] is not present in data set.
+Term [motiv] is not present in data set.
+Term [hostag] is not present in data set.
+
+
+Calculating Okapi for: militari coup detat attempt success countri 
+Term [militari] is not present in data set.
+Term [detat] is not present in data set.
+Term [countri] is not present in data set.
+
+
+Calculating Okapi for: identifi support nation rifl associ nra asset 
+Term [identifi] is not present in data set.
+Term [rifl] is not present in data set.
+Term [associ] is not present in data set.
+Term [nra] is not present in data set.
+
+
+Calculating Okapi for: develop iran contra affair 
+
+
+Calculating Okapi for: predict anticip rail strike report ongo rail strike 
+Term [anticip] is not present in data set.
+Term [ongo] is not present in data set.
+
+
+Calculating Okapi for: poach method type wildlif 
+Term [poach] is not present in data set.
+Term [wildlif] is not present in data set.
+
+
+Calculating Okapi for: sign contract preliminari agreement make tent reserv launch commerci satellit 
+Term [preliminari] is not present in data set.
+Term [reserv] is not present in data set.
+Term [commerci] is not present in data set.
+Term [satellit] is not present in data set.
+
+
+Calculating Okapi for: current crimin action offic fail u. financi institut 
+Term [crimin] is not present in data set.
+Term [offic] is not present in data set.
+Term [u.] is not present in data set.
+Term [financi] is not present in data set.
+Term [institut] is not present in data set.
+
+
+Calculating Okapi for: crime perpetr aid comput 
+Term [perpetr] is not present in data set.
+Term [comput] is not present in data set.
+
+
+Calculating Okapi for: effort non communist industri state regul transfer high tech good technolog undesir nation 
+Term [industri] is not present in data set.
+Term [regul] is not present in data set.
+Term [technolog] is not present in data set.
+Term [undesir] is not present in data set.
+
+
+Calculating Okapi for: exist pend invest opec member state downstream oper 
+Term [pend] is not present in data set.
+Term [oper] is not present in data set.
+
+
+Calculating Okapi for: role israel iran contra affair 
+
+
+Calculating Okapi for: comput applic crime solv 
+Term [comput] is not present in data set.
+Term [applic] is not present in data set.
+Term [solv] is not present in data set.
+
+
+Calculating Okapi for: actual studi unsubstanti concern safeti manufactur employe instal worker fine diamet fiber insul product 
+Term [studi] is not present in data set.
+Term [unsubstanti] is not present in data set.
+Term [safeti] is not present in data set.
+Term [manufactur] is not present in data set.
+Term [employe] is not present in data set.
+Term [instal] is not present in data set.
+Term [diamet] is not present in data set.
+Term [insul] is not present in data set.
+
+
+Calculating Okapi for: mci bell system breakup 
+
+
+Calculating Okapi for: instanc fiber optic technolog actual 
+Term [instanc] is not present in data set.
+Term [technolog] is not present in data set.
+
+
+Calculating Okapi for: individu organ produc fiber optic equip 
+Term [individu] is not present in data set.
+Term [produc] is not present in data set.
+Term [equip] is not present in data set.
+
+
+Calculating Okapi for: side controversi standard perform determin salari level incent pai contrast determin pai sole basi senior longev job 
+Term [controversi] is not present in data set.
+Term [determin] is not present in data set.
+Term [salari] is not present in data set.
+Term [incent] is not present in data set.
+Term [pai] is not present in data set.
+Term [determin] is not present in data set.
+Term [pai] is not present in data set.
+Term [basi] is not present in data set.
+Term [longev] is not present in data set.
+
+
+Calculating Okapi for: platform 1988 presidenti candid 
+Term [presidenti] is not present in data set.
+Term [candid] is not present in data set.
+
+
+Calculating Okapi for: machin translat system 
+Term [machin] is not present in data set.
+Term [translat] is not present in data set.
+
+
+Calculating Okapi for: acquisit armi specifi advanc weapon system 
+Term [acquisit] is not present in data set.
+Term [armi] is not present in data set.
+Term [specifi] is not present in data set.
+Term [advanc] is not present in data set.
+
+Total time taken: 0.6745814266333333 minutes

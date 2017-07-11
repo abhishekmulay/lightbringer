@@ -3,7 +3,7 @@ package hw1.restclient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hw1.main.ConfigurationManager;
-import hw2.search.DocumentSummaryProvider;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;
@@ -79,7 +79,4 @@ public class DocumentIdExtractor {
         return docids;
     }
 
-    public static Set<String> getAllDocumentIdsFromIndex() {
-        return DocumentSummaryProvider.getAllDocumentIds();
-    }
 }

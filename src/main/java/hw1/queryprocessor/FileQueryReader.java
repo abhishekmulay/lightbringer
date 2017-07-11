@@ -1,6 +1,6 @@
 package hw1.queryprocessor;
 
-import hw1.indexing.datareader.TextSanitizer;
+
 import hw1.main.ConfigurationManager;
 import hw1.pojos.Query;
 
@@ -13,9 +13,7 @@ import java.util.List;
  */
 public class FileQueryReader {
     //    private final List<String> stopWords = QueryCleaner.getStopWords();
-    final static boolean STEMMING_AND_STOPWORD_REMOVAL_ENABLED = Boolean.parseBoolean(ConfigurationManager.getConfigurationValue("stopwords.removal.and.stemming.enabled"));
     public static final String QUERY_FILE_PATH = ConfigurationManager.getConfigurationValue("query.file.path");
-    private static final String STOP_WORDS_FILE_PATH = ConfigurationManager.getConfigurationValue("stop.words.file.path");
 
     public List<Query> getAllQueries(String QUERY_FILE_PATH) {
         List<Query> queries = new ArrayList<Query>();
@@ -40,14 +38,6 @@ public class FileQueryReader {
     }
 
     private String cleanQuery(String query) {
-        return QueryCleaner.removeStopWords(query);
-        // using own stemmer
-//        return QueryCleaner.analyzeString(query);
-//        return stemQuery(query);
-    }
-
-    private String stemQuery(String query) {
-        String[] tokens = TextSanitizer.getTokens(query, STEMMING_AND_STOPWORD_REMOVAL_ENABLED);
-        return String.join(" ", tokens);
+        return QueryCleaner.analyzeString(query);
     }
 }

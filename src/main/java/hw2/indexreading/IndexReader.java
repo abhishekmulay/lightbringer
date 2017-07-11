@@ -4,11 +4,9 @@ import hw1.main.ConfigurationManager;
 import hw2.indexing.CatalogEntry;
 import hw2.indexing.CatalogReader;
 import hw2.indexing.IndexingUnit;
-import hw2.merging.IndexMerger;
 import hw2.search.DocumentSummaryProvider;
 import util.FileUtils;
 import util.ListUtils;
-import util.MapUtils;
 
 import java.io.File;
 import java.util.*;
@@ -44,85 +42,37 @@ public class IndexReader {
         return stringListMap.get(term);
     }
 
-    // term=df1;ttf1;docIdMappingNumber1:tf1:pos1,pos2,pos3];docIdMappingNumber2:tf2:pos1,pos2,pos3];docIdMappingNumber3:tf3:pos1,pos2,pos3];
+
+//    naturalized=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
     public static Map<String, List<IndexingUnit>> parseIndexEntry(String entry) {
+//        System.out.println(entry);
         String term = entry.substring(0, entry.indexOf("="));
-        String docBlocksString = entry.substring(entry.indexOf("=") + 1, entry.length());
+        String docBlocksString = entry.substring(entry.indexOf("=")+1, entry.length());
         String[] docBlocks = docBlocksString.split(INVERTED_INDEX_SEPARATOR);
         Map<String, List<IndexingUnit>> termIndexingUnitListMap = new HashMap<>();
-        final int df = Integer.parseInt(docBlocks[0]);
-        final int ttf = Integer.parseInt(docBlocks[1]);
 
         List<IndexingUnit> indexingUnitList = new ArrayList<>();
-        // first two indexes are df and ttf, 0=df, 1=ttf
-        for (int index=2; index<docBlocks.length; index++) {
-            String block = docBlocks[index];
+        for (String block : docBlocks) {
             String[] indexingUnitParts = block.split(":");
-            try {
-                int docIdMappingNumber = Integer.parseInt(indexingUnitParts[0]);
-                String documentId = DocumentSummaryProvider.getOriginalDocumentId(docIdMappingNumber);
-                int termFrequency = Integer.parseInt(indexingUnitParts[1]);
 
-                List<Integer> asList = new ArrayList<>();
-                int[] positionArray = ListUtils.fromString(indexingUnitParts[2]);
-                for (int i : positionArray) {
-                    asList.add(i);
-                }
+            int docIdMappingNumber = Integer.parseInt(indexingUnitParts[0]);
+            String documentId = summaryProvider.getOriginalDocumentId(docIdMappingNumber);
 
-                indexingUnitList.add(new IndexingUnit(term, documentId, docIdMappingNumber, termFrequency, asList, ttf, df));
-            } catch (Exception e) {
-                System.out.println("Exception while parsing term: [" + term + "]");
-                e.printStackTrace();
+            int termFrequency = Integer.parseInt(indexingUnitParts[1]);
+            int documentFrequency = Integer.parseInt(indexingUnitParts[2]);
+            int ttf = Integer.parseInt(indexingUnitParts[3]);
+
+            List<Integer> asList = new ArrayList<>();
+            int[] positionArray = ListUtils.fromString(indexingUnitParts[4]);
+            for (int i : positionArray) {
+                asList.add(i);
             }
+
+            indexingUnitList.add(new IndexingUnit(term, documentId, docIdMappingNumber, termFrequency, asList, ttf, documentFrequency));
         }
         termIndexingUnitListMap.put(term, indexingUnitList);
         return termIndexingUnitListMap;
     }
-
-
-    // term=df1;ttf1;docIdMappingNumber1:tf1:pos1,pos2,pos3];docIdMappingNumber2:tf2:pos1,pos2,pos3];docIdMappingNumber3:tf3:pos1,pos2,pos3];
-
-    // each line is => cancel=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
-    public static String getMergedLineForTerm(String term, List<String> linesForTerm) {
-        if (linesForTerm.size() < 1) {
-            System.out.println("No lines for term = [" + term +"]");
-            return "";
-        }
-
-        List<IndexingUnit> indexingUnitList = new ArrayList<>();
-
-        int df =0, ttf =0;
-        for (int index=0; index < linesForTerm.size(); index++) {
-            String line = linesForTerm.get(index);
-
-            String dfTtfAndDocBlocksString = line.substring(line.indexOf("=") + 1, line.length());
-            String[] docBlocks = dfTtfAndDocBlocksString.split(";");
-            df += Integer.parseInt(docBlocks[0]);
-            ttf += Integer.parseInt(docBlocks[1]);
-
-            line = line.replace("\n", "").replace("\r", "").trim();
-            Map<String, List<IndexingUnit>> parsedTermIndexingUnitMap = parseIndexEntry(line);
-            indexingUnitList.addAll(parsedTermIndexingUnitMap.get(term));
-        }
-
-        Collections.sort(indexingUnitList, (o1, o2) -> {
-            if (o1.getTermFrequency() > o2.getTermFrequency()) {
-                return -1;
-            } else if (o1.getTermFrequency() < o2.getTermFrequency()) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
-
-        StringBuilder builder = new StringBuilder();
-        builder.append(term).append("=").append(df).append(";").append(ttf).append(";");
-        for (IndexingUnit docBlock : indexingUnitList) {
-            builder.append(docBlock.toString());
-        }
-        return builder.toString();
-    }
-
 
     // line should be of like => cancel=AP890103-0105:1:-1:-1:[239];AP890103-0176:1:-1:-1:[142];
     public static String mergeEntries(String line1, String line2) {
@@ -156,7 +106,8 @@ public class IndexReader {
 
     private static List<IndexingUnit> mergeIndexingUnitsList(List<IndexingUnit> list1, List<IndexingUnit> list2) {
         List<IndexingUnit> mergedIndexingUnitsList = new ArrayList<>();
-        int i = 0, j = 0;
+
+        int i =0, j =0;
         int list1Length = list1.size();
         int list2Length = list2.size();
 
@@ -189,12 +140,4 @@ public class IndexReader {
         return mergedIndexingUnitsList;
     }
 
-
-    public static void main(String[] args) {
-        IndexReader reader = new IndexReader("/Users/abhishek/Google " +
-                "Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/inverted_index/1_catalog.txt");
-        List<IndexingUnit> indexingUnitList = reader.get("sadden");
-        for (IndexingUnit unit : indexingUnitList)
-            System.out.println(unit.toPrettyString());
-    }
 }
