@@ -2,16 +2,18 @@ import properties
 import random
 import math
 from elasticsearch import Elasticsearch
+import urllib
 
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 index = properties.team_index
 type = properties.team_type
 
-root_set = [] # list of dics
-base_set = set() # set of urls
+root_set = []  # list of dics
+base_set = set()  # set of urls
 
 d = 200
 base_set_size = 10000
+
 
 def create_root_set():
     global root_set
@@ -57,26 +59,29 @@ def create_root_set():
 def expand_root_set():
     global root_set
     global base_set
-    doc_count = 0
     try:
         for doc in root_set:
             has_outlinks = doc is not None and 'fields' in doc and 'out_links' in doc['fields']
+            has_inlinks = doc is not None and 'fields' in doc and 'in_links' in doc['fields']
 
             if len(base_set) >= base_set_size:
                 break
-
-            if not has_outlinks:
+            if not has_outlinks or not has_inlinks:
                 continue
+
             outlinks = doc['fields']['out_links']
-            doc_count += (len(doc['fields']['out_links']))
+            url_encoded_outlinks = [urllib.quote_plus(x.encode('utf-8', 'ignore')) for x in outlinks]
+            base_set.update(url_encoded_outlinks)
 
-            if len(outlinks) <= d:
-                base_set.update(outlinks)
+            inlinks = doc['fields']['in_links']
+            url_encoded_inlinks = [urllib.quote_plus(x.encode('utf-8', 'ignore')) for x in inlinks]
+            if len(url_encoded_inlinks) <= d:
+                base_set.update(url_encoded_inlinks)
             else:
-                random_url_select_count =  int(math.floor(len(outlinks) // 10))
-                base_set.update(random.sample(outlinks, random_url_select_count))
+                random_url_select_count = int(math.floor(len(url_encoded_inlinks) // 10))
+                base_set.update(random.sample(url_encoded_inlinks, random_url_select_count))
 
-            # print '[' + str(len(doc['fields']['out_links'])) + '], url=' + doc['_id']
+                # print '[' + str(len(doc['fields']['out_links'])) + '], url=' + doc['_id']
     except Exception, e:
         print "Error\t", e.message
 
