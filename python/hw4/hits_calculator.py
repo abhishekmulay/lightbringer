@@ -3,17 +3,51 @@ import random
 import math
 from elasticsearch import Elasticsearch
 import urllib
+import operator
+
+from LinksProvider import LinksProvider
 
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 index = properties.team_index
 type = properties.team_type
 
+#  1 G := set of pages
+#  2 for each page p in G do
+#  3   p.auth = 1 // p.auth is the authority score of the page p
+#  4   p.hub = 1 // p.hub is the hub score of the page p
+#  5 function HubsAndAuthorities(G)
+#  6   for step from 1 to k do // run the algorithm for k steps
+#  7     norm = 0
+#  8     for each page p in G do  // update all authority values first
+#  9       p.auth = 0
+# 10       for each page q in p.incomingNeighbors do // p.incomingNeighbors is the set of pages that link to p
+# 11          p.auth += q.hub
+# 12       norm += square(p.auth) // calculate the sum of the squared auth values to normalise
+# 13     norm = sqrt(norm)
+# 14     for each page p in G do  // update the auth scores
+# 15       p.auth = p.auth / norm  // normalise the auth values
+# 16     norm = 0
+# 17     for each page p in G do  // then update all hub values
+# 18       p.hub = 0
+# 19       for each page r in p.outgoingNeighbors do // p.outgoingNeighbors is the set of pages that p links to
+# 20         p.hub += r.auth
+# 21       norm += square(p.hub) // calculate the sum of the squared hub values to normalise
+# 22     norm = sqrt(norm)
+# 23     for each page p in G do  // then update all hub values
+# 24       p.hub = p.hub / norm   // normalise the hub values
+
+#########################################
+# Global variables
+
 root_set = []  # list of dics
 base_set = set()  # set of urls
+auth_scores = dict()
+hub_scores = dict()
 
 d = 200
+k = 100
 base_set_size = 10000
-
+########################################
 
 def create_root_set():
     global root_set
@@ -55,7 +89,6 @@ def create_root_set():
 
     print "Retrieved top [" + str(len(base_set)) + "] from ES."
 
-
 def expand_root_set():
     global root_set
     global base_set
@@ -87,32 +120,76 @@ def expand_root_set():
 
     print "Total docs in base set " + str(len(base_set))
 
+def hits_algo(G):
+    global auth_scores
+    global hub_scores
 
-#  1 G := set of pages
-#  2 for each page p in G do
-#  3   p.auth = 1 // p.auth is the authority score of the page p
-#  4   p.hub = 1 // p.hub is the hub score of the page p
-#  5 function HubsAndAuthorities(G)
-#  6   for step from 1 to k do // run the algorithm for k steps
-#  7     norm = 0
-#  8     for each page p in G do  // update all authority values first
-#  9       p.auth = 0
-# 10       for each page q in p.incomingNeighbors do // p.incomingNeighbors is the set of pages that link to p
-# 11          p.auth += q.hub
-# 12       norm += square(p.auth) // calculate the sum of the squared auth values to normalise
-# 13     norm = sqrt(norm)
-# 14     for each page p in G do  // update the auth scores
-# 15       p.auth = p.auth / norm  // normalise the auth values
-# 16     norm = 0
-# 17     for each page p in G do  // then update all hub values
-# 18       p.hub = 0
-# 19       for each page r in p.outgoingNeighbors do // p.outgoingNeighbors is the set of pages that p links to
-# 20         p.hub += r.auth
-# 21       norm += square(p.hub) // calculate the sum of the squared hub values to normalise
-# 22     norm = sqrt(norm)
-# 23     for each page p in G do  // then update all hub values
-# 24       p.hub = p.hub / norm   // normalise the hub values
+    for p in G:
+        auth_scores[p] = 1
+        hub_scores[p] = 1
+
+    print "Initialized auth_scores dict, size = [" + str(len(auth_scores)) + ']'
+    print "Initialized hub_scores dict, size = [" + str(len(hub_scores)) + ']'
+
+    print "Starting HITS. k = [" + str(k) +']'
+    HubsAndAuthorities(G)
+
+
+def HubsAndAuthorities(G):
+    global k
+
+    linkProvider = LinksProvider()
+    outlinks_dict = linkProvider.get_outlinks_dict()
+    inlinks_dict = linkProvider.get_inlinks_dict()
+
+    for step in range(0, k):
+        try:
+            print "Step = [" + str(step) + ']'
+            norm = 0
+            for p in G:
+                auth_scores[p] = 0
+                for q in inlinks_dict.get(p, []):
+                    auth_scores[p] += hub_scores.get(q, 0)
+                norm += math.pow(auth_scores.get(p, 1), 2)
+            norm = math.sqrt(norm)
+
+            for p in G:
+                auth_scores[p] = auth_scores.get(p, 1) / norm
+            norm = 0
+
+            for p in G:
+                hub_scores[p] = 0
+                for r in outlinks_dict.get(p, []):
+                    hub_scores[p] += auth_scores.get(r, 0)
+                norm += math.pow(hub_scores.get(p, 1), 2)
+            norm = math.sqrt(norm)
+
+            for p in G:
+                hub_scores[p] = hub_scores.get(p, 1) / norm
+
+        except Exception, e:
+            print "Exception: ", e
+
+    print "HITS finished.\nWriting hub_scores to [" + str( properties.hits_hub_output_file) + ']'
+    sort_and_write_dict(hub_scores, properties.hits_hub_output_file, lines_to_write=500)
+    print "Writing auth_scores to [" + str(properties.hits_auth_output_file) + ']'
+    sort_and_write_dict(auth_scores, properties.hits_auth_output_file, lines_to_write=500)
+
+def sort_and_write_dict(map, filepath, lines_to_write):
+    # ex. sorted_list = [('p3', 3212), ('p1', 123), ('p2', 111)]
+    sorted_list = sorted(map.items(), key=operator.itemgetter(1), reverse=True)
+    rank = 0
+    with open(filepath, 'w') as op_file:
+        for key, val in sorted_list:
+            if lines_to_write <= rank:
+                break
+            rank += 1
+            line = str(key) + ' ' + str(rank) + ' ' + str(val) + '\n'
+            op_file.write(line.encode('utf-8', 'ignore'))
+    print "Wrote sorted dict to file = [" + filepath + ']'
+
 
 if __name__ == '__main__':
     create_root_set()
     expand_root_set()
+    hits_algo(base_set)

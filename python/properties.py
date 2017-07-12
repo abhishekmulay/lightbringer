@@ -6,3 +6,6 @@ team_index='elastic4_final'
 team_type='document'
 abhishek_inlinks_file='/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/in.link.map.txt'
 final_inlinks_file='/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/final.inlinks.txt'
+
+hits_hub_output_file='/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/hits.hub.txt'
+hits_auth_output_file='/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/hits.auth.txt'
