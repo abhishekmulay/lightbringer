@@ -3,9 +3,9 @@
  */
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {fetchItems} from  '../actions/index';
+import {fetchItems, appConfig} from  '../actions/index';
 import {bindActionCreators} from 'redux';
-var request = require('superagent');
+const request = require('superagent');
 
 class SearchBar extends Component {
 
@@ -28,13 +28,16 @@ class SearchBar extends Component {
         .end(function(err, res){
           // Calling the end function will send the request
           let results = res.body.hits.hits || [];
-          self.sendSearchResultsToListComponent(results);
+          let scrollId = res.body['_scroll_id'] || '';
+          let config = {'scroll_id' : scrollId, 'search_term' : searchTerm};
+          self.sendSearchResultsToListComponent(results, config);
         });
     }
   }
 
-  sendSearchResultsToListComponent(results) {
+  sendSearchResultsToListComponent(results, config) {
     this.props.fetchItems(results);
+    this.props.appConfig(config);
   }
 
   render() {
@@ -43,7 +46,7 @@ class SearchBar extends Component {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-xs-12">
-                    <input type="text" className="form-control" name="search-bar" placeholder="search..." onKeyPress={this.handleSearch}/>
+                    <input type="text" className="form-control" name="search-bar" placeholder="search..." onKeyPress={this.handleSearch} autoFocus={true}/>
                 </div>
             </div>
         </div>
@@ -54,14 +57,15 @@ class SearchBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    items: state.items
+    items: state.items,
+    appConfig: state.appConfig
   }
 }
 
 // this will show up as props inside ItemList component
 function mapDispatchToProps(dispatch) {
   // when selectItem is called, result should be passed to all our reducers
-  return bindActionCreators({fetchItems: fetchItems}, dispatch);
+  return bindActionCreators({fetchItems: fetchItems, appConfig: appConfig }, dispatch);
 }
 
 //promote ItemList from a component to a container , it knows about new dispatch method selectItem

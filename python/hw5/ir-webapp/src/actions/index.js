@@ -16,3 +16,10 @@ export function fetchItems(items) {
     payload: items
   };
 }
+
+export function appConfig(configObject) {
+  return {
+    type : 'APP_CONFIG',
+    payload : configObject
+  };
+}

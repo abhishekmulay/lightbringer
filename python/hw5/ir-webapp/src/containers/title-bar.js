@@ -19,7 +19,8 @@ class TitleBar extends Component {
           <div className="container-fluid">
             <div className="row">
               <div className="col-xs-12">
-                <h4> {this.props.item._id}</h4>
+                <h4 className="doc-title"><a href={this.props.item._source.url} target="_blank">{this.props.item._source.title}</a> </h4>
+                <p className="text-muted">{this.props.item._source.author}</p>
               </div>
             </div>
           </div>
@@ -28,7 +29,6 @@ class TitleBar extends Component {
   }
 
 }
-
 
 function mapStateToProps(state) {
   return {
