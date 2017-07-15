@@ -1,11 +1,12 @@
-import properties
-import random
 import math
-from elasticsearch import Elasticsearch
-import urllib
 import operator
+import random
+import urllib
 
-from LinksProvider import LinksProvider
+from elasticsearch import Elasticsearch
+
+import properties
+from hw4.LinksProvider import LinksProvider
 
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 index = properties.team_index
@@ -45,7 +46,7 @@ auth_scores = dict()
 hub_scores = dict()
 
 d = 200
-k = 100
+k = 200
 base_set_size = 10000
 ########################################
 
@@ -167,6 +168,8 @@ def HubsAndAuthorities(G):
             for p in G:
                 hub_scores[p] = hub_scores.get(p, 1) / norm
 
+            print 'outlinks = [' + str(len(outlinks_dict.get(p,[]))) + '], inlinks = [' + str(len(inlinks_dict.get(p,[]))) + ']\t' + \
+                  ', hub score = [' + str(hub_scores.get(p, 0)) + '], auth score = [' + str(auth_scores.get(p, 0))  + ']' + p
         except Exception, e:
             print "Exception: ", e
 
@@ -184,10 +187,9 @@ def sort_and_write_dict(map, filepath, lines_to_write):
             if lines_to_write <= rank:
                 break
             rank += 1
-            line = str(key) + ' ' + str(rank) + ' ' + str(val) + '\n'
+            line = str(key) + '\t' + str(val) + '\n'
             op_file.write(line.encode('utf-8', 'ignore'))
     print "Wrote sorted dict to file = [" + filepath + ']'
-
 
 if __name__ == '__main__':
     create_root_set()

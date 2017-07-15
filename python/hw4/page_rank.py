@@ -120,6 +120,9 @@ def page_rank():
         for p in P:
             PR[p] = newPR[p]
 
+    for p in P:
+        print 'outlinks = [' + str(len(outlinks_dict.get(p, []))) + '], inlinks = [' + str(len(inlinks_dict.get(p,[]))) + '], score = [' + str(PR.get(p, -1)) + '], doc = [' + p + ']'
+
     sort_and_write_dict(PR)
 
 

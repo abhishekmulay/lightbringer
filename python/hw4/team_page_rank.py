@@ -30,9 +30,9 @@ import operator
 
 PR = dict()
 P = set() # 26,98,619
-inlinks_dict = dict()  # 26,97,863
-outlinks_dict = dict()  # 76,626
-sink_nodes_set = set()  # 26,21,993
+inlinks_dict = dict()
+outlinks_dict = dict()
+sink_nodes_set = set()
 N = 2698619.0
 d = 0.85
 
@@ -148,6 +148,8 @@ def page_rank():
 
         for p in P:
             PR[p] = newPR[p]
+            print 'outlinks = [' + str(len(outlinks_dict.get(p, []))) + '], inlinks = [' + str(
+                len(inlinks_dict.get(p, []))) + '], score = [' + str(PR.get(p, -1)) + '], doc = [' + p + ']'
 
     sort_and_write_dict(PR)
 
@@ -173,7 +175,7 @@ def is_converged(PR, P):
 def sort_and_write_dict(map):
     # ex. sorted_list = [('p3', 3212), ('p1', 123), ('p2', 111)]
     sorted_list = sorted(map.items(), key=operator.itemgetter(1), reverse=True)
-    filepath = properties.page_rank_output_file_path
+    filepath = properties.team_page_rank_output_file_path
     rank = 0
     with open(filepath, 'w') as op_file:
         for key, val in sorted_list:
