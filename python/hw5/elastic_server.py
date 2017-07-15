@@ -16,8 +16,7 @@ class ElasticSearchServer(object):
                     "text": search_term
                 }
             },
-            'size': 100,
-            "_source": "_id"
+            'size': 20
         }
         return es.search(index=self.index, doc_type=self.type, body=query, scroll='2m', request_timeout=70)
 

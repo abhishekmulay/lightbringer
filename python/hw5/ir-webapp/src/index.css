@@ -29,6 +29,7 @@ body {
 .app-body #left-pane {
   border-right:1px solid  #c9c9c9;
   height: 100%;
+  padding:0;
 }
 
 .app-body #right-pane {

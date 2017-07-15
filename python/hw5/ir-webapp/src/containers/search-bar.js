@@ -2,17 +2,21 @@
  * Created by abhishek on 7/14/17.
  */
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {fetchItems} from  '../actions/index';
+import {bindActionCreators} from 'redux';
 var request = require('superagent');
 
 class SearchBar extends Component {
 
   constructor(props) {
     super(props);
-
     this.handleSearch = this.handleSearch.bind(this);
+    this.sendSearchResultsToListComponent = this.sendSearchResultsToListComponent.bind(this);
   }
 
   handleSearch(e) {
+    let self = this;
     if (e.key === 'Enter') {
       console.log('Searching for = [' + e.target.value + ']');
       const searchTerm = e.target.value;
@@ -23,12 +27,15 @@ class SearchBar extends Component {
         .set('Accept', 'application/json')
         .end(function(err, res){
           // Calling the end function will send the request
-          console.log(res);
+          let results = res.body.hits.hits || [];
+          self.sendSearchResultsToListComponent(results);
         });
     }
   }
 
-
+  sendSearchResultsToListComponent(results) {
+    this.props.fetchItems(results);
+  }
 
   render() {
     return (
@@ -45,4 +52,17 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+function mapStateToProps(state) {
+  return {
+    items: state.items
+  }
+}
+
+// this will show up as props inside ItemList component
+function mapDispatchToProps(dispatch) {
+  // when selectItem is called, result should be passed to all our reducers
+  return bindActionCreators({fetchItems: fetchItems}, dispatch);
+}
+
+//promote ItemList from a component to a container , it knows about new dispatch method selectItem
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

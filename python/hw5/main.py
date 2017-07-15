@@ -9,11 +9,9 @@ es_server = ElasticSearchServer(properties.team_index, properties.team_type)
 app = Flask(__name__)
 CORS(app)
 
-
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
-
 
 @app.route('/search', methods=['POST', 'OPTIONS'])
 @cross_origin()
@@ -22,7 +20,6 @@ def search_handler():
     search_term = request_params['search_term']
     result = es_server.search(search_term)
     return send_json(result, 200)
-
 
 def send_json(data, code, headers=None):
     """Makes a Flask response with a JSON encoded body"""

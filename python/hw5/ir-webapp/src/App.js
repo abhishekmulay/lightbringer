@@ -1,30 +1,34 @@
-import React, { Component } from 'react';
-import SearchBar from './components/search-bar';
+import React, {Component} from 'react';
+import SearchBar from './containers/search-bar';
+import ItemList from './containers/item-list';
+import ItemDetail from './containers/item-detail';
+import TitleBar from './containers/title-bar';
 import './App.css';
 
 class App extends Component {
+
   render() {
     return (
-      <div className="App">
-        <div className="container-fluid">
-          {/*header*/}
-          <div className="row app-header">
-            <div className="col-xs-4">
-              <SearchBar> </SearchBar>
+        <div className="App">
+          <div className="container-fluid">
+            {/*header*/}
+            <div className="row app-header">
+              <div className="col-xs-4">
+                <SearchBar> </SearchBar>
+              </div>
+              <div className="col-xs-8">
+                <TitleBar/>
+              </div>
             </div>
-            <div className="col-xs-8">
-              title bar here
+
+            {/*body*/}
+            <div className="row app-body">
+              <div className="col-xs-4" id="left-pane"><ItemList/></div>
+              <div className="col-xs-8" id="right-pane"><ItemDetail/></div>
             </div>
-          </div>
 
-          {/*body*/}
-          <div className="row app-body">
-            <div className="col-xs-4" id="left-pane">left pane</div>
-            <div className="col-xs-8" id="right-pane">righ pane</div>
           </div>
-
         </div>
-      </div>
     );
   }
 }
