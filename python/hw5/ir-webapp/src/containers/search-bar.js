@@ -5,14 +5,12 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {fetchItems, appConfig} from  '../actions/index';
 import {bindActionCreators} from 'redux';
-const request = require('superagent');
 
 class SearchBar extends Component {
 
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
-    this.sendSearchResultsToListComponent = this.sendSearchResultsToListComponent.bind(this);
   }
 
   handleSearch(e) {
@@ -20,24 +18,10 @@ class SearchBar extends Component {
     if (e.key === 'Enter') {
       console.log('Searching for = [' + e.target.value + ']');
       const searchTerm = e.target.value;
-      const searchEndpoint = 'http://localhost:4000/search';
-      request
-        .post(searchEndpoint)
-        .send({ search_term : searchTerm }) // sends a JSON post body
-        .set('Accept', 'application/json')
-        .end(function(err, res){
-          // Calling the end function will send the request
-          let results = res.body.hits.hits || [];
-          let scrollId = res.body['_scroll_id'] || '';
-          let config = {'scroll_id' : scrollId, 'search_term' : searchTerm};
-          self.sendSearchResultsToListComponent(results, config);
-        });
+      this.props.fetchItems(searchTerm);
+      let config = {'scroll_id' : '', 'search_term' : searchTerm};
+      this.props.appConfig(config);
     }
-  }
-
-  sendSearchResultsToListComponent(results, config) {
-    this.props.fetchItems(results);
-    this.props.appConfig(config);
   }
 
   render() {

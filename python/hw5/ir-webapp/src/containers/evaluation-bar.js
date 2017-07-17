@@ -4,8 +4,6 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {selectItem} from  '../actions/index';
-import {bindActionCreators} from 'redux';
 const request = require('superagent');
 
 class EvaluationBar extends Component {
@@ -24,10 +22,10 @@ class EvaluationBar extends Component {
         <div id="EvaluationBar">
           <div className={this.props.item._source.evaluation_done ? 'hidden' : 'row'}>
             <div className="col-xs-4">
-              <button className="btn btn-default btn-md" value={0}>Score: 0</button>
+              <button className="btn btn-default btn-md" value={0} onClick={(e) => this.evaluate(e)}>Score: 0</button>
             </div>
             <div className="col-xs-4">
-              <button className="btn btn-warning btn-md" value={1}>Score: 1</button>
+              <button className="btn btn-warning btn-md" value={1} onClick={(e) => this.evaluate(e)}>Score: 1</button>
             </div>
             <div className="col-xs-4">
               <button className="btn btn-success btn-md" value={2} onClick={(e) => this.evaluate(e)}>Score: 2</button>

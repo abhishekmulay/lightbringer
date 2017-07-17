@@ -33,6 +33,13 @@ def evaluation_handler():
     result = es_server.evaluate(id, score, evaluator)
     return send_json(result, 200)
 
+@app.route('/evaluate', methods=['GET'])
+@cross_origin()
+def get_evaluation_details():
+    evaluator = request.args.get('evaluator')
+    result = es_server.get_evaluation_details(evaluator=evaluator)
+    return send_json(result, 200)
+
 
 #####################################################
 def send_json(data, code, headers=None):

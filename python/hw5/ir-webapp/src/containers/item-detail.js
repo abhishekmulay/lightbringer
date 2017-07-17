@@ -19,6 +19,7 @@ class ItemDetail extends Component {
                 {/*<p className="content">{this.props.item._source.text}</p>*/}
                 {/*<button onClick={() => console.log(this.props)}>click</button>*/}
                 <p className="content">{this.getHighlightedText(this.props.item._source.text, this.props.appConfig.search_term)}</p>
+                {/*<iframe title={this.props.item._source._id} src={this.props.item._source.url}></iframe>*/}
               </div>
             </div>
           </div>
@@ -39,6 +40,7 @@ class ItemDetail extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('[ItemDetail] mapStateToProps: ', state);
   return {
     item: state.activeItem,
     appConfig : state.appConfig

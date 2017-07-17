@@ -11,11 +11,14 @@
 //   ]
 // }
 
-export default function (state = null, action) {
+export default function (state = [], action) {
+  console.log('[reducer] action received. state: ', state, ' action:', action);
 
   switch (action.type) {
     case 'ITEMS_FETCHED':
-      return action.payload;
+      // concat into new array => action.payload.body.hits.hits and state arrays
+      console.log('ITEMS_FETCHED', action);
+      return state.concat(action.payload.body.hits.hits);
 
     default:
       return state;

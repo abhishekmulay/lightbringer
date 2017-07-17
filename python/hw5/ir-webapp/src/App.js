@@ -12,6 +12,7 @@ class App extends Component {
     return (
         <div className="App">
           <div className="container-fluid">
+
             {/*header*/}
             <div className="row app-header">
               <div className="col-xs-4">

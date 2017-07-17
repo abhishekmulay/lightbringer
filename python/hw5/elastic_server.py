@@ -54,5 +54,32 @@ class ElasticSearchServer(object):
         except Exception, e:
             print "Exception while evaluating: ", e
 
+    def get_evaluation_details(self, evaluator):
+        print "Finding evaluated documents for: [" + str(evaluator) + ']'
+        query = {
+            "query": {
+                "term": {
+                    "evaluator": {
+                        "value": evaluator.lower()
+                    }
+                }
+            },
+            'size' : 100
+        }
+        page = es.search(index=self.index, doc_type=self.type, body=query, scroll='2m', request_timeout=70)
+        scroll_id = page['_scroll_id']
+        has_more_hits = len(page['hits']['hits']) > 0
+        all_hits = page['hits']['hits']
+        while has_more_hits:
+            print "scrolling..."
+            next_page = es.scroll(scroll_id=scroll_id, scroll='2m', request_timeout=70)
+            scroll_id = next_page['_scroll_id']
+            has_more_hits = len(next_page['hits']['hits']) > 0
+            if not has_more_hits:
+                break
+            hits = next_page['hits']['hits']
+            all_hits += hits
+        return all_hits
+
 
 

@@ -14,7 +14,8 @@ body {
 .app-header {
   background: #fbfbfb;
   height: 60px;
-  border-right: 1px solid #c9c9c9;
+  border-right: 1px solid #E9E9E9;
+  border-bottom: 1px solid #E9E9E9;
 }
 
 .app-header #SearchBar {
@@ -22,15 +23,21 @@ body {
 }
 
 .app-header #TitleBar .doc-title a{
-  color: rgba(14, 122, 254, 1);
+  /*color: rgba(14, 122, 254, 1);*/
+  color: #555;
   cursor: pointer;
   text-transform: capitalize;
+}
+
+.app-header #TitleBar .doc-title{
+  margin-bottom: 5px;
 }
 
 .app-header #TitleBar .doc-title a:hover,
 .app-header #TitleBar .doc-title a:active,
 .app-header #TitleBar .doc-title a:visited {
-  color: rgba(14, 122, 254, 1);
+  /*color: rgba(14, 122, 254, 1);*/
+  color: #555;
   text-decoration: none;
 }
 
@@ -43,7 +50,7 @@ body {
 }
 
 .app-body #left-pane {
-  border-right: 1px solid #f2f2f2;
+  border-right: 1px solid #E9E9E9;
   height: 100%;
   padding: 0;
   overflow-x: auto;
@@ -53,14 +60,14 @@ body {
   text-align: left;
   padding: 8px 10px;
   height: 60px;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid #E9E9E9;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
 .app-body #left-pane .result-item:hover,
 .app-body #left-pane .result-item:active {
-  background: #f8f8f8;
+  background: #E9E9E9;
   cursor: pointer;
 }
 
@@ -68,6 +75,13 @@ body {
   text-align: center;
   line-height: 40px;
   margin-bottom: 70px;
+  border-bottom: none;
+}
+
+.app-body #left-pane .result-item .done{
+  position: relative;
+  display: inline-block;
+  float: right;
 }
 
 .app-body #right-pane {
@@ -91,6 +105,7 @@ body {
   position: fixed;
   bottom: 0;
   height: 50px;
+  opacity: 0.9;
 }
 
 .app-body #EvaluationBar {
@@ -106,8 +121,10 @@ body {
 .text-muted {
   font-weight: 300;
   font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .form-control, .btn {
+  opacity: 1;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
