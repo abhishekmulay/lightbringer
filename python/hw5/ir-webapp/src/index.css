@@ -41,6 +41,15 @@ body {
   text-decoration: none;
 }
 
+.app-header #TitleBar .score-info {
+  position: absolute;
+  top: 15px;
+  right: 5%;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 /*************************************************/
 /* body */
 .app-body {
@@ -60,7 +69,7 @@ body {
   position: fixed;
   top: 60px;
   width: 33.33%;
-  background: #f2f2f2;
+  background: #fbfbfb;
   border-bottom: 1px solid #E9E9E9;
   font-weight: 300;
 }
@@ -93,7 +102,7 @@ body {
 }
 
 .app-body #left-pane .result-item.load-more:hover,
-.app-body #left-pane .result-item.load-more:active{
+.app-body #left-pane .result-item.load-more:active {
   background: #FFFFFF;
   cursor: default;
 }

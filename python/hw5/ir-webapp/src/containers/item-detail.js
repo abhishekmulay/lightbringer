@@ -5,6 +5,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+
 class ItemDetail extends Component {
   render() {
     if (!this.props.item) {
@@ -16,10 +17,8 @@ class ItemDetail extends Component {
           <div className="container-fluid">
             <div className="row">
               <div className="col-xs-12">
-                {/*<p className="content">{this.props.item._source.text}</p>*/}
                 {/*<button onClick={() => console.log(this.props)}>click</button>*/}
                 <p className="content">{this.getHighlightedText(this.props.item._source.text, this.props.appConfig.search_term)}</p>
-                {/*<iframe title={this.props.item._source._id} src={this.props.item._source.url}></iframe>*/}
               </div>
             </div>
           </div>
@@ -31,7 +30,7 @@ class ItemDetail extends Component {
     // Split on higlight term and include term into parts, ignore case
     let parts = text.split(new RegExp(`(${higlight})`, 'gi'));
     return <span> { parts.map((part, i) =>
-        <span key={i} style={part.toLowerCase() === higlight.toLowerCase() ? { fontWeight: 'bold' } : {} }>
+        <span key={i} style={part.toLowerCase() === higlight.toLowerCase() ? { fontWeight: 'normal' , background : '#FFFBCC' } : {} }>
             { part }
         </span>)
     } </span>;
@@ -40,7 +39,6 @@ class ItemDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('[ItemDetail] mapStateToProps: ', state);
   return {
     item: state.activeItem,
     appConfig : state.appConfig

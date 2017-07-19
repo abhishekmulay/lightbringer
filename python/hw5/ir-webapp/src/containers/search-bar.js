@@ -14,7 +14,6 @@ class SearchBar extends Component {
   }
 
   handleSearch(e) {
-    let self = this;
     if (e.key === 'Enter') {
       this.props.clearItems();
       console.log('Searching for = [' + e.target.value + ']');
