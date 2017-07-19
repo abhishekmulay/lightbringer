@@ -22,14 +22,14 @@ body {
   margin-top: 10px;
 }
 
-.app-header #TitleBar .doc-title a{
+.app-header #TitleBar .doc-title a {
   /*color: rgba(14, 122, 254, 1);*/
   color: #555;
   cursor: pointer;
   text-transform: capitalize;
 }
 
-.app-header #TitleBar .doc-title{
+.app-header #TitleBar .doc-title {
   margin-bottom: 5px;
 }
 
@@ -56,6 +56,19 @@ body {
   overflow-x: auto;
 }
 
+.app-body #left-pane .result-stats {
+  position: fixed;
+  top: 60px;
+  width: 33.33%;
+  background: #f2f2f2;
+  border-bottom: 1px solid #E9E9E9;
+  font-weight: 300;
+}
+
+#ResultList .list-group {
+  margin-top: 20px;
+}
+
 .app-body #left-pane .result-item {
   text-align: left;
   padding: 8px 10px;
@@ -66,7 +79,8 @@ body {
 }
 
 .app-body #left-pane .result-item:hover,
-.app-body #left-pane .result-item:active {
+.app-body #left-pane .result-item:active,
+.app-body #left-pane .result-item.active {
   background: #E9E9E9;
   cursor: pointer;
 }
@@ -78,7 +92,13 @@ body {
   border-bottom: none;
 }
 
-.app-body #left-pane .result-item .done{
+.app-body #left-pane .result-item.load-more:hover,
+.app-body #left-pane .result-item.load-more:active{
+  background: #FFFFFF;
+  cursor: default;
+}
+
+.app-body #left-pane .result-item .done {
   position: relative;
   display: inline-block;
   float: right;

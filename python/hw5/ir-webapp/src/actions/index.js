@@ -3,8 +3,11 @@
  */
 const request = require('superagent');
 
+export const CLEAR_ITEMS = 'CLEAR_ITEMS';
+export const ITEMS_FETCHED = 'ITEMS_FETCHED';
+
+
 export function selectItem(item) {
-  // return Action
   return {
     type : 'ITEM_SELECTED',
     payload : item
@@ -18,16 +21,25 @@ export function appConfig(configObject) {
   };
 }
 
-export function fetchItems(searchTerm='') {
+// fetches items from API
+export function fetchItems(searchTerm='', from = 0) {
   console.log('[action] dispatching action ITEMS_FETCHED\n Fetching items for [' + searchTerm + ']');
   const url = 'http://localhost:4000/search';
-  const response = request
+  const promise = request
         .post(url)
-        .send({ search_term : searchTerm }) // sends a JSON post body
-        .set('Accept', 'application/json');
+        .send({ search_term : searchTerm, from : from }) // sends a JSON post body
+        .set('Accept', 'application/json'); // return a promise at the end
 
   return {
-    type: 'ITEMS_FETCHED',
-    payload : response
+    type: ITEMS_FETCHED,
+    payload : promise
+  }
+}
+
+// clear existing items array
+export function clearItems() {
+  return {
+    type : CLEAR_ITEMS,
+    payload : []
   }
 }

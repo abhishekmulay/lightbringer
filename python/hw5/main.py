@@ -19,8 +19,8 @@ def hello_world():
 def search_handler():
     request_params = request.get_json()
     search_term = request_params.get('search_term', '')
-    scroll_id = request_params.get('scroll_id', '')
-    result = es_server.search(search_term, scroll_id)
+    from_size = request_params.get('from', 0)
+    result = es_server.search(search_term, int(from_size))
     return send_json(result, 200)
 
 @app.route('/evaluate', methods=['POST', 'OPTIONS'])

@@ -1,5 +1,6 @@
 import properties
 from elasticsearch import Elasticsearch
+
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
 
@@ -7,22 +8,20 @@ class ElasticSearchServer(object):
     def __init__(self, index, doc_type):
         self.index = index
         self.type = doc_type
-        print "Connected ElasticSearch index=[" + self.index +'], type=[' + self.type +']'
+        print "Connected ElasticSearch index=[" + self.index + '], type=[' + self.type + ']'
 
-    def search(self, search_term, scroll_id):
+    def search(self, search_term, from_size=0):
         query = {
             "query": {
                 "match": {
                     "text": search_term
                 }
             },
+            'from': from_size,
             'size': 20
         }
 
-        if not scroll_id:
-            return es.search(index=self.index, doc_type=self.type, body=query, scroll='2m', request_timeout=70)
-        else:
-            return es.scroll(scroll_id=scroll_id, scroll='2m', request_timeout=70)
+        return es.search(index=self.index, doc_type=self.type, body=query, request_timeout=70)
 
     def scroll(self, scroll_id):
         all_hits = []
@@ -44,8 +43,8 @@ class ElasticSearchServer(object):
                 "lang": "painless",
                 "params": {
                     "score": score,
-                    "evaluator" : evaluator,
-                    "evaluation_done" : True
+                    "evaluator": evaluator,
+                    "evaluation_done": True
                 }
             }
         }
@@ -64,7 +63,7 @@ class ElasticSearchServer(object):
                     }
                 }
             },
-            'size' : 100
+            'size': 100
         }
         page = es.search(index=self.index, doc_type=self.type, body=query, scroll='2m', request_timeout=70)
         scroll_id = page['_scroll_id']
@@ -80,6 +79,3 @@ class ElasticSearchServer(object):
             hits = next_page['hits']['hits']
             all_hits += hits
         return all_hits
-
-
-
