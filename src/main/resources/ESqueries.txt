@@ -660,6 +660,235 @@ GET /ap_dataset/document/_search
 
 
 
+##################################################################################################
+GET /_cat/health?v
+GET /_cat/master?v
+GET /_nodes/stats
+GET /_cat/indices?v
+
+########################################################
+# Search all docs
+GET elastic4_demo/document/_search?pretty=false
+{
+  "query" :  {
+    "term": {
+      "author": {
+        "value": "sanamdeep"
+      }
+    }
+  },
+  "_source" : false
+}
+
+#https://en.wikipedia.org/wiki/Category:American_political_pundits
+
+
+GET /elastic4_final/document/_search
+{
+  "query": {
+    "term": {
+      "_id": {
+        "value": "https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAishwarya_Rai"
+      }
+    }
+  }
+}
+
+
+
+GET /elastic4_final/document/_search
+{
+  "size": 20,
+ "_source": "_id"
+}
+
+#152702 Chernobyl accident
+#152703 Three Mile Island accident
+
+GET /elastic4_final/document/_search
+{
+  "query": {
+    "term": {
+      "qid": {
+        "value": 152703
+      }
+    }
+  },
+  "_source": ["score", "qid"],
+  "stored_fields": ["url"]
+}
+
+
+
+GET /elastic4_final/document/_search
+{
+  "query": {
+    "term": {
+      "evaluator": {
+        "value": "abhishek"
+      }
+    }
+  },
+  "size": 166,
+  "_source": "score",
+  "stored_fields": ["url"]
+}
+
+
+GET elastic4_final/document/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "nuclear",
+      "fields": ["title", "text", "url"]
+    }
+  },
+  "size": 20,
+  "from": 0
+}
+
+
+GET /elastic4_final/document/_search?scroll=1m
+{
+  "query": {
+    "match": {
+      "text": "fukushima nuclear disaster"
+    }
+  },
+  "size": 10,
+  "_source": "_id",
+  "stored_fields": ["url"]
+}
+
+
+
+# http%3A%2F%2Fit.businessinsider.com
+GET elastic4_final/document/_search
+{
+ "query": {
+   "term": {
+     "url": "http://it.businessinsider.com"
+   }
+ }
+}
+
+GET elastic4_final/document/_search
+{
+  "query": {
+    "term": {
+      "_id": "https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGreater_Khingan"
+    }
+  },
+  "stored_fields": ["in_links"]
+}
+
+
+
+POST elastic4_demo/document/1
+{
+  "author" : "Abhishek",
+  "in_links" : ["x", "y", "z"]
+}
+
+POST elastic4_demo/document/2/_update
+{
+    "script" : {
+        "inline": "ctx._source.in_links = params.inlinks",
+        "lang": "painless",
+        "params" : {
+            "inlinks" : ["p","q", "r"]
+        }
+    }
+}
+
+
+########################################################
+# Create new index with mapping
+
+PUT /elastic4_demo/
+{
+"settings": {
+  "index": {
+      "store": {
+        "type": "fs"
+      },
+    "number_of_shards": 3,
+    "number_of_replicas": 1
+    }
+  }
+}
+
+PUT elastic4_demo/document/_mapping
+{
+  "document": {
+    "properties": {
+      "docno": {
+        "type": "text",
+        "store": true,
+        "index": "not_analyzed",
+        "term_vector": "with_positions_offsets_payloads"
+      },
+      "HTTPheader": {
+        "type": "keyword",
+        "store": true
+      },
+      "title":{
+        "type": "text",
+        "store": true,
+        "term_vector": "with_positions_offsets_payloads"
+      },
+      "text": {
+        "type": "text",
+        "store": true,
+        "term_vector": "with_positions_offsets_payloads"
+      },
+      "html_Source": {
+        "type":"text",
+        "store": true
+      },
+      "in_links":{
+        "type": "keyword",
+        "store": true
+      },
+      "out_links":{
+        "type": "keyword",
+        "store": true
+      },
+      "author":{
+        "type": "text",
+        "store": true
+      },
+      "depth": {
+        "type": "integer",
+        "store": true
+      },
+      "url": {
+        "type": "keyword",
+        "index": "not_analyzed",
+        "store": true
+      }
+    }
+  }
+}
+########################################################
+
+# Delete all documents under type=docuemnt
+# change to POST
+
+
+
+########################################################
+
+
+
+
+
+
+
+
+###################################################################################################
+
+
 ####################################################
 #    Get all Okapi, TF-IDF and MB25                #
 ####################################################

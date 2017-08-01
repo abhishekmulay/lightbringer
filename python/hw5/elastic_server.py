@@ -13,12 +13,13 @@ class ElasticSearchServer(object):
     def search(self, search_term, from_size=0):
         query = {
             "query": {
-                "match": {
-                    "text": search_term
+                "multi_match": {
+                    "query": search_term,
+                    "fields": ["title", "text", "url"]
                 }
             },
-            'from': from_size,
-            'size': 20
+            "size": 20,
+            "from": from_size
         }
 
         return es.search(index=self.index, doc_type=self.type, body=query, request_timeout=70)
@@ -79,3 +80,72 @@ class ElasticSearchServer(object):
             hits = next_page['hits']['hits']
             all_hits += hits
         return all_hits
+
+    def dump_evaluated_files(self):
+        query_id = 152703
+        print "\n\n"
+        query = {
+            "query": {
+                "term": {
+                    "qid": {
+                        "value": query_id
+                    }
+                }
+            },
+            "size": 150,
+            "_source": "score",
+            "stored_fields": ["url"]
+        }
+        results = es.search(index=self.index, doc_type=self.type, body=query, request_timeout=70)
+        hits = results['hits']['hits']
+        # query_id = 152701 # Fukushima nuclear accident
+        # query_id = 152702 # Chernobyl accident
+        # query_id = 152703 # Three Mile Island accident
+        # query_id = 152704 # Kyshtym disaster
+        accessor = 'Abhishek'
+
+        # query_1_file_path = '152701_Fukushima_nuclear_accident.txt'
+        # with open(query_1_file_path) as query_1_file:
+        #     lines = [line.rstrip('\n') for line in query_1_file]
+
+        for hit in hits:
+            id = hit['_id']
+            grade = hit['_source']['score']
+            line = str(query_id) + ' ' + accessor + ' ' + id + ' ' + grade
+            print line
+
+    def get_top_docs(self, query_id, search_term, file_to_write, size=10):
+        # 64 Q0 AP890901-0048 1 2.0160589373642317 Exp
+        query = {
+            "query": {
+                "multi_match": {
+                    "query": search_term,
+                    "fields": ["title", "text", "url"]
+                }
+            },
+            "_source": "_id",
+            "size": size
+        }
+
+        results = es.search(index=self.index, doc_type=self.type, body=query, request_timeout=70)
+        hits = results['hits']['hits']
+        rank = 1
+        for hit in hits:
+            docno = hit['_id']
+            score = hit['_score']
+            line = str(query_id) + ' Q0 ' + str(docno) + ' ' + str(rank) + ' ' + str(score) + ' Exp\n'
+            # print line
+            rank += 1
+            file_to_write.write(line)
+
+if __name__ == '__main__':
+    server = ElasticSearchServer(properties.team_index, properties.team_type)
+    d = {152701 : 'Fukushima nuclear accident', 152702 : 'Chernobyl accident', 152703 : 'Three Mile Island accident', 152704 :'Kyshtym disaster'}
+    # query_id = 152701 # Fukushima nuclear accident
+    # query_id = 152702 # Chernobyl accident
+    # query_id = 152703 # Three Mile Island accident
+    # query_id = 152704 # Kyshtym disaster
+    combined_trec_file = 'final_trec.txt'
+    with open(combined_trec_file, 'a+') as trec_file:
+        for query_id, search_term in d.iteritems():
+            server.get_top_docs(query_id, search_term, trec_file, 1000)

@@ -1,8 +1,8 @@
 from flask import Flask, Response, json, request
 from flask_cors import CORS, cross_origin
 
-import properties
 from hw5.elastic_server import ElasticSearchServer
+import properties
 
 es_server = ElasticSearchServer(properties.team_index, properties.team_type)
 

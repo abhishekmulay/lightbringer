@@ -9,3 +9,8 @@ final_inlinks_file='/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DAT
 
 hits_hub_output_file='/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/hits.hub.txt'
 hits_auth_output_file='/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/AP_DATA/output_files/hits.auth.txt'
+qrel_files_folder_path='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw5/qrel_files'
+apdataset_qrel_file_path='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/qrels.adhoc.51-100.AP89.txt'
+individual_index='ap_dataset'
+individual_type='document'
+stemmed_query_file='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/queries_stemmed_25.txt'
