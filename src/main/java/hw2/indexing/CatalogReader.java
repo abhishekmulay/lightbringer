@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Abhishek Mulay on 6/4/17.
@@ -72,4 +73,7 @@ public class CatalogReader {
         return catalogEntryMap;
     }
 
+    public static Set<String> getVocabulary() {
+        return null;
+    }
 }

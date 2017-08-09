@@ -16,7 +16,6 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.trigonic.jrobotx.RobotExclusion;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -94,8 +93,8 @@ public class RobotsTxtReader {
             if (ignoreList.contains(hostId)) {
                 return false;
             }
-            RobotExclusion robotExclusion = new RobotExclusion();
-            return robotExclusion.allows(urlObj, USER_AGENT);
+//            RobotExclusion robotExclusion = new RobotExclusion();
+//            return robotExclusion.allows(urlObj, USER_AGENT);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

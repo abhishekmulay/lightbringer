@@ -78,4 +78,8 @@ public class RestCallHandler {
         return response;
     }
 
+
+    public char[] getMetadata(String index, String type, String encodedUrlId) {
+        return new char[0];
+    }
 }

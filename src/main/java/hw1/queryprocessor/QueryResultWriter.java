@@ -18,17 +18,18 @@ public class QueryResultWriter {
             PrintWriter writer = new PrintWriter(new FileOutputStream(new File(outputFile), true));
             int queryNumber = query.getQueryId();
             int rank = 0;
-            int maxNumberOfEntriesToWrite = 1000;
+            int maxNumberOfEntriesToWrite = Integer.MAX_VALUE;
             int count = 0;
             String documentId = "";
             Double score = 0.0;
+            System.out.println("\n\nWritting " + docIdScoreMap.size() + " lines for query id = [" + query.getQueryId() + "]\n\n");
             for (Map.Entry<String, Double> entry : docIdScoreMap.entrySet()) {
                 documentId = entry.getKey();
                 score = entry.getValue();
                 rank += 1;
-                if (count == maxNumberOfEntriesToWrite) {
-                    break;
-                }
+//                if (count == maxNumberOfEntriesToWrite) {
+//                    break;
+//                }
 
                 // <query-number> Q0 <docno> <rank> <score> Exp
                 writer.println(queryNumber + " Q0 " + documentId + " " + rank + " " + score + " Exp");

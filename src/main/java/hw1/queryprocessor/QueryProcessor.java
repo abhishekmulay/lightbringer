@@ -31,10 +31,10 @@ public class QueryProcessor {
             Map<String, List<TermStatistics>> termStatistics = null;
             try {
 //                termStatistics = StatisticsProvider.getTermStatisticsForQuery(query);
-                termStatistics = StatisticsProvider.getStatisticsForQueryFromIndex(query);
-                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf(termStatistics);
-//                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
-//                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf_from_es(vectorTermStatisticsForQuery);
+//                termStatistics = StatisticsProvider.getStatisticsForQueryFromIndex(query);
+//                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf(termStatistics);
+                Map<String, List<VectorStatistics>> vectorTermStatisticsForQuery = StatisticsProvider.getVectorTermStatisticsForQuery(query);
+                Map<String, Double> docIdOkapiValuesMap = OkapiTFCalculator.okapi_tf_from_es(vectorTermStatisticsForQuery);
                 Map<String, Double> sortedDocIdOkapiValuesMap = MapUtils.sortByValue(docIdOkapiValuesMap);
                 QueryResultWriter.writeQueryResultToFile(query, sortedDocIdOkapiValuesMap, okapiOutputFile);
             } catch (IOException e) {

@@ -110,8 +110,8 @@ public class App {
 //        runOkapi();
 //        runTfIdf();
 //        runBM25();
-//        runUnigramWithLaplaceSmoothing();
-//        runUnigramWithJelinekMercerSmoothing();
+        runUnigramWithLaplaceSmoothing();
+        runUnigramWithJelinekMercerSmoothing();
 
 
 

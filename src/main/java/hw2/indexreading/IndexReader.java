@@ -140,4 +140,7 @@ public class IndexReader {
         return mergedIndexingUnitsList;
     }
 
+    public static String getMergedLineForTerm(String term, List<String> linesForTerm) {
+        return null;
+    }
 }

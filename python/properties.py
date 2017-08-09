@@ -14,3 +14,20 @@ apdataset_qrel_file_path='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/h
 individual_index='ap_dataset'
 individual_type='document'
 stemmed_query_file='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/queries_stemmed_25.txt'
+okapi_all_file='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/model_files/okapi.all.txt'
+tfidf_all_file='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/model_files/tfidf.all.txt'
+bm25_all_file='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/model_files/bm25.all.txt'
+jelinek_all_file='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/model_files/jelinek.all.txt'
+laplace_all_file='/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/model_files/laplace.all.txt'
+
+liblinear_output_test = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/output_files/liblinear-output-test.txt'
+feature_matrix_test_path = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/output_files/feature_matrix_test.txt'
+
+liblinear_output_train = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/output_files/liblinear-output-train.txt'
+feature_matrix_train_path = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/output_files/feature_matrix_train.txt'
+
+test_output = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/output_files/test_output'
+train_output = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/output_files/train_output'
+
+trec_test_file = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/trec_test.txt'
+trec_train_file = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/trec_train.txt'
