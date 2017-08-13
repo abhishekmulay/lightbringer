@@ -31,3 +31,19 @@ train_output = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/output_
 
 trec_test_file = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/trec_test.txt'
 trec_train_file = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw6/trec_train.txt'
+
+trec07p_folder_path = '/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/trec07p/data'
+trec07_index_file = '/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/trec07p/full/index'
+
+
+spam_index = 'spam_trec07p'
+spam_index_type = 'document'
+
+spam_words_file = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw7/spam_words.txt'
+trec07_features_test_path = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw7/trec07_features_test_file.txt'
+trec07_features_train_path = '/Users/abhishek/Dropbox/CS6200_Abhishek_Mulay/python/hw7/trec07_features_train_file.txt'
+
+vocabulary_file_path = '/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/trec07p/vocabulary.trec07p.txt'
+
+trec07p_feature_all_unigram_test_file = '/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/trec07p/trec07p_feature_all_unigram_test.txt'
+trec07p_feature_all_unigram_train_file = '/Users/abhishek/Google Drive/NEU/summer-17/IR/IR_data/trec07p/trec07p_feature_all_unigram_train.txt'
