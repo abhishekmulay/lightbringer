@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import util.ConfigurationManager;
 import app.models.CrawlableURL;
 import app.models.DocumentModel;
-import app.LinkSelectorProvider;
-import app.SeedURLProvider;
+import app.crawler.strategy.LinkSelectorProvider;
+import app.crawler.strategy.SeedURLProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Connection;
@@ -34,7 +34,7 @@ public class Crawler {
     private static final String inlinksMapOutputFilePath = ConfigurationManager.getConfigurationValue("in.linkmap.output.file");
     private static final String logFilePath = ConfigurationManager.getConfigurationValue("log.file.path");
 
-    private static final int MAX_URL_CRAWL_COUNT = 20;
+    private static final int MAX_URL_CRAWL_COUNT = Integer.parseInt(ConfigurationManager.getConfigurationValue("max.url.crawl.count"));
     // frontier
     private static PriorityQueue<CrawlableURL> frontier = new PriorityQueue<>(5, new Comparator<CrawlableURL>() {
         @Override
@@ -44,9 +44,6 @@ public class Crawler {
     });
     // out links map <url : <out links from url>>
     private static Map<CrawlableURL, Set<CrawlableURL>> outlinksMap = new HashMap<>();
-
-//    private static Map<CrawlableURL, Set<CrawlableURL>> outlinksMap = new HashMap<>();
-//    private static Map<CrawlableURL, Set<CrawlableURL>> inlinksMap = new HashMap<>();
 
     // domain name politeness timeout map
     private static Map<String, Long> domainTimeMap = new HashMap<>();
@@ -72,7 +69,8 @@ public class Crawler {
             }
 
             String hostName = curl.getOriginalUrl().getHost();
-            String selector = LinkSelectorProvider.getAnchorSelector(hostName); // use domain specific css selector to get anchor tags
+            // use domain specific css selector to get anchor tags
+            String selector = LinkSelectorProvider.getAnchorSelector(hostName);
 
             Connection.Response response = Jsoup.connect(url)
                     .timeout(10 * 1000)
@@ -115,13 +113,13 @@ public class Crawler {
             }
 
             List<String> outlinksList = new ArrayList<>();
-            crawlableUrlOutlinks.stream().forEach(link-> outlinksList.add(link.getCanonicalizedUrl()));
+            crawlableUrlOutlinks.stream().forEach(link -> outlinksList.add(link.getCanonicalizedUrl()));
 
 
             LOG.info("Adding [" + crawlableUrlOutlinks.size() + "] URLs to map at depth = [" + nextDepth + "]");
 
             DocumentModel model = new DocumentModel(curl.getCanonicalizedUrl(), headersMap, title, content, rawHtml,
-                    null, outlinksList, "Abhishek", nextDepth-1, curl.getOriginalUrl().toString());
+                    null, outlinksList, "Abhishek", nextDepth - 1, curl.getOriginalUrl().toString());
             jsonGenerator.writeObject(model);
 
             visitedURLs.add(curl);
@@ -133,9 +131,6 @@ public class Crawler {
     }
 
     public static void main(String[] args) {
-        long timeAtStart = System.nanoTime();
-        ///////////////////////////////////////////////////////////////////
-//        cleanup();
         int fileNumberCounter = 1;
 
         List<CrawlableURL> seedUrls = SeedURLProvider.getSeedUrls();
@@ -150,7 +145,7 @@ public class Crawler {
 
         while (visitedURLs.size() < MAX_URL_CRAWL_COUNT) {
             if (visitedURLs.size() % 1000 == 0) {
-                fileNumberCounter +=1;
+                fileNumberCounter += 1;
                 createJsonGenerator(fileNumberCounter);
             }
 
@@ -165,7 +160,6 @@ public class Crawler {
                 nextDepth += 1;
                 LOG.info("=========================================================================\n\n");
                 LOG.info("Starting new wave at depth=[" + (nextDepth - 1) + "], added [" + crawlableURLS.size() + "] " + "URLs " + " to frontier.");
-//                    crawlableURLS.forEach( foundUrl-> LOG.info("Added in frontier: "+ foundUrl));
 
             } else {
                 CrawlableURL urlToCrawl = frontier.poll();
@@ -174,19 +168,9 @@ public class Crawler {
                 crawl(urlToCrawl, nextDepth);
             }
         }
-
-        writeLinkMapToFile(outlinksMap, outlinksOutputFilePath);
-//        writeLinkMapToFile(inlinksMap, inlinksMapOutputFilePath);
-
-        // combine inlinks and outlinks for each model
-//        createFinalDataFile();
-
-        ///////////////////////////////////////////////////////////////////
-        long timeAtEnd = System.nanoTime();
-        long elapsedTime = timeAtEnd - timeAtStart;
-        double seconds = (double) elapsedTime / 1000000000.0;
-        System.out.println("\nTotal time taken: " + seconds / 60.0 + " minutes");
-        LOG.info("\nTotal time taken: " + seconds / 60.0 + " minutes");
+        LOG.info("=========================================================================\n\n");
+        LOG.info("Crawling done. Writing [" + outlinksMap.size() + "] outlinks to file. \n\n");
+//        writeLinkMapToFile(outlinksMap, outlinksOutputFilePath);
     }
 
     private static void createJsonGenerator(final int fileNumberCounter) {
@@ -201,7 +185,7 @@ public class Crawler {
         }
     }
 
-    ///////////////////////////////////////////
+
     private static void checkPolitenessTimeout(final String hostName) {
         if (domainTimeMap.containsKey(hostName)) {
             long timeElapsed = System.currentTimeMillis() - domainTimeMap.get(hostName);
@@ -215,13 +199,17 @@ public class Crawler {
         }
     }
 
-    public static void createFinalDataFile() {
-        LOG.info("Crawling completed. Now need to read the model json fileOutputStream and bulk post to ES.");
-    }
 
     private static void writeLinkMapToFile(Map<CrawlableURL, Set<CrawlableURL>> linkMap, String linksOutputFilePath) {
         File file = new File(linksOutputFilePath);
         if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            file.delete();
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -256,26 +244,5 @@ public class Crawler {
         writer.close();
     }
 
-    private static void cleanup() {
-        // delete : app.log, outlinks map and models.json
-//        String[] filesToDelete = {outlinksOutputFilePath, inlinksMapOutputFilePath};
-//        for (String filePath : filesToDelete) {
-//            if(filePath != null && !filePath.isEmpty()) {
-//                File file = new File(filePath);
-//                if (file.exists()) {
-//                    LOG.info("Deleting [" + filePath + "]");
-//                    file.delete();
-//                }
-//            }
-//        }
-
-        File outputDir = new File(OUTPUT_DIR);
-        for (File f: outputDir.listFiles()) {
-            if(f != null && f.exists()) {
-                LOG.info("Deleting [" + f + "]");
-                f.delete();
-            }
-        }
-    }
 
 }

@@ -1,6 +1,6 @@
 package util;
 
-import hw2.indexing.IndexingUnit;
+
 
 import java.util.*;
 
@@ -36,28 +36,5 @@ public class MapUtils {
     }
 
 
-    public static Map<String, IndexingUnit> sortByTF(Map<String, IndexingUnit> unsortMap) {
-
-        // 1. Convert Map to List of Map
-        List<Map.Entry<String, IndexingUnit>> list = new LinkedList<Map.Entry<String, IndexingUnit>>(unsortMap.entrySet());
-
-        // 2. Sort list with Collections.sort(), provide a custom Comparator
-        //    Try switch the o1 o2 position for a different order
-        Collections.sort(list, new Comparator<Map.Entry<String, IndexingUnit>>() {
-            @Override
-            public int compare(Map.Entry<String, IndexingUnit> o1, Map.Entry<String, IndexingUnit> o2) {
-                return o1.getValue().getTermFrequency() > o2.getValue().getTermFrequency() ? -1 : 1;
-            }
-        });
-
-        // 3. Loop the sorted list and put it into a new insertion order Map LinkedHashMap
-        Map<String, IndexingUnit> sortedMap = new LinkedHashMap<>();
-
-        for (Map.Entry<String, IndexingUnit> entry : list) {
-            sortedMap.put(entry.getKey(), entry.getValue());
-        }
-
-        return sortedMap;
-    }
 
 }

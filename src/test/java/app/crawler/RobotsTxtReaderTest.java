@@ -1,8 +1,8 @@
 package app.crawler;
 
-import app.LinkSelectorProvider;
+import app.crawler.strategy.LinkSelectorProvider;
 import app.models.CrawlableURL;
-import app.SeedURLProvider;
+import app.crawler.strategy.SeedURLProvider;
 import junit.framework.TestCase;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

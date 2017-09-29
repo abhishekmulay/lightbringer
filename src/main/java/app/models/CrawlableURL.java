@@ -1,6 +1,6 @@
 package app.models;
 
-import app.URLPriorityCalculator;
+import app.crawler.strategy.URLPriorityCalculator;
 
 import java.net.URI;
 

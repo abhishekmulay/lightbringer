@@ -1,5 +1,7 @@
 package app;
 
+import app.crawler.strategy.LinkSelectorProvider;
+import app.crawler.strategy.URLPriorityCalculator;
 import junit.framework.TestCase;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
