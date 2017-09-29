@@ -2,9 +2,8 @@ package hw2.indexing;
 
 import hw1.indexing.datareader.DataReader;
 
-import hw1.indexing.datareader.DocumentSummary;
 import hw1.indexing.datareader.TextSanitizer;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.HW1Model;
 import hw2.search.DocumentSummaryProvider;
 import util.FileUtils;

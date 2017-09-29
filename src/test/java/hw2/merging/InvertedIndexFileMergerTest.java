@@ -1,13 +1,10 @@
 package hw2.merging;
 
-import hw1.main.ConfigurationManager;
-import hw2.indexing.CatalogEntry;
+import util.ConfigurationManager;
 import hw2.indexing.CatalogReader;
 import hw2.indexreading.IndexReader;
 import junit.framework.TestCase;
 import org.junit.Assert;
-
-import java.util.Map;
 
 /**
  * Created by Abhishek Mulay on 6/5/17.

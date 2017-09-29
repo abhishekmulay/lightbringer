@@ -1,6 +1,6 @@
 package hw2;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw2.indexing.Indexer;
 
 import hw2.merging.BulkMerger;

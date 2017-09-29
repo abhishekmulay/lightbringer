@@ -6,6 +6,7 @@ import hw1.pojos.HW1Model;
 import hw1.queryprocessor.FileQueryReader;
 import hw1.pojos.Query;
 import hw1.queryprocessor.QueryProcessor;
+import util.ConfigurationManager;
 
 import java.io.File;
 import java.io.IOException;

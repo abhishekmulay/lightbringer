@@ -1,19 +1,14 @@
 package hw2.merging;
 
-import hw1.main.ConfigurationManager;
-import hw2.indexing.CatalogEntry;
+import util.ConfigurationManager;
 import hw2.indexing.CatalogReader;
 import hw2.indexreading.IndexReader;
 import junit.framework.TestCase;
 import org.junit.Assert;
-import org.omg.CORBA.INV_FLAG;
-import org.omg.PortableInterceptor.INACTIVE;
 import util.MapUtils;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

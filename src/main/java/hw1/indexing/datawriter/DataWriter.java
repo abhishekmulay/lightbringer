@@ -1,7 +1,7 @@
 package hw1.indexing.datawriter;
 
 import hw1.indexing.datareader.DataReader;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.restclient.RestCallHandler;
 
 import java.util.*;

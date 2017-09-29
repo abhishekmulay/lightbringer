@@ -1,12 +1,6 @@
 package hw2.search;
 
-import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.Annotation;
-import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.process.Morphology;
-import edu.stanford.nlp.util.CoreMap;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw2.indexing.IndexingUnit;
 import util.FileUtils;
 
@@ -14,7 +8,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by Abhishek Mulay on 6/8/17.

@@ -2,7 +2,7 @@ package hw1.queryprocessor;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.restclient.RestCallHandler;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Response;

@@ -1,7 +1,7 @@
 package hw2.evaluation;
 
 import hw1.indexing.datareader.TextSanitizer;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw2.indexing.IndexingUnit;
 import hw2.search.TermSearcher;
 import util.FileUtils;

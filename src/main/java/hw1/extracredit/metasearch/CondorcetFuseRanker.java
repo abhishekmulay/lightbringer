@@ -1,6 +1,6 @@
 package hw1.extracredit.metasearch;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 
 import java.io.*;
 import java.util.ArrayList;

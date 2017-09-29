@@ -1,6 +1,6 @@
 package hw1.extracredit.metasearch;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.Query;
 import hw1.queryprocessor.FileQueryReader;
 import hw1.queryprocessor.QueryResultWriter;

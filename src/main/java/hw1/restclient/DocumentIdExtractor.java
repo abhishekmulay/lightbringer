@@ -2,7 +2,7 @@ package hw1.restclient;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;

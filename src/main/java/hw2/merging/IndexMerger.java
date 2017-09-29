@@ -1,6 +1,6 @@
 package hw2.merging;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw2.indexing.CatalogEntry;
 import hw2.indexing.CatalogReader;
 import hw2.indexing.Indexer;
@@ -8,7 +8,6 @@ import hw2.indexreading.IndexReader;
 import util.FileUtils;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**

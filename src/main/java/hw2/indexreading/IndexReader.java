@@ -1,6 +1,6 @@
 package hw2.indexreading;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw2.indexing.CatalogEntry;
 import hw2.indexing.CatalogReader;
 import hw2.indexing.IndexingUnit;

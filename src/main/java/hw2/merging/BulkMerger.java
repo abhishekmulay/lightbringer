@@ -1,6 +1,6 @@
 package hw2.merging;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import util.FileUtils;
 
 import java.io.File;

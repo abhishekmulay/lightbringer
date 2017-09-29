@@ -2,7 +2,7 @@ package hw1.extracredit.pseudorelevancefeedback;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.Query;
 import hw1.queryprocessor.FileQueryReader;
 import hw1.restclient.RestCallHandler;

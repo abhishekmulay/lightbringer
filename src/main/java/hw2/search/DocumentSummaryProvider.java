@@ -1,7 +1,7 @@
 package hw2.search;
 
 import hw1.indexing.datareader.DocumentSummary;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 
 import java.io.*;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package hw2.evaluation;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,7 +1,7 @@
 package hw1.indexing.datareader;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.HW1Model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;

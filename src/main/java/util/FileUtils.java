@@ -1,7 +1,5 @@
 package util;
 
-import hw1.main.ConfigurationManager;
-
 import java.io.*;
 import java.nio.file.Files;
 
@@ -11,7 +9,9 @@ import java.io.IOException;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Abhishek Mulay on 6/7/17.
@@ -19,6 +19,8 @@ import java.util.List;
 public class FileUtils {
 
     final static String INVERTED_INDEX_FOLDER = ConfigurationManager.getConfigurationValue("inverted.index.files.directory");
+    public final static Set<String> IGNORED_FILES  = new HashSet();
+    static {IGNORED_FILES.add(".DS_Store");}
 
     public static String getCatalogFileForInvertedIndexFile(final String invertedIndexFilePath) {
         if (invertedIndexFilePath.isEmpty() || invertedIndexFilePath == null)

@@ -1,9 +1,8 @@
 package hw1.ranking.proximitymodel;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.TermStatistics;
 import hw2.search.ProximitySearcher;
-import hw2.search.TermSearcher;
 
 import java.util.HashMap;
 import java.util.LinkedList;

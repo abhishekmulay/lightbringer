@@ -1,6 +1,6 @@
 package hw1.restclient;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.entity.ContentType;
@@ -16,8 +16,8 @@ import java.util.Collections;
  */
 public class RestCallHandler {
 
-    private final String INDEX_NAME = ConfigurationManager.getConfigurationValue("index.name");
-    private final String TYPE_NAME = ConfigurationManager.getConfigurationValue("type.name");
+    private final String INDEX_NAME = ConfigurationManager.getConfigurationValue("team.elastic.index");
+    private final String TYPE_NAME = ConfigurationManager.getConfigurationValue("team.elastic.type");
     private final String BULK_API_ENDPOINT = '/' + INDEX_NAME + '/' + INDEX_NAME + "/_bulk";
     private final String DOCUMENT_API = '/' + INDEX_NAME + '/' + TYPE_NAME + '/';
 
@@ -80,6 +80,9 @@ public class RestCallHandler {
 
 
     public char[] getMetadata(String index, String type, String encodedUrlId) {
-        return new char[0];
+        String actionMetaData = String.format
+                ("{ \"index\" : { \"_index\" : \"%s\", \"_type\" : \"%s\", \"_id\" : \"%s\" } }%n",
+                        index, type, encodedUrlId);
+        return actionMetaData.toCharArray();
     }
 }

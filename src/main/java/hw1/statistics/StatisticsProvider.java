@@ -2,7 +2,7 @@ package hw1.statistics;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.Query;
 import hw1.pojos.TermStatistics;
 import hw1.ranking.vectorspacemodels.VectorSpaceModelsCalculator;

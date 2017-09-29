@@ -1,6 +1,6 @@
 package hw2.indexing;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import util.ListUtils;
 
 

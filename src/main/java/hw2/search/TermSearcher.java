@@ -1,6 +1,6 @@
 package hw2.search;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw2.indexing.IndexingUnit;
 import hw2.indexreading.IndexReader;
 

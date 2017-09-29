@@ -1,7 +1,7 @@
 package hw1.queryprocessor;
 
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.Query;
 
 import java.io.*;

@@ -2,7 +2,7 @@ package hw1.indexing.datareader;
 
 
 import edu.stanford.nlp.process.Morphology;
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 
 import java.io.*;
 import java.util.ArrayList;

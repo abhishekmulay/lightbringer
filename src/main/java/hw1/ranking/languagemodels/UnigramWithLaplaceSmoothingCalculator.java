@@ -1,6 +1,6 @@
 package hw1.ranking.languagemodels;
 
-import hw1.main.ConfigurationManager;
+import util.ConfigurationManager;
 import hw1.pojos.TermStatistics;
 
 import java.util.HashMap;
